@@ -816,7 +816,8 @@
             </div>
             <div class="beat-actions">
               <button onclick="playBeat('${beat.file}', this)">${lang === 'fr' ? '▶️ Écouter' : '▶️ Listen'}</button>
-              <a href="${beat.download}" download title="${lang === 'fr' ? 'Télécharger' : 'Download'}"><span>⬇️</span></a>
+              ${hasDownload ? `<a href="${beat.download}" download title="${lang === 'fr' ? 'Télécharger' : 'Download'}"><span>⬇️</span> ${lang === 'fr' ? 'Télécharger' : 'Download'}</a>` : `<div class="no-beat">${lang === 'fr' ? 'Aucun fichier trouvé 😢' : 'No file found 😢'}</div>`}
+
             </div>
           `;
           container.appendChild(item);
