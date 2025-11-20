@@ -732,7 +732,7 @@
         {
           name: "CARTIER",
           file: "audio/DRILL/CARTIER.mp3",
-          download: "audio/DRILL/CARTIER.mp3",
+          download: "audio/TRAP/CARTIER.mp3",
           bpm: 142,
           key: "A# major",
           duration: "3:44",
@@ -816,8 +816,7 @@
             </div>
             <div class="beat-actions">
               <button onclick="playBeat('${beat.file}', this)">${lang === 'fr' ? '▶️ Écouter' : '▶️ Listen'}</button>
-              ${hasDownload ? `<a href="${beat.download}" download title="${lang === 'fr' ? 'Télécharger' : 'Download'}"><span>⬇️</span> ${lang === 'fr' ? 'Télécharger' : 'Download'}</a>` : `<div class="no-beat">${lang === 'fr' ? 'Aucun fichier trouvé 😢' : 'No file found 😢'}</div>`}
-
+              <a href="${beat.download}" download title="${lang === 'fr' ? 'Télécharger' : 'Download'}"><span>⬇️</span></a>
             </div>
           `;
           container.appendChild(item);
