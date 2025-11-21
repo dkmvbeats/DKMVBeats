@@ -1,583 +1,260 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BeatMarket — Home (Waveform + Account)</title>
-  <meta name="description" content="Marketplace instrumentales — Template BeatStars-style with waveform & auth UI"/>
-  <link rel="icon" href="images/favicon.ico" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BeatMarket — Home (Waveform + Account)</title>
+<link rel="icon" href="images/favicon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/wavesurfer.js"></script>
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070707; --panel:#0d0d0d; --muted:#9b9fa6; --accent:#ff2b2b; --accent-2:#b30000;
+  --glass:rgba(255,255,255,0.02); --radius:14px; --nav-h:78px; --maxw:1300px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
+  background:linear-gradient(180deg,#050505 0%, #0b0b0b 100%); color:#f7f7f7;}
+a{color:inherit; text-decoration:none}
 
-  <!-- Wavesurfer (waveform) -->
-  <script src="https://unpkg.com/wavesurfer.js"></script>
+/* TOPBAR */
+.topbar{position:fixed; left:12px; right:12px; top:12px; height:var(--nav-h);
+background: linear-gradient(90deg, rgba(12,12,12,0.9), rgba(18,18,18,0.85));
+border-radius:18px; display:flex; align-items:center; justify-content:space-between;
+padding:10px 18px; gap:16px; z-index:1400; box-shadow:0 14px 50px rgba(0,0,0,0.6);
+border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px);}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .logo{width:56px;height:56px;border-radius:10px;object-fit:cover;background:linear-gradient(180deg,#111,#161616);
+display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(179,0,0,0.07);overflow:hidden;}
+.brand .title{font-weight:900;letter-spacing:0.6px;font-size:1rem;color:#fff;}
+.navlinks{display:flex;gap:8px;align-items:center;margin-left:8px;}
+.navlinks a{padding:10px 12px;border-radius:10px;font-weight:700;color:var(--muted);transition:all .15s ease;}
+.navlinks a:hover{color:var(--accent); transform:translateY(-2px);}
+.navlinks a.active{color:var(--accent);}
 
-  <style>
-  /* ------------------------------
-     BeatMarket - Full page (red/black theme)
-     Includes: auth modal + waveform player
-     ------------------------------ */
-  :root{
-    --bg: #070707;
-    --panel: #0d0d0d;
-    --muted: #9b9fa6;
-    --accent: #ff2b2b;
-    --accent-2: #b30000;
-    --glass: rgba(255,255,255,0.02);
-    --radius: 14px;
-    --nav-h: 78px;
-    --maxw: 1300px;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
-    background: linear-gradient(180deg,#050505 0%, #0b0b0b 100%);
-    color:#f7f7f7;
-  }
-  a{ color:inherit; text-decoration:none; }
+/* ACTIONS */
+.actions{display:flex;gap:8px;align-items:center;}
+.btn{background: linear-gradient(135deg,var(--accent),var(--accent-2)); border:none;color:#fff;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer; box-shadow:0 10px 30px rgba(179,0,0,0.12);}
+.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted);cursor:pointer;}
 
-  /* topbar */
-  .topbar {
-    position:fixed; left:12px; right:12px; top:12px; height:var(--nav-h);
-    background: linear-gradient(90deg, rgba(12,12,12,0.9), rgba(18,18,18,0.85));
-    border-radius: 18px; display:flex; align-items:center; justify-content:space-between;
-    padding:10px 18px; gap:16px; z-index:1400; box-shadow:0 14px 50px rgba(0,0,0,0.6);
-    border:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px);
-  }
-  .brand { display:flex; align-items:center; gap:12px; }
-  .brand .logo {
-    width:56px; height:56px; border-radius: 10px; object-fit:cover; background:linear-gradient(180deg,#111,#161616);
-    display:flex; align-items:center; justify-content:center; font-weight:900; font-size:16px;
-    box-shadow: 0 10px 30px rgba(179,0,0,0.07);
-    overflow:hidden;
-  }
-  .brand .title { font-weight:900; letter-spacing:0.6px; font-size:1rem; color:#fff; }
-  .navlinks { display:flex; gap:8px; align-items:center; margin-left:8px; }
-  .navlinks a { padding:10px 12px; border-radius:10px; font-weight:700; color:var(--muted); transition:all .15s ease; }
-  .navlinks a:hover { color:var(--accent); transform:translateY(-2px); }
+/* USER MENU */
+.user-btn{display:flex;gap:8px;align-items:center;padding:6px 10px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.03);}
+.avatar{width:38px;height:38px;border-radius:10px;object-fit:cover;background:#111;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.6);}
+.user-dropdown{position:absolute;right:18px;top:calc(var(--nav-h)+20px);background:var(--panel);border-radius:10px;padding:10px;display:none;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.6);z-index:1500;}
+.user-dropdown a{display:block;padding:8px 10px;color:var(--muted);border-radius:8px;}
+.user-dropdown a:hover{background:rgba(255,255,255,0.02);color:var(--accent);}
 
-  .actions { display:flex; gap:8px; align-items:center; }
-  .btn {
-    background: linear-gradient(135deg,var(--accent),var(--accent-2));
-    border:none; color:#fff; padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer;
-    box-shadow:0 10px 30px rgba(179,0,0,0.12);
-  }
-  .ghost { background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:10px; color:var(--muted); cursor:pointer; }
+/* MAIN LAYOUT */
+main{padding: calc(var(--nav-h)+26px) 22px 120px; max-width:var(--maxw); margin:0 auto;}
+.tabcontent{display:none;}
+.tabcontent.active{display:block;}
 
-  /* user menu */
-  .user-btn { display:flex; gap:8px; align-items:center; padding:6px 10px; border-radius:10px; cursor:pointer; border:1px solid rgba(255,255,255,0.03); }
-  .avatar {
-    width:38px; height:38px; border-radius:10px; object-fit:cover; background:#111; display:flex; align-items:center; justify-content:center; font-weight:800;
-    color:#fff; box-shadow:0 6px 20px rgba(0,0,0,0.6);
-  }
-  .user-dropdown {
-    position:absolute; right:18px; top:calc(var(--nav-h) + 20px); background:var(--panel); border-radius:10px; padding:10px; display:none;
-    border:1px solid rgba(255,255,255,0.03); box-shadow:0 10px 30px rgba(0,0,0,0.6); z-index:1500;
-  }
-  .user-dropdown a { display:block; padding:8px 10px; color:var(--muted); border-radius:8px; }
-  .user-dropdown a:hover { background:rgba(255,255,255,0.02); color:var(--accent); }
+/* BEATS GRID */
+.beats-grid{display:grid;grid-template-columns: repeat(3,1fr);gap:14px;margin-top:18px;}
+.beat{background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));border-radius:12px;padding:12px;display:flex;gap:12px;align-items:center;border:1px solid rgba(255,255,255,0.02);transition:transform .16s;}
+.beat:hover{transform:translateY(-6px);box-shadow:0 18px 60px rgba(0,0,0,0.6);}
+.thumb{width:110px;height:110px;border-radius:10px;object-fit:cover;flex-shrink:0;}
+.meta{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;}
+.title{font-weight:900;color:var(--accent);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.info{display:flex;gap:10px;color:var(--muted);font-size:0.9rem;flex-wrap:wrap;}
+.actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+.buy{background: linear-gradient(135deg,var(--accent),var(--accent-2));padding:8px 12px;border-radius:8px;font-weight:900;color:#fff;border:none;cursor:pointer;}
 
-  /* main layout */
-  main { padding: calc(var(--nav-h) + 26px) 22px 120px; max-width:var(--maxw); margin:0 auto; }
+/* FOOTER */
+footer{margin-top:36px;color:var(--muted);text-align:center;padding:28px 0;}
+.muted{color:var(--muted);}
 
-  /* hero */
-  .hero { display:grid; grid-template-columns: 1fr 420px; gap:22px; align-items:stretch; }
-  .hero-left { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06)); border-radius:var(--radius); padding:26px; border:1px solid rgba(255,255,255,0.02); }
-  .hero-left h1 { margin:0; font-size:2.6rem; color:var(--accent); letter-spacing:1px; }
-  .lead { color:var(--muted); margin-top:12px; }
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:1800;}
+.modal{width:420px;max-width:96%;background:var(--panel);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 120px rgba(0,0,0,0.8);}
+.modal h3{margin:0 0 12px 0;color:var(--accent);}
+.form-row{display:flex;gap:8px;flex-direction:column;margin-bottom:12px;}
+.form-row input{padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:#fff;outline:none;}
 
-  .searchbar { display:flex; gap:12px; align-items:center; background:var(--glass); padding:12px; border-radius:12px; margin-top:18px; border:1px solid rgba(255,255,255,0.03); }
-  .searchbar input { background:transparent; border:none; outline:none; color:#fff; font-size:1rem; width:100%; }
-
-  .hero-right { background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03)); border-radius:var(--radius); padding:16px; border:1px solid rgba(255,255,255,0.02); text-align:center; }
-  .hero-right .cover { width:100%; height:240px; object-fit:cover; border-radius:10px; box-shadow:0 18px 48px rgba(0,0,0,0.6); }
-
-  /* beats grid */
-  .beats-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:18px; }
-  .beat { background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04)); border-radius:12px; padding:12px; display:flex; gap:12px; align-items:center; border:1px solid rgba(255,255,255,0.02); transition:transform .16s; }
-  .beat:hover { transform:translateY(-6px); box-shadow:0 18px 60px rgba(0,0,0,0.6); }
-  .thumb { width:110px; height:110px; border-radius:10px; object-fit:cover; flex-shrink:0; }
-  .meta { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
-  .title { font-weight:900; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .info { display:flex; gap:10px; color:var(--muted); font-size:0.9rem; flex-wrap:wrap; }
-  .actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
-  .buy { background: linear-gradient(135deg,var(--accent),var(--accent-2)); padding:8px 12px; border-radius:8px; font-weight:900; color:#fff; border:none; cursor:pointer; }
-  .download { background:transparent; border:1px solid rgba(255,255,255,0.06); padding:6px 10px; border-radius:8px; color:var(--muted); }
-
-  /* producers */
-  .producers { display:flex; gap:12px; overflow:auto; margin-top:12px; padding-bottom:8px; }
-  .producer { min-width:200px; padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03)); border:1px solid rgba(255,255,255,0.02); display:flex; gap:12px; align-items:center; }
-
-  /* waveform player area (in sticky player) */
-  .player {
-    position:fixed; left:12px; right:12px; bottom:12px; height:110px; display:flex; align-items:center; gap:16px; padding:12px 18px;
-    background: linear-gradient(90deg, rgba(12,12,12,0.98), rgba(18,18,18,0.98)); border-radius:16px; z-index:1600;
-    border:1px solid rgba(255,255,255,0.02); box-shadow:0 20px 60px rgba(0,0,0,0.75);
-  }
-  .player img { width:64px; height:64px; object-fit:cover; border-radius:10px; }
-  .track { flex:1; min-width:0; display:flex; flex-direction:column; gap:8px; }
-  .track .title { font-weight:900; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .wave-container { height:64px; width:100%; border-radius:8px; overflow:hidden; background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02)); }
-  .player .controls { display:flex; gap:8px; align-items:center; }
-
-  /* auth modal */
-  .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:1800; }
-  .modal { width:420px; max-width:96%; background:var(--panel); border-radius:12px; padding:18px; border:1px solid rgba(255,255,255,0.03); box-shadow:0 30px 120px rgba(0,0,0,0.8); }
-  .modal h3 { margin:0 0 12px 0; color:var(--accent); }
-  .form-row { display:flex; gap:8px; flex-direction:column; margin-bottom:12px; }
-  .form-row input { padding:10px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.04); color:#fff; outline:none; }
-
-  /* small */
-  .muted { color:var(--muted); }
-  footer { margin-top:36px; color:var(--muted); text-align:center; padding:28px 0; }
-
-  @media (max-width:1100px){
-    .hero { grid-template-columns: 1fr; }
-    .beats-grid { grid-template-columns: repeat(2,1fr); }
-  }
-  @media (max-width:700px){
-    .beats-grid { grid-template-columns: 1fr; }
-    .topbar { left:10px; right:10px; top:8px; padding:8px; border-radius:12px; }
-    .brand .logo { width:48px; height:48px; }
-    .hero-right .cover { height:160px; }
-  }
-  </style>
+@media(max-width:1100px){.beats-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:700px){.beats-grid{grid-template-columns:1fr;}}
+</style>
 </head>
 <body>
-  <!-- TOPBAR -->
-  <header class="topbar" role="banner" aria-label="Main Navigation">
-    <div style="display:flex; align-items:center; gap:12px;">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <!-- image uploaded by user -->
-          <img src="/images/Capture8.jpeg" alt="Logo" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
-        </div>
-        <div>
-          <div class="title">BeatMarket</div>
-          <div style="font-size:11px; color:var(--muted)">Instrumentales & Kits</div>
-        </div>
-      </div>
 
-      <nav class="navlinks" role="navigation" aria-label="Main">
-        <a href="#" data-tab="home" class="tablink">Accueil</a>
-        <a href="#" data-tab="trending" class="tablink">Tendances</a>
-        <a href="#" data-tab="producers" class="tablink">Achat</a>
-        <a href="#" data-tab="kits" class="tablink">Kits</a>
-        <a href="#" data-tab="blog" class="tablink">Blog</a>
-      </nav>
+<header class="topbar">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div class="brand">
+      <div class="logo"><img src="/images/Capture8.jpeg" alt="Logo" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"></div>
+      <div><div class="title">BeatMarket</div><div style="font-size:11px;color:var(--muted)">Instrumentales & Kits</div></div>
     </div>
-
-    <div class="actions" style="position:relative;">
-      <button class="ghost" id="btn-signin">S'identifier</button>
-      <div id="userArea" style="display:none;">
-        <div class="user-btn" id="userBtn" tabindex="0" aria-haspopup="true" aria-expanded="false">
-          <div class="avatar" id="userAvatar">U</div>
-          <div id="userName" style="font-weight:700;">Utilisateur</div>
-        </div>
-        <div class="user-dropdown" id="userDropdown" role="menu" aria-hidden="true">
-          <a href="#" id="myStore">Ma boutique</a>
-          <a href="#" id="myBeats">Mes beats</a>
-          <a href="#" id="signOut">Se déconnecter</a>
-        </div>
+    <nav class="navlinks">
+      <a href="#" data-tab="home" class="tablink active">Accueil</a>
+      <a href="#" data-tab="trending" class="tablink">Tendances</a>
+      <a href="#" data-tab="producers" class="tablink">Achat</a>
+      <a href="#" data-tab="kits" class="tablink">Kits</a>
+      <a href="#" data-tab="blog" class="tablink">Blog</a>
+    </nav>
+  </div>
+  <div class="actions" style="position:relative;">
+    <button class="ghost" id="btn-signin">S'identifier</button>
+    <div id="userArea" style="display:none;">
+      <div class="user-btn" id="userBtn" tabindex="0">
+        <div class="avatar" id="userAvatar">U</div>
+        <div id="userName" style="font-weight:700;">Utilisateur</div>
       </div>
-      <button class="btn" id="btn-getstarted">Vendre / Acheter</button>
+      <div class="user-dropdown" id="userDropdown">
+        <a href="#" id="myStore">Ma boutique</a>
+        <a href="#" id="myBeats">Mes beats</a>
+        <a href="#" id="signOut">Se déconnecter</a>
+      </div>
     </div>
-  </header>
+    <button class="btn" id="btn-getstarted">Vendre / Acheter</button>
+  </div>
+</header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-left">
-        <h1 id="hero-title">Buy & Sell Beats — Marketplace</h1>
-        <p class="lead">Explore des centaines d'instrumentales, filtre par mood, BPM et tonalité. Pré-écoute avec waveform.</p>
+<main>
+  <section id="home" class="tabcontent active">
+    <h1>Accueil</h1>
+    <p>Bienvenue sur BeatMarket !</p>
+  </section>
 
-        <div class="searchbar" role="search">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
-          <input id="searchInput" type="search" placeholder="Rechercher un beat, artiste, tag..." aria-label="Rechercher">
-          <select id="filterSelect" aria-label="Filtrer par style" style="background:transparent; border:none; color:var(--muted); font-weight:700;">
-            <option value="all">Tous styles</option>
-            <option value="trap">Trap</option>
-            <option value="drill">Drill</option>
-            <option value="afro">Afro</option>
-            <option value="reggaeton">Reggaeton</option>
-            <option value="rnb">R'n'B</option>
-          </select>
-        </div>
+  <section id="trending" class="tabcontent">
+    <h1>Tendances</h1>
+    <div id="beatsGrid" class="beats-grid"></div>
+    <button class="ghost" id="loadMoreBtn">Afficher plus</button>
+  </section>
 
-        <div style="margin-top:14px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-          <button class="btn" id="cta-browse">Parcourir beats</button>
-          <button class="ghost" id="cta-upload">Uploader un beat</button>
-          <div class="muted" style="margin-left:auto; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);">Marketplace</div>
-        </div>
+  <section id="producers" class="tabcontent">
+    <h1>Achat / Producteurs</h1>
+    <p>Liste des producteurs...</p>
+  </section>
 
-        <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
-          <div class="cat active" data-cat="all">Tous</div>
-          <div class="cat" data-cat="trap">Trap</div>
-          <div class="cat" data-cat="drill">Drill</div>
-          <div class="cat" data-cat="afro">Afro</div>
-          <div class="cat" data-cat="reggaeton">Reggaeton</div>
-          <div class="cat" data-cat="rnb">R'n'B</div>
-        </div>
+  <section id="kits" class="tabcontent">
+    <h1>Kits</h1>
+    <p>Voir les kits disponibles...</p>
+  </section>
 
-        <!-- trending grid will be below -->
-      </div>
+  <section id="blog" class="tabcontent">
+    <h1>Blog</h1>
+    <p>Articles récents...</p>
+  </section>
 
-      <aside class="hero-right">
-        <img class="cover" src="/images/Capture8.jpeg" alt="Featured" onerror="this.style.display='none'">
-        <div style="display:flex; gap:10px; justify-content:center; margin-top:12px;">
-          <button class="btn" id="btn-listen-demo">Ecouter la démo</button>
-          <button class="ghost" id="btn-follow">S'abonner</button>
-        </div>
-        <div style="margin-top:8px; color:var(--muted); font-weight:700; text-align:center;">Featured: DKMV Beats — New Drops</div>
-      </aside>
-    </section>
+  <footer>© <span id="year"></span> Tous droits réservés — DKMV Beats</footer>
+</main>
 
-    <!-- BEATS GRID -->
-    <section class="section trending" aria-labelledby="trending-title">
-      <h2 id="trending-title">Tendances</h2>
-      <p class="lead">Les beats les plus chauds — pré-écoute, achat instantané, licences.</p>
+<!-- WAVESURFER PLAYER -->
+<div class="player" id="player" style="display:none;">
+  <img id="playerThumb" src="/images/Capture8.jpeg" alt="cover">
+  <div class="track">
+    <div class="title" id="trackTitle">Titre</div>
+    <div class="muted" id="trackArtist">Artiste</div>
+    <div class="wave-container" id="waveform"></div>
+  </div>
+  <div class="controls">
+    <button class="ghost" id="prevBtn">⏮</button>
+    <button class="btn" id="playBtn">▶️</button>
+    <button class="ghost" id="nextBtn">⏭</button>
+  </div>
+</div>
 
-      <div id="beatsGrid" class="beats-grid" role="list"></div>
-
-      <div style="display:flex; justify-content:center; margin-top:16px;">
-        <button class="ghost" id="loadMoreBtn">Afficher plus</button>
-      </div>
-    </section>
-
-    <footer>
-      © <span id="year"></span> Tous droits réservées —  DKMV Beats<span class="muted"></span>
-    </footer>
-  </main>
-
-  <!-- STICKY PLAYER (waveform) -->
-  <div class="player" id="player" style="display:none;" aria-hidden="true">
-    <img id="playerThumb" src="/images/Capture8.jpeg" alt="cover">
-    <div class="track">
-      <div class="title" id="trackTitle">Titre</div>
-      <div class="muted" id="trackArtist">Artiste</div>
-      <div class="wave-container" id="waveform"></div>
+<!-- AUTH MODAL -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <h3>Connexion / Inscription (démo)</h3>
+    <p class="muted">Connexion simulée (stockée localement)</p>
+    <div class="form-row">
+      <input id="authName" placeholder="Pseudo" aria-label="Pseudo">
+      <input id="authEmail" type="email" placeholder="Email" aria-label="Email">
     </div>
-    <div class="controls">
-      <button class="ghost" id="prevBtn">⏮</button>
-      <button class="btn" id="playBtn">▶️</button>
-      <button class="ghost" id="nextBtn">⏭</button>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="ghost" id="authCancel">Annuler</button>
+      <button class="btn" id="authSubmit">Se connecter</button>
     </div>
   </div>
+</div>
 
-  <!-- AUTH MODAL -->
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="modalTitle">
-      <h3 id="modalTitle">Connexion / Inscription (démo)</h3>
-      <p class="muted">Connexion simulée (stockée localement). Aucune donnée serveur n'est envoyée.</p>
-      <div class="form-row">
-        <input id="authName" placeholder="Pseudo (ex: DKMV)" aria-label="Pseudo">
-        <input id="authEmail" type="email" placeholder="Email" aria-label="Email">
-      </div>
-      <div style="display:flex; gap:8px; justify-content:flex-end;">
-        <button class="ghost" id="authCancel">Annuler</button>
-        <button class="btn" id="authSubmit">Se connecter</button>
-      </div>
-    </div>
-  </div>
+<script>
+// ============================
+// MAIN JS
+// ============================
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  <script>
-  /* ============================
-     Main JS: data, UI, waveform, auth (client-side demo)
-     ============================ */
+// --- TAB SWITCHING ---
+document.querySelectorAll('.tablink').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const tab=link.dataset.tab;
+    document.querySelectorAll('.tabcontent').forEach(sec=>sec.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.querySelectorAll('.tablink').forEach(l=>l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
 
-  (function(){
-    // helper ready
-    function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+// --- SAMPLE BEATS ---
+const sampleBeats=[];
+const styles=['trap','drill','afro','reggaeton','rnb'];
+for(let i=1;i<=20;i++){
+  const s=styles[i%styles.length];
+  sampleBeats.push({id:'beat-'+i,title:`${s.toUpperCase()} BEAT ${i}`,artist:`Producer ${i}`,
+    bpm:70+(i%80),key:'A minor',duration:'3:30',cover:'/images/Capture8.jpeg',file:`assets/audio/beat_${i}.mp3`,price:7.99,style:s});
+}
+const beatsGrid=document.getElementById('beatsGrid');
+sampleBeats.forEach(b=>{
+  const el=document.createElement('div');
+  el.className='beat';
+  el.innerHTML=`<img class="thumb" src="${b.cover}"><div class="meta"><div class="title">${b.title}</div><div class="by"><strong>${b.artist}</strong></div><div class="info">BPM: ${b.bpm} - ${b.key} - ${b.duration}</div></div><div class="actions"><button class="buy" data-play="${b.file}" data-title="${b.title}" data-artist="${b.artist}" data-cover="${b.cover}">PREVIEW</button></div>`;
+  el.querySelector('button[data-play]').addEventListener('click',function(){startPreview({file:b.file,title:b.title,artist:b.artist,cover:b.cover,id:b.id});});
+  beatsGrid.appendChild(el);
+});
 
-    ready(function(){
-      // year
-      document.getElementById('year').textContent = new Date().getFullYear();
+// --- WAVESURFER ---
+const wave=WaveSurfer.create({container:'#waveform',waveColor:'#444',progressColor:'#ff2b2b',height:64,normalize:true,cursorWidth:1});
+const playerEl=document.getElementById('player'),playerThumb=document.getElementById('playerThumb'),trackTitle=document.getElementById('trackTitle'),trackArtist=document.getElementById('trackArtist');
+const playBtn=document.getElementById('playBtn');let playlist=[],current=-1;
+function startPreview(obj){if(!obj||!obj.file)return;const exists=playlist.findIndex(x=>x.id===obj.id);if(exists===-1)playlist.unshift(obj);else playlist.unshift(playlist.splice(exists,1)[0]);current=0;openTrack(playlist[current]);}
+function openTrack(t){if(!t)return;playerEl.style.display='flex';playerThumb.src=t.cover;trackTitle.textContent=t.title;trackArtist.textContent=t.artist;wave.load(t.file);}
+playBtn.addEventListener('click',()=>wave.isPlaying()?wave.pause():wave.play());
 
-      // sample catalogue (same generator)
-      const styles = ['trap','drill','afro','reggaeton','club','rnb','pop','boombap'];
-      const sampleBeats = [];
-      for(let i=1;i<=90;i++){
-        const s = styles[i % styles.length];
-        sampleBeats.push({
-          id: 'beat-'+i,
-          title: `${s.toUpperCase()} BEAT ${i}`,
-          artist: `Producer ${ (i%12)+1 }`,
-          bpm: 70 + (i%80),
-          key: ['A minor','C minor','D minor','E minor','G minor','F major'][i%6],
-          duration: `${2 + (i%4)}:${(10 + (i%50)).toString().padStart(2,'0')}`,
-          cover: (i%2===0) ? "/images/Capture8.jpeg" : "/images/Capture8.jpeg",
-          file: `assets/audio/beat_${i}.mp3`,
-          price: (i%7===0) ? 0 : (7.99 + (i%5)),
-          style: s
-        });
-      }
+// --- AUTH MODAL ---
+const modalBackdrop=document.getElementById('modalBackdrop');
+const btnSignin=document.getElementById('btn-signin');
+const authCancel=document.getElementById('authCancel');
+const authSubmit=document.getElementById('authSubmit');
+const authName=document.getElementById('authName');
+const authEmail=document.getElementById('authEmail');
 
-      // render beats (paginated)
-      const beatsGrid = document.getElementById('beatsGrid');
-      let shown = 0;
-      const perPage = 9;
+function showModal(){modalBackdrop.style.display='flex';}
+function hideModal(){modalBackdrop.style.display='none';}
 
-      function currency(p){ return (p && p>0) ? p.toFixed(2)+'€' : 'FREE'; }
+btnSignin.addEventListener('click',showModal);
+authCancel.addEventListener('click',hideModal);
+modalBackdrop.addEventListener('click',e=>{if(e.target===modalBackdrop)hideModal();});
 
-      function createBeatCard(b){
-        const el = document.createElement('div');
-        el.className = 'beat';
-        el.innerHTML = `
-          <img class="thumb" src="${b.cover}" alt="${b.title}">
-          <div class="meta">
-            <div class="title">${b.title}</div>
-            <div class="by"><strong>${b.artist}</strong></div>
-            <div class="info"><span>BPM: ${b.bpm}</span><span>${b.key}</span><span>${b.duration}</span></div>
-          </div>
-          <div class="actions">
-            <button class="buy" data-play="${b.file}" data-title="${b.title}" data-artist="${b.artist}" data-cover="${b.cover}">PREVIEW</button>
-            <a class="download" href="${b.file}" download>${currency(b.price)}</a>
-          </div>
-        `;
-        // preview binds
-        el.querySelector('button[data-play]').addEventListener('click', function(){
-          const f = this.dataset.play;
-          const t = this.dataset.title;
-          const a = this.dataset.artist;
-          const c = this.dataset.cover;
-          startPreview({file:f, title:t, artist:a, cover:c, id:b.id});
-        });
-        return el;
-      }
+authSubmit.addEventListener('click',()=>{
+  const name=authName.value.trim()||'User';
+  const email=authEmail.value.trim()||'';
+  const user={name,email,id:'u_'+Math.random().toString(36).slice(2,9)};
+  localStorage.setItem('bm_user',JSON.stringify(user));
+  hideModal();
+  renderUserArea();
+});
 
-      function loadMore(){
-        const to = Math.min(sampleBeats.length, shown + perPage);
-        for(let i=shown;i<to;i++){
-          beatsGrid.appendChild(createBeatCard(sampleBeats[i]));
-        }
-        shown = to;
-        if(shown >= sampleBeats.length) document.getElementById('loadMoreBtn').style.display='none';
-      }
-      loadMore();
-      document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
+// --- USER AREA ---
+function renderUserArea(){
+  const raw=localStorage.getItem('bm_user');
+  const userArea=document.getElementById('userArea');
+  if(!raw){userArea.style.display='none';btnSignin.style.display='inline-block';return;}
+  const user=JSON.parse(raw);
+  btnSignin.style.display='none';userArea.style.display='inline-flex';
+  document.getElementById('userName').textContent=user.name;
+  document.getElementById('userAvatar').textContent=(user.name[0]||'U').toUpperCase();
+}
+renderUserArea();
 
-      // producers
-      const producersList = document.getElementById('producersList');
-      for(let i=1;i<=8;i++){
-        const div = document.createElement('div');
-        div.className = 'producer';
-        div.innerHTML = `<img src="/mnt/data/Capture d'écran 2025-11-21 105250.png" alt="prod">
-          <div style="min-width:0;">
-            <strong>Producer ${i}</strong>
-            <div class="muted" style="font-size:.9rem">Beats: ${10 + (i%12)}</div>
-          </div>`;
-        producersList.appendChild(div);
-      }
-
-      // chips
-      document.querySelectorAll('.cat').forEach(c=>{
-        c.addEventListener('click', function(){
-          document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
-          this.classList.add('active');
-          const cat = this.dataset.cat;
-          if(cat==='all'){ beatsGrid.innerHTML=''; shown=0; document.getElementById('loadMoreBtn').style.display='inline-block'; loadMore(); }
-          else {
-            const filtered = sampleBeats.filter(b => b.style === cat);
-            beatsGrid.innerHTML = '';
-            filtered.slice(0,60).forEach(b => beatsGrid.appendChild(createBeatCard(b)));
-            document.getElementById('loadMoreBtn').style.display='none';
-          }
-        });
-      });
-
-      // search
-      const searchInput = document.getElementById('searchInput');
-      searchInput.addEventListener('input', function(){
-        const q = this.value.trim().toLowerCase();
-        if(!q){ beatsGrid.innerHTML=''; shown=0; document.getElementById('loadMoreBtn').style.display='inline-block'; loadMore(); return; }
-        const filtered = sampleBeats.filter(b => b.title.toLowerCase().includes(q) || b.artist.toLowerCase().includes(q));
-        beatsGrid.innerHTML = '';
-        filtered.slice(0,120).forEach(b => beatsGrid.appendChild(createBeatCard(b)));
-        document.getElementById('loadMoreBtn').style.display='none';
-      });
-
-      // filter select
-      document.getElementById('filterSelect').addEventListener('change', function(){
-        const v = this.value;
-        if(v==='all'){ beatsGrid.innerHTML=''; shown=0; document.getElementById('loadMoreBtn').style.display='inline-block'; loadMore(); return; }
-        const filtered = sampleBeats.filter(b => b.style === v);
-        beatsGrid.innerHTML=''; filtered.slice(0,120).forEach(b=>beatsGrid.appendChild(createBeatCard(b))); document.getElementById('loadMoreBtn').style.display='none';
-      });
-
-      // ----------------------------
-      // AUTH (client-side demo, localStorage)
-      // ----------------------------
-      const modalBackdrop = document.getElementById('modalBackdrop');
-      const btnSignin = document.getElementById('btn-signin');
-      const authCancel = document.getElementById('authCancel');
-      const authSubmit = document.getElementById('authSubmit');
-      const authName = document.getElementById('authName');
-      const authEmail = document.getElementById('authEmail');
-
-      function showModal(){ modalBackdrop.style.display='flex'; modalBackdrop.setAttribute('aria-hidden','false'); }
-      function hideModal(){ modalBackdrop.style.display='none'; modalBackdrop.setAttribute('aria-hidden','true'); }
-
-      btnSignin.addEventListener('click', showModal);
-      authCancel.addEventListener('click', hideModal);
-      modalBackdrop.addEventListener('click', function(e){ if(e.target === modalBackdrop) hideModal(); });
-
-      // sign in / store user in localStorage
-      authSubmit.addEventListener('click', function(){
-        const name = authName.value.trim() || 'User';
-        const email = authEmail.value.trim() || '';
-        const user = { name, email, id: 'u_' + Math.random().toString(36).slice(2,9) };
-        localStorage.setItem('bm_user', JSON.stringify(user));
-        hideModal(); renderUserArea();
-      });
-
-      function renderUserArea(){
-        const raw = localStorage.getItem('bm_user');
-        const userArea = document.getElementById('userArea');
-        const btnSignin = document.getElementById('btn-signin');
-        if(!raw){
-          userArea.style.display='none';
-          btnSignin.style.display='inline-block';
-          return;
-        }
-        const user = JSON.parse(raw);
-        btnSignin.style.display='none';
-        userArea.style.display='inline-flex';
-        document.getElementById('userName').textContent = user.name;
-        const avatar = document.getElementById('userAvatar');
-        avatar.textContent = (user.name[0] || 'U').toUpperCase();
-      }
-
-      renderUserArea();
-
-      // user dropdown toggle
-      const userBtn = document.getElementById('userBtn');
-      const userDropdown = document.getElementById('userDropdown');
-      if(userBtn){
-        userBtn.addEventListener('click', ()=> {
-          const visible = userDropdown.style.display === 'block';
-          userDropdown.style.display = visible ? 'none' : 'block';
-          userDropdown.setAttribute('aria-hidden', visible ? 'true' : 'false');
-        });
-      }
-      // sign out
-      document.getElementById('signOut').addEventListener('click', function(e){
-        e.preventDefault();
-        localStorage.removeItem('bm_user');
-        userDropdown.style.display='none';
-        renderUserArea();
-      });
-
-      // ----------------------------
-      // WAVESURFER player + playlist behaviour
-      // ----------------------------
-      const playerEl = document.getElementById('player');
-      const playerThumb = document.getElementById('playerThumb');
-      const trackTitle = document.getElementById('trackTitle');
-      const trackArtist = document.getElementById('trackArtist');
-      const playBtn = document.getElementById('playBtn');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-
-      // playlist & index
-      let playlist = []; // objects {file,title,artist,cover,id}
-      let current = -1;
-
-      // init wavesurfer
-      const wave = WaveSurfer.create({
-        container: '#waveform',
-        waveColor: '#444',
-        progressColor: '#ff2b2b',
-        height: 64,
-        responsive: true,
-        normalize: true,
-        cursorWidth: 1,
-        backend: 'WebAudio'
-      });
-
-      wave.on('ready', function(){
-        // play automatically when loaded
-        wave.play();
-        playBtn.textContent = '⏸';
-      });
-      wave.on('pause', ()=> playBtn.textContent = '▶️');
-      wave.on('play', ()=> playBtn.textContent = '⏸');
-      wave.on('finish', ()=> playBtn.textContent = '▶️');
-
-      function startPreview(obj){
-        // add to playlist top if new
-        if(!obj || !obj.file) return;
-        // push if not present
-        const exists = playlist.findIndex(x=>x.id === obj.id);
-        if(exists === -1){
-          playlist.unshift(obj);
-        } else {
-          // move to top
-          const e = playlist.splice(exists,1)[0];
-          playlist.unshift(e);
-        }
-        current = 0;
-        openTrack(playlist[current]);
-      }
-
-      function openTrack(t){
-        // t: {file,title,artist,cover}
-        if(!t) return;
-        playerEl.style.display = 'flex';
-        playerThumb.src = t.cover || '/images/Capture8.jpeg';
-        trackTitle.textContent = t.title || 'Titre';
-        trackArtist.textContent = t.artist || 'Artiste';
-        // load into wavesurfer
-        try {
-          wave.load(t.file);
-        } catch(err){
-          console.warn('Wave load error (file may not exist):', err);
-        }
-      }
-
-      // play/pause
-      playBtn.addEventListener('click', function(){
-        if(!wave.isReady && !wave.isPlaying){
-          // if not loaded, do nothing
-          return;
-        }
-        if(wave.isPlaying()){
-          wave.pause();
-        } else {
-          wave.play();
-        }
-      });
-
-      prevBtn.addEventListener('click', function(){
-        if(current > 0){
-          current--;
-          openTrack(playlist[current]);
-        }
-      });
-      nextBtn.addEventListener('click', function(){
-        if(current + 1 < playlist.length){
-          current++;
-          openTrack(playlist[current]);
-        }
-      });
-
-      // when pressing PREVIEW, we called startPreview() -> playlist updated
-      // Next/Prev operations handled above.
-
-      // keyboard shortcut F to focus search
-      document.addEventListener('keydown', function(e){
-        if(e.key.toLowerCase() === 'f' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
-          e.preventDefault(); searchInput.focus();
-        }
-      });
-
-      // expose startPreview globally for debug (optional)
-      window.startPreview = startPreview;
-
-      // End ready
-    }); // ready
-  })();
-  </script>
+// --- USER DROPDOWN ---
+const userBtn=document.getElementById('userBtn');
+const userDropdown=document.getElementById('userDropdown');
+if(userBtn){userBtn.addEventListener('click',()=>{const visible=userDropdown.style.display==='block';userDropdown.style.display=visible?'none':'block';});}
+document.getElementById('signOut').addEventListener('click',e=>{e.preventDefault();localStorage.removeItem('bm_user');userDropdown.style.display='none';renderUserArea();});
+</script>
 </body>
 </html>
