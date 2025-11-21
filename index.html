@@ -3,719 +3,473 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DKMV Beats — Rouge & Noir</title>
-  <meta name="description" content="DKMV Beats - Instrumentales, kits & loopkits."/>
+  <title>BeatMarket — Page d'accueil (BeatStars style)</title>
+  <meta name="description" content="Marketplace instrumentales — Beats, kits & producteurs. Template inspiré BeatStars."/>
   <link rel="icon" href="images/favicon.ico" />
 
-  <!-- Font -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-
   <style>
-  /* ======================
-     THEME : Rouge & Noir (mix design)
-     ====================== */
+  /* ===========================
+     BeatMarket - Home (BeatStars style)
+     Single-file HTML/CSS/JS
+     Palette: sombre marketplace
+     =========================== */
 
   :root{
-    --black-1: #0b0b0b;    /* noir profond */
-    --black-2: #151515;
-    --card: rgba(22,22,22,0.95);
-    --red: #e60000;       /* rouge vif */
-    --red-dark: #990000;  /* rouge foncé */
-    --muted: #9aa4b2;
-    --glass: rgba(255,255,255,0.03);
-    --white: #ffffff;
-    --radius: 18px;
-    --nav-height: 74px;
-    --accent-shadow: 0 10px 40px rgba(230,0,0,0.12);
+    --bg: #0b0b0b;
+    --panel: #0f0f10;
+    --card: #121216;
+    --muted: #9b9fa6;
+    --accent: #ff4d4d; /* bright red accent */
+    --accent-2: #b30000;
+    --glass: rgba(255,255,255,0.02);
+    --radius: 14px;
+    --nav-h: 78px;
+    --maxw: 1260px;
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(135deg, var(--black-1) 0%, #111 100%);
-    color:var(--white);
+    margin:0; font-family:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial;
+    background: linear-gradient(180deg, #060606 0%, #0b0b0b 100%);
+    color:#f7f7f7;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
-    -webkit-touch-callout:none;
-    -webkit-user-select:none;
-    user-select:none;
+    line-height:1.4;
   }
+  a{color:inherit;text-decoration:none}
 
-  a { color: inherit; text-decoration: none; }
-
-  /* PRELOADER */
-  #preloader {
-    position: fixed; inset:0; display:flex; justify-content:center; align-items:center; z-index:99999;
-    background: linear-gradient(180deg, rgba(11,11,11,0.98), rgba(20,20,20,0.95));
-    transition: opacity .35s ease;
-  }
-  #preloader.hidden{ opacity:0; pointer-events:none; transform:scale(.995); }
-
-  .loader { display:flex; flex-direction:column; gap:12px; align-items:center; }
-  .loader .circle{
-    width:92px; height:92px; border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0.2)),
-      conic-gradient(var(--red), rgba(255,255,255,0.03) 40%, transparent 60%);
-    filter: drop-shadow(0 10px 40px rgba(230,0,0,0.12));
-    animation: spin 1.6s linear infinite;
-  }
-  @keyframes spin { to{ transform: rotate(360deg) } }
-  .loader .label { color:var(--muted); font-weight:700; letter-spacing:1px; }
-
-  /* NAV */
-  .top-nav-fixed{
-    position:fixed; left:12px; right:12px; top:12px;
-    height:var(--nav-height);
-    background: linear-gradient(90deg, rgba(10,10,10,0.85), rgba(18,18,18,0.75));
-    border-radius: 18px;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 18px; gap:18px; z-index:1200;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.65);
-    backdrop-filter: blur(6px);
+  /* ---------- top nav ---------- */
+  .topbar {
+    position:fixed; left:12px; right:12px; top:12px; height:var(--nav-h);
+    background: linear-gradient(90deg, rgba(18,18,18,0.88), rgba(12,12,12,0.78));
+    border-radius: 18px; display:flex; align-items:center; justify-content:space-between;
+    padding:10px 18px; gap:16px; z-index:1200; box-shadow:0 10px 40px rgba(0,0,0,0.6);
     border: 1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(6px);
   }
-
-  .brand-left { display:flex; gap:14px; align-items:center; }
-  .brand-left img.logo { width:56px; height:56px; border-radius:12px; object-fit:cover; box-shadow: 0 8px 30px rgba(230,0,0,0.12); }
-  .brand-title { display:none; } /* on oublie le texte, rendu par image ou absent */
-
-  .nav-links { display:flex; gap:8px; align-items:center; }
-  .nav-links button.tab-btn {
-    background:none; border:none; color:var(--white); padding:8px 14px; border-radius:10px; font-weight:700; cursor:pointer;
-    transition: background .18s, transform .12s, color .12s;
-    letter-spacing: 0.6px;
+  .brand { display:flex; align-items:center; gap:12px; }
+  .brand .logo {
+    width:56px; height:56px; border-radius: 10px; object-fit:cover; background:linear-gradient(180deg,#111,#161616);
+    display:flex; align-items:center; justify-content:center; font-weight:900; font-size:16px;
+    box-shadow: 0 8px 36px rgba(179,0,0,0.08);
   }
-  .tab-btn:hover { transform: translateY(-2px); color:var(--red); }
-  .tab-btn.active {
-    background: linear-gradient(90deg, rgba(230,0,0,0.12), rgba(153,0,0,0.06));
-    color:var(--red);
-    transform: translateY(-3px);
-    box-shadow: var(--accent-shadow);
+  .brand .title { font-weight:900; letter-spacing:0.6px; font-size:1rem; color:#fff; }
+  .navlinks { display:flex; gap:8px; align-items:center; }
+  .navlinks a { padding:10px 12px; border-radius:10px; font-weight:700; color:var(--muted); transition:all .15s ease; }
+  .navlinks a:hover { color:var(--accent); transform:translateY(-2px); }
+
+  .actions { display:flex; gap:8px; align-items:center; }
+  .btn {
+    background: linear-gradient(135deg,var(--accent),var(--accent-2));
+    border:none; color:#fff; padding:10px 14px; border-radius:10px; font-weight:800; cursor:pointer;
+    box-shadow:0 10px 30px rgba(179,0,0,0.12);
   }
+  .ghost { background:transparent; border:1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:10px; color:var(--muted); cursor:pointer; }
 
-  .controls { display:flex; gap:8px; align-items:center; }
-  #toggleTheme, #toggleLang {
-    background: linear-gradient(135deg,#1a1a1a,#2b2b2b); border:1px solid rgba(255,255,255,0.03); color:var(--red); width:44px; height:44px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px;
-  }
-  #toggleLang { width:auto; padding:6px 12px; border-radius:10px; color:#fff; background:var(--red); border:none; font-weight:800; box-shadow: 0 6px 20px rgba(230,0,0,0.12); }
+  /* ---------- main container ---------- */
+  main { padding: calc(var(--nav-h) + 28px) 22px 120px; max-width:var(--maxw); margin:0 auto; }
 
-  /* MAIN */
-  main{ padding: calc(var(--nav-height) + 28px) 20px 140px; min-height:100vh; max-width:1300px; margin:0 auto; }
-
+  /* ---------- hero ---------- */
   .hero {
-    display:grid; grid-template-columns: 1fr 420px; gap:28px; align-items:start;
-    margin-bottom:20px;
+    display:grid; grid-template-columns: 1fr 420px; gap:22px; align-items:stretch;
   }
   .hero-left {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-    border-radius: var(--radius); padding:28px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.025);
-  }
-  .hero-left h1{ margin:0; font-size:2.6rem; letter-spacing:1px; color:var(--red); text-shadow: 0 6px 20px rgba(230,0,0,0.08); }
-  .hero-left p.lead { color:var(--muted); font-size:1.02rem; margin-top:12px; margin-bottom:18px; }
-
-  .hero-cta { display:flex; gap:12px; margin-top:16px; align-items:center; flex-wrap:wrap; }
-  .btn-primary {
-    background: linear-gradient(135deg,var(--red),var(--red-dark)); color:#fff; border:none; padding:12px 18px; border-radius:12px; cursor:pointer; font-weight:800;
-    box-shadow: 0 12px 40px rgba(230,0,0,0.12);
-  }
-  .btn-ghost {
-    background:transparent; border:1.5px solid rgba(255,255,255,0.06); color:var(--white); padding:10px 14px; border-radius:12px; cursor:pointer;
-  }
-
-  .hero-right { display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:flex-start; }
-  .hero-right .cover {
-    width:100%; max-width:420px; height:240px; object-fit:cover; border-radius:14px; box-shadow: 0 16px 40px rgba(0,0,0,0.6);
-    border: 2px solid rgba(230,0,0,0.06);
-  }
-  .maintenance { margin-top:10px; color:var(--red); font-weight:800; }
-
-  /* filters row */
-  .filters-row { display:flex; gap:12px; align-items:center; margin-top:18px; flex-wrap:wrap; }
-  .searchbar {
-    flex:1; display:flex; gap:8px; align-items:center;
-    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
-    padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.03);
-  }
-  .searchbar input {
-    background:transparent; border:none; outline:none; color:var(--white); font-size:1rem; width:100%;
-  }
-  .chip {
-    padding:10px 14px; border-radius:999px; background:rgba(255,255,255,0.02); font-weight:700; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
-  }
-  .chip.active { background: linear-gradient(90deg,var(--red-dark),var(--red)); color:#fff; box-shadow: var(--accent-shadow); transform:translateY(-3px); }
-
-  /* layout: catalogue & sidebar */
-  .catalogue {
-    display:grid; grid-template-columns: 1fr 360px; gap:22px; align-items:start; margin-top:18px;
-  }
-
-  .catalogue-list {
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
-    border-radius: 14px;
-    padding:18px; border:1px solid rgba(255,255,255,0.02);
-  }
-
-  .beats-grid {
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:12px;
-  }
-
-  .beat-card {
-    display:flex; gap:12px; align-items:center; padding:12px; border-radius:12px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
-    border:1px solid rgba(255,255,255,0.02); transition: transform .16s, box-shadow .16s;
-  }
-  .beat-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(230,0,0,0.06); }
-  .beat-thumb { width:88px; height:88px; border-radius:10px; object-fit:cover; border:1px solid rgba(255,255,255,0.02); }
-  .beat-meta { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
-  .beat-title { font-weight:900; font-size:1rem; color:var(--red); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .beat-desc { font-size:0.92rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .beat-info { display:flex; gap:10px; font-size:0.85rem; color:var(--muted); }
-
-  .beat-actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
-
-  /* right panel */
-  aside.right-panel{
-    position:relative; border-radius:16px; padding:16px; height:fit-content;
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+    border-radius: var(--radius); padding:28px; box-shadow:0 18px 60px rgba(0,0,0,0.6);
     border:1px solid rgba(255,255,255,0.02);
   }
-  .widget { margin-bottom:16px; }
-  .widget h3 { margin:0 0 10px 0; font-size:1.05rem; color:var(--red); }
+  .hero-left h1 { margin:0; font-size:3rem; line-height:1; color:var(--accent); letter-spacing:1px; }
+  .hero-left p.lead { color:var(--muted); margin-top:14px; font-size:1.05rem; }
 
-  /* sticky player */
-  .player-sticky {
-    position:fixed; left:12px; right:12px; bottom:12px; height:82px; display:flex; align-items:center; gap:18px; padding:12px 18px;
-    background: linear-gradient(90deg, rgba(10,10,10,0.98), rgba(18,18,18,0.98));
-    border-radius:18px; box-shadow:0 28px 80px rgba(0,0,0,0.7); z-index:1200; border:1px solid rgba(255,255,255,0.02);
+  .hero-cta { margin-top:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+
+  .searchbar {
+    display:flex; gap:12px; align-items:center; background:var(--glass); padding:12px; border-radius:12px; margin-top:18px; border:1px solid rgba(255,255,255,0.03);
   }
-  .player-thumb { width:64px; height:64px; border-radius:10px; object-fit:cover; }
-  .player-meta { flex:1; display:flex; flex-direction:column; gap:6px; min-width:0;}
-  .player-controls { display:flex; gap:10px; align-items:center; }
+  .searchbar input { background:transparent; border:none; outline:none; color:#fff; font-size:1rem; width:100%; }
 
-  /* full sections */
-  .full-section { margin-top:22px; padding:22px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02)); border:1px solid rgba(255,255,255,0.02); }
-  .about-grid { display:grid; grid-template-columns: 420px 1fr; gap:18px; align-items:start; }
+  .hero-right {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
+    border-radius: var(--radius); padding:18px; text-align:center; border:1px solid rgba(255,255,255,0.02);
+    display:flex; flex-direction:column; gap:12px; justify-content:flex-start;
+  }
+  .hero-right .cover { width:100%; height:240px; object-fit:cover; border-radius:12px; box-shadow:0 18px 48px rgba(0,0,0,0.6); }
 
-  /* contact */
-  .contact-card { max-width:720px; margin:0 auto; padding:20px; border-radius:12px; background:rgba(0,0,0,0.06); border:1px solid rgba(255,255,255,0.02); }
-  .form-row { display:flex; gap:10px; }
-  .form-row input, textarea { width:100%; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:var(--white); outline:none; }
-  .form-row textarea { min-height:140px; resize:vertical; }
+  /* ---------- categories row ---------- */
+  .cats { display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+  .cat {
+    padding:10px 14px; border-radius:999px; background:transparent; border:1px solid rgba(255,255,255,0.03); color:var(--muted); font-weight:700; cursor:pointer;
+  }
+  .cat.active { background: linear-gradient(90deg,var(--accent-2),var(--accent)); color:#fff; box-shadow:0 12px 40px rgba(179,0,0,0.08); transform:translateY(-3px); }
 
-  footer { margin-top:36px; padding:18px; text-align:center; color:var(--muted); font-size:0.95rem; }
+  /* ---------- trending / featured section ---------- */
+  .section { margin-top:22px; display:block; }
+  .section h2 { margin:0 0 12px 0; color:#fff; letter-spacing:0.4px; }
+  .section p.lead { color:var(--muted); margin:0 0 18px 0; }
 
-  /* responsive */
-  @media (max-width: 980px){
+  /* ---------- grid of beats ---------- */
+  .beats-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; }
+  .beat {
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
+    border-radius:12px; padding:12px; display:flex; gap:12px; align-items:center;
+    border:1px solid rgba(255,255,255,0.02); transition:transform .16s, box-shadow .16s;
+  }
+  .beat:hover { transform:translateY(-8px); box-shadow:0 24px 70px rgba(0,0,0,0.6); }
+  .beat .thumb { width:110px; height:110px; border-radius:10px; object-fit:cover; flex-shrink:0; }
+  .beat .meta { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
+  .beat .title { font-weight:900; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .beat .by { font-size:0.9rem; color:var(--muted); display:flex; gap:8px; align-items:center; }
+  .beat .info { display:flex; gap:10px; color:var(--muted); font-size:0.9rem; flex-wrap:wrap; }
+  .beat .actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+  .buy { background: linear-gradient(135deg,var(--accent),var(--accent-2)); padding:8px 12px; border-radius:8px; font-weight:900; color:#fff; border:none; cursor:pointer; }
+  .download { background:transparent; border:1px solid rgba(255,255,255,0.06); padding:6px 10px; border-radius:8px; color:var(--muted); }
+
+  /* ---------- featured producers carousel ---------- */
+  .producers { display:flex; gap:12px; overflow:auto; padding-bottom:8px; }
+  .producer {
+    min-width:200px; border-radius:12px; padding:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+    border:1px solid rgba(255,255,255,0.02); display:flex; gap:12px; align-items:center;
+  }
+  .producer img { width:64px; height:64px; border-radius:10px; object-fit:cover; }
+
+  /* ---------- features / how it works ---------- */
+  .features { display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; margin-top:20px; }
+  .feature { background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03)); padding:18px; border-radius:12px; border:1px solid rgba(255,255,255,0.02); text-align:center; }
+
+  /* ---------- sticky player ---------- */
+  .player {
+    position:fixed; left:12px; right:12px; bottom:12px; height:86px; display:flex; align-items:center; gap:16px; padding:12px 18px;
+    background: linear-gradient(90deg, rgba(12,12,12,0.98), rgba(18,18,18,0.98)); border-radius:16px; z-index:1200;
+    border:1px solid rgba(255,255,255,0.02); box-shadow:0 20px 60px rgba(0,0,0,0.7);
+  }
+  .player img { width:64px; height:64px; object-fit:cover; border-radius:10px; }
+  .player .track { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
+  .player .track .title { font-weight:900; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .player .controls { display:flex; gap:8px; align-items:center; }
+
+  /* ---------- footer ---------- */
+  footer { margin-top:36px; color:var(--muted); text-align:center; padding:28px 0; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1100px){
     .hero { grid-template-columns: 1fr; }
-    .catalogue { grid-template-columns: 1fr; }
+    .beats-grid { grid-template-columns: repeat(2, 1fr); }
+    .features { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width:700px){
     .beats-grid { grid-template-columns: 1fr; }
-    .hero-right .cover { max-width:100%; height:180px; }
-  }
-  @media (max-width:600px){
-    .top-nav-fixed{ left:8px; right:8px; top:8px; padding:8px; border-radius:12px; }
-    .brand-left img.logo{ width:48px; height:48px; }
-    #toggleLang{ display:none; }
-    body{ padding-bottom:110px; }
+    .topbar { left:10px; right:10px; top:8px; padding:8px; border-radius:12px; }
+    .brand .logo { width:48px; height:48px; }
+    .hero-right .cover { height:160px; }
+    .producer { min-width:160px; }
   }
 
-  /* show/hide sections (SPA) */
-  .page { display:none; opacity:0; transform: translateY(6px); transition: all .28s ease; }
-  .page.active { display:block; opacity:1; transform: translateY(0); }
-
+  /* small helper */
+  .muted { color:var(--muted); }
+  .visually-hidden { position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   </style>
 </head>
 <body>
-  <!-- PRELOADER -->
-  <div id="preloader" role="status">
-    <div class="loader">
-      <div class="circle" aria-hidden="true"></div>
-      <div class="label">Chargement — DKMV Beats</div>
-    </div>
-  </div>
-
-  <!-- NAV -->
-  <nav class="top-nav-fixed" aria-label="navigation">
-    <div class="brand-left">
-      <!-- using one of your uploaded screenshots as a logo/visual -->
-      <img class="logo" src="/mnt/data/Capture d&#39;écran 2025-11-21 105250.png" alt="DKMV" onerror="this.style.display='none'">
-    </div>
-
-    <div class="nav-links" role="tablist" aria-label="Sections">
-      <button class="tab-btn active" data-tab="accueil">Accueil</button>
-      <button class="tab-btn" data-tab="instrumentales">Instrumentales</button>
-      <button class="tab-btn" data-tab="kits">Kits</button>
-      <button class="tab-btn" data-tab="apropos">À propos</button>
-      <button class="tab-btn" data-tab="contact">Contact</button>
-    </div>
-
-    <div class="nav-actions">
-      <div class="controls">
-        <div id="toggleTheme" title="Changer thème" aria-label="Changer le thème">🌓</div>
-        <button id="toggleLang" title="Switch languages">FR</button>
+  <!-- topbar -->
+  <header class="topbar" role="banner" aria-label="Main Navigation">
+    <div class="brand" title="BeatMarket">
+      <!-- using your uploaded image as a visual brand -->
+      <div class="logo" aria-hidden="true">
+        <img src="/mnt/data/Capture d'écran 2025-11-21 105250.png" alt="" style="width:100%; height:100%; border-radius:10px; object-fit:cover;" onerror="this.style.display='none'">
       </div>
+      <div class="title">BeatMarket</div>
     </div>
-  </nav>
 
-  <main>
-    <!-- ACCUEIL (page par défaut visible) -->
-    <section id="accueil" class="page active">
-      <div class="hero">
-        <div class="hero-left">
-          <h1>DKMV Beats</h1>
-          <p class="lead">Instrumentales professionnelles — Trap, Drill, Afro, Reggaeton et plus. Parcours le catalogue, écoute et télécharge.</p>
+    <nav class="navlinks" role="navigation" aria-label="Main">
+      <a href="#" data-tab="home" class="tablink">Accueil</a>
+      <a href="#" data-tab="trending" class="tablink">Tendances</a>
+      <a href="#" data-tab="producers" class="tablink">Producteurs</a>
+      <a href="#" data-tab="kits" class="tablink">Kits</a>
+      <a href="#" data-tab="blog" class="tablink">Blog</a>
+    </nav>
 
-          <div class="filters-row">
-            <div class="searchbar" role="search">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
-              <input id="globalSearch" type="search" placeholder="🔍 Rechercher un beat, titre, bpm..." aria-label="Rechercher">
-            </div>
+    <div class="actions">
+      <button class="ghost" id="btn-signin">S'identifier</button>
+      <button class="btn" id="btn-getstarted">Vendre / Acheter</button>
+    </div>
+  </header>
 
-            <div class="chip active" data-filter="all">Tous</div>
-            <div class="chip" data-filter="trap">Trap</div>
-            <div class="chip" data-filter="drill">Drill</div>
-            <div class="chip" data-filter="afro">Afro</div>
-            <div class="chip" data-filter="reggaeton">Reggaeton</div>
-          </div>
+  <main role="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-left" id="hero-left">
+        <h1 id="hero-title">Buy & Sell Beats — Marketplace</h1>
+        <p class="lead">Explore des centaines d'instrumentales, filtre par mood, BPM et tonalité. Prêt pour ton prochain projet.</p>
 
-          <div class="hero-cta">
-            <button class="btn-primary" id="btnBrowse">Parcourir le catalogue</button>
-            <button class="btn-ghost" id="btnPreview">Voir la démo</button>
-            <div style="margin-left:auto; color:var(--muted); font-weight:700; padding:6px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);">SITE EN MAINTENANCE</div>
-          </div>
-
-          <div style="margin-top:18px;">
-            <h3 style="margin:0 0 8px 0; color:var(--red);">Nouveautés</h3>
-            <div style="display:flex; gap:8px; overflow:auto; padding-bottom:6px;">
-              <!-- small covers - use your uploaded screenshot as fallback -->
-              <img src="/mnt/data/Capture d&#39;écran 2025-11-21 105144.png" style="width:120px; height:80px; object-fit:cover; border-radius:8px;" alt="v1" onerror="this.style.display='none'">
-              <img src="/mnt/data/Capture d&#39;écran 2025-11-21 105250.png" style="width:120px; height:80px; object-fit:cover; border-radius:8px;" alt="v2" onerror="this.style.display='none'">
-              <img src="assets/images/default_cover.jpg" style="width:120px; height:80px; object-fit:cover; border-radius:8px;" alt="v3">
-            </div>
-          </div>
+        <div class="searchbar" role="search" aria-label="Recherche de beats">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
+          <input id="searchInput" type="search" placeholder="Rechercher un beat, artiste, tag (ex: trap, 140bpm, minor)..." aria-label="Rechercher">
+          <select id="filterSelect" aria-label="Filtrer par style" style="background:transparent; border:none; color:var(--muted); font-weight:700;">
+            <option value="all">Tous styles</option>
+            <option value="trap">Trap</option>
+            <option value="drill">Drill</option>
+            <option value="afro">Afro</option>
+            <option value="reggaeton">Reggaeton</option>
+            <option value="rnb">R'n'B</option>
+          </select>
         </div>
 
-        <div class="hero-right">
-          <img class="cover" src="/mnt/data/Capture d&#39;écran 2025-11-21 105144.png" alt="cover" onerror="this.src='/mnt/data/Capture d&#39;écran 2025-11-21 105250.png'">
-          <div class="maintenance">SITE EN MAINTENANCE 🛠️</div>
-          <div style="color:var(--muted); text-align:center; margin-top:8px;">Abonne-toi pour les mises à jour</div>
+        <div class="hero-cta">
+          <button class="btn" id="cta-browse">Parcourir beats</button>
+          <button class="ghost" id="cta-upload">Uploader un beat</button>
+          <div class="muted" style="margin-left:auto; padding:8px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);">Marketplace</div>
         </div>
+
+        <div class="cats" aria-label="Catégories">
+          <div class="cat active" data-cat="all">Tous</div>
+          <div class="cat" data-cat="trap">Trap</div>
+          <div class="cat" data-cat="drill">Drill</div>
+          <div class="cat" data-cat="afro">Afro</div>
+          <div class="cat" data-cat="reggaeton">Reggaeton</div>
+          <div class="cat" data-cat="rnb">R'n'B</div>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-label="Aperçu">
+        <img class="cover" src="/mnt/data/Capture d'écran 2025-11-21 105144.png" alt="Cover featured" onerror="this.style.display='none'">
+        <div style="display:flex; gap:10px; justify-content:center;">
+          <button class="btn" id="btn-listen-demo">Ecouter la démo</button>
+          <button class="ghost" id="btn-follow">S'abonner</button>
+        </div>
+        <div style="margin-top:6px; color:var(--muted); font-weight:700; text-align:center;">Featured: DKMV Beats — New Drops</div>
+      </aside>
+    </section>
+
+    <!-- TRENDING / GRID -->
+    <section class="section trending" aria-labelledby="trending-title">
+      <h2 id="trending-title">Tendances</h2>
+      <p class="lead">Les beats les plus chauds du moment — pré-écoute, achat instantané, licences.</p>
+
+      <div id="beatsGrid" class="beats-grid" role="list">
+        <!-- JS will inject beat cards here -->
+      </div>
+
+      <div style="display:flex; justify-content:center; margin-top:16px;">
+        <button class="ghost" id="loadMoreBtn">Afficher plus</button>
       </div>
     </section>
 
-    <!-- INSTRUMENTALES (initialement masqué) -->
-    <section id="instrumentales" class="page" aria-labelledby="instrumentales">
-      <div class="catalogue">
-        <div class="catalogue-list">
-          <h2 style="margin-top:0;">Catalogue Musical</h2>
-          <p style="margin:6px 0 18px 0; color:var(--muted)">Écoute, teste et télécharge les instrumentales. Filtre par style, sous-style, BPM ou tonalité.</p>
-
-          <div id="beatsContainer" class="beats-grid" aria-live="polite">
-            <!-- JS injecte les cartes -->
-          </div>
-
-          <div id="catalogueFooter" style="margin-top:12px; display:flex; justify-content:center">
-            <button class="btn-ghost" id="loadMore">Afficher plus</button>
-          </div>
-        </div>
-
-        <aside class="right-panel">
-          <div class="widget">
-            <h3>Top streams</h3>
-            <div class="small-list" id="topStreams"></div>
-          </div>
-
-          <div class="widget">
-            <h3>Kits populaires</h3>
-            <div class="small-list" id="topKits"></div>
-          </div>
-
-          <div class="widget">
-            <h3>Réseaux</h3>
-            <div style="color:var(--muted); font-size:0.95rem;">Pour commandes personnalisées : <br><strong>dkmv.beats@example.com</strong></div>
-            <div style="margin-top:10px; display:flex; gap:8px;">
-              <a class="btn-ghost" href="https://youtube.com" target="_blank">YouTube</a>
-              <a class="btn-ghost" href="https://instagram.com" target="_blank">Instagram</a>
-            </div>
-          </div>
-        </aside>
+    <!-- FEATURED PRODUCERS -->
+    <section class="section producers-section" aria-labelledby="producers-title">
+      <h2 id="producers-title">Producteurs en vedette</h2>
+      <div class="producers" id="producersList" role="list">
+        <!-- JS injected -->
       </div>
     </section>
 
-    <!-- KITS -->
-    <section id="kits" class="page full-section" aria-labelledby="kits">
-      <h2>Kits & Loopkits</h2>
-      <p style="color:var(--muted)">Téléchargez ou parcourez les packs (drums, loops, one-shots).</p>
-
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-top:12px;" id="kitsGrid">
-        <!-- JS -->
-      </div>
-    </section>
-
-    <!-- A PROPOS -->
-    <section id="apropos" class="page full-section">
-      <h2>À propos</h2>
-      <div class="about-grid">
-        <div>
-          <img src="/mnt/data/Capture d&#39;écran 2025-11-21 105250.png" alt="DKMV" style="width:100%; border-radius:12px; object-fit:cover; max-height:320px;" onerror="this.style.display='none'">
+    <!-- HOW IT WORKS / FEATURES -->
+    <section class="section features-section" aria-labelledby="features-title">
+      <h2 id="features-title">Comment ça marche</h2>
+      <div class="features" role="list">
+        <div class="feature">
+          <h3>Écoute instantanée</h3>
+          <p class="muted">Pré-écoute haute qualité avant d'acheter ou télécharger.</p>
         </div>
-        <div>
-          <p><strong>DKMV Beats</strong> est un studio virtuel centré sur la production de beats et de kits pour artistes, labels et créateurs de contenu. Nous produisons des instrumentales professionnelles, prêtes à être utilisées.</p>
-
-          <h3>Styles</h3>
-          <ul>
-            <li>Trap / Drill / Jersey Drill</li>
-            <li>Afro / Afrotrap / Afrodrill / AfroArab</li>
-            <li>Reggaeton / Oriental / Raï</li>
-            <li>Pop / Chill / Lo-Fi / R'n'B</li>
-            <li>Old School / Boom Bap / Ambiance</li>
-          </ul>
-
-          <h3>Services</h3>
-          <ul>
-            <li>Beat exclusif</li>
-            <li>Production sur-mesure</li>
-            <li>Mix & Master</li>
-            <li>Synchronisation (vidéo/ads)</li>
-          </ul>
+        <div class="feature">
+          <h3>Licences claires</h3>
+          <p class="muted">Choisis la licence adaptée (non-exclusive / exclusive).</p>
         </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="page full-section">
-      <h2>Contact</h2>
-      <div class="contact-card">
-        <form id="contactForm" action="https://formspree.io/f/xdkwweby" method="POST" novalidate>
-          <div style="display:flex; gap:12px; margin-bottom:10px;">
-            <input id="cf_name" name="name" placeholder="Votre nom" required>
-            <input id="cf_email" name="_replyto" type="email" placeholder="Votre email" required>
-          </div>
-          <div style="margin-bottom:10px;">
-            <input id="cf_subject" name="subject" placeholder="Sujet (ex: Beat exclusif)" />
-          </div>
-          <div style="margin-bottom:12px;">
-            <textarea id="cf_message" name="message" placeholder="Écrivez votre message..." required></textarea>
-          </div>
-          <div style="display:flex; gap:10px;">
-            <button type="submit" class="btn-primary">Envoyer</button>
-            <button type="reset" class="btn-ghost">Réinitialiser</button>
-          </div>
-          <p id="formStatus" style="margin-top:10px; color:var(--muted);"></p>
-        </form>
+        <div class="feature">
+          <h3>Vendre facilement</h3>
+          <p class="muted">Uploade tes beats, gère tes ventes et liens de streaming.</p>
+        </div>
       </div>
     </section>
 
     <footer>
-      © <span id="year"></span> DKMV Beats — Tous droits réservés.
+      © <span id="year"></span> BeatMarket — Template inspired by BeatStars. — <span class="muted">Made for demo</span>
     </footer>
   </main>
 
-  <!-- PLAYER STICKY -->
-  <div class="player-sticky" id="playerSticky" style="display:none;">
-    <img src="assets/images/default_cover.jpg" alt="cover" class="player-thumb" id="playerThumb" onerror="this.src='assets/images/default_cover.jpg'">
-    <div class="player-meta">
-      <div style="display:flex; justify-content:space-between; gap:12px; align-items:center;">
-        <div style="min-width:0;">
-          <div id="playerTitle" style="font-weight:900; color:var(--red); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Titre</div>
-          <div id="playerArtist" style="font-size:0.9rem; color:var(--muted)">DKMV Beats</div>
-        </div>
-        <div class="player-controls">
-          <button id="playerPrev" class="btn-ghost">⏮</button>
-          <button id="playerPlay" class="btn-primary">▶️</button>
-          <button id="playerNext" class="btn-ghost">⏭</button>
-        </div>
-      </div>
-      <input type="range" id="playerSeek" min="0" max="100" value="0" style="width:100%; margin-top:8px;">
+  <!-- STICKY PLAYER -->
+  <div class="player" id="player" aria-hidden="true" style="display:none;">
+    <img id="playerThumb" src="/mnt/data/Capture d'écran 2025-11-21 105144.png" alt="cover" onerror="this.style.display='none'">
+    <div class="track">
+      <div class="title" id="trackTitle">Track Title</div>
+      <div class="muted" id="trackArtist">Artist</div>
+    </div>
+    <div class="controls">
+      <button class="ghost" id="prevBtn">⏮</button>
+      <button class="btn" id="playBtn">▶️</button>
+      <button class="ghost" id="nextBtn">⏭</button>
     </div>
   </div>
 
   <script>
-  // ===============================
-  // SPA + Catalogue + Player
-  // ===============================
+  /* ==========================
+     JS: populate grid, interactions
+     ========================== */
 
-  function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
+  (function(){
+    // helper ready
+    function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
 
-  ready(() => {
-    // Hide preloader
-    setTimeout(()=> document.getElementById('preloader').classList.add('hidden'), 500);
+    ready(function(){
+      document.getElementById('year').textContent = new Date().getFullYear();
 
-    // year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Tabs behavior: show only selected page, accueil active on load
-    const tabs = document.querySelectorAll('.tab-btn');
-    const pages = document.querySelectorAll('.page');
-
-    function showPage(id) {
-      pages.forEach(p => {
-        if(p.id === id) { p.classList.add('active'); p.style.display = ''; }
-        else { p.classList.remove('active'); p.style.display = 'none'; }
-      });
-      tabs.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
-      // scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ensure accueil visible by default (already set in HTML). Also hide others initially
-    pages.forEach(p => {
-      if(!p.classList.contains('active')) p.style.display = 'none';
-    });
-
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.dataset.tab;
-        showPage(id);
-      });
-    });
-
-    // Theme toggle (light/dark) - preserve if needed
-    const themeBtn = document.getElementById('toggleTheme');
-    const savedTheme = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    if(savedTheme === 'light') document.body.classList.add('light-mode');
-    themeBtn.addEventListener('click', ()=> {
-      document.body.classList.toggle('light-mode');
-      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-    });
-
-    // Language toggle (basic)
-    const toggleLang = document.getElementById('toggleLang');
-    let lang = localStorage.getItem('lang') || 'fr';
-    toggleLang.textContent = lang === 'fr' ? 'FR' : 'EN';
-    toggleLang.addEventListener('click', ()=> {
-      lang = (lang === 'fr') ? 'en' : 'fr';
-      localStorage.setItem('lang', lang);
-      toggleLang.textContent = lang === 'fr' ? 'FR' : 'EN';
-      // you can expand translations here as needed
-    });
-
-    // Data: generate many sample beats (large catalogue) to simulate full site
-    const beats = [];
-    const styles = ['trap','drill','afro','reggaeton','club','pop','rnb','boombap'];
-    const keys = ['A minor','C minor','D minor','E minor','G minor','F major','Bb major','D# minor'];
-    for(let i=1;i<=200;i++){
-      const s = styles[i % styles.length];
-      beats.push({
-        id: 'b' + i,
-        name: `${s.toUpperCase()} BEAT ${i}`,
-        file: `assets/audio/${s}_beat_${i}.mp3`,
-        download: `assets/audio/${s}_beat_${i}.mp3`,
-        bpm: 70 + (i % 100),
-        key: keys[i % keys.length],
-        duration: `${2 + (i%4)}:${(10 + i%50).toString().padStart(2,'0')}`,
-        cover: '/mnt/data/Capture d\'écran 2025-11-21 105144.png',
-        style: s,
-        description: { fr: `Instrumentale ${s} numéro ${i}`, en: `${s} instrumental nr ${i}` },
-        price: (i%5===0) ? 0 : (7.99 + (i%6))
-      });
-    }
-
-    // kits
-    const kits = [
-      { name: "LoopKit — L'OVNI", file: "assets/kits/LOVNI.zip", cover: "/mnt/data/Capture d'écran 2025-11-21 105250.png", price:0, description:{fr:"Loopkit gratuit", en:"Free loopkit"} },
-      { name: "DrumKit — STREET", file: "assets/kits/STREET.zip", cover: "/mnt/data/Capture d'écran 2025-11-21 105144.png", price:12.99, description:{fr:"Kit de drums complet", en:"Full drumkit"} }
-    ];
-
-    // render functions
-    const beatsContainer = document.getElementById('beatsContainer');
-    const kitsGrid = document.getElementById('kitsGrid');
-    const topStreams = document.getElementById('topStreams');
-    const topKits = document.getElementById('topKits');
-
-    // create beat card
-    function createBeatCard(b) {
-      const div = document.createElement('div');
-      div.className = 'beat-card';
-      div.innerHTML = `
-        <img class="beat-thumb" src="${b.cover}" alt="${b.name}" onerror="this.src='/mnt/data/Capture d\\'écran 2025-11-21 105144.png'">
-        <div class="beat-meta">
-          <div class="beat-title">${b.name}</div>
-          <div class="beat-desc">${b.description.fr}</div>
-          <div class="beat-info"><span>BPM: ${b.bpm}</span><span>Tonalité: ${b.key}</span><span>${b.duration}</span></div>
-        </div>
-        <div class="beat-actions">
-          <button class="btn-primary" data-play="${b.file}" data-title="${b.name}" data-cover="${b.cover}">${lang==='fr' ? 'Écouter' : 'Listen'}</button>
-          <a class="btn-ghost" href="${b.download}" download>${b.price && b.price > 0 ? b.price.toFixed(2)+'€' : 'FREE'}</a>
-        </div>
-      `;
-      // play binding
-      div.querySelector('button[data-play]').addEventListener('click', (e)=>{
-        const f = e.currentTarget.dataset.play;
-        const t = e.currentTarget.dataset.title;
-        const c = e.currentTarget.dataset.cover;
-        startPlayer({file:f, title:t, cover:c});
-      });
-      return div;
-    }
-
-    // pagination style load
-    let shown = 0;
-    const perPage = 16;
-    function loadMore() {
-      const to = Math.min(beats.length, shown + perPage);
-      for(let i=shown;i<to;i++){
-        beatsContainer.appendChild(createBeatCard(beats[i]));
+      // Sample data generator (massive catalogue)
+      const styles = ['trap','drill','afro','reggaeton','club','rnb','pop','boombap'];
+      const sampleBeats = [];
+      for(let i=1;i<=90;i++){
+        const s = styles[i % styles.length];
+        sampleBeats.push({
+          id: 'beat-'+i,
+          title: `${s.toUpperCase()} BEAT ${i}`,
+          artist: `Producer ${ (i%12)+1 }`,
+          bpm: 70 + (i%80),
+          key: ['A minor','C minor','D minor','E minor','G minor','F major'][i%6],
+          duration: `${2 + (i%4)}:${(10 + (i%50)).toString().padStart(2,'0')}`,
+          cover: (i%2===0) ? "/mnt/data/Capture d'écran 2025-11-21 105144.png" : "/mnt/data/Capture d'écran 2025-11-21 105250.png",
+          file: `assets/audio/beat_${i}.mp3`,
+          price: (i%7===0) ? 0 : (7.99 + (i%5))
+        });
       }
-      shown = to;
-      if(shown >= beats.length) document.getElementById('loadMore').style.display='none';
-    }
-    loadMore();
-    document.getElementById('loadMore').addEventListener('click', loadMore);
 
-    // kits rendering
-    kits.forEach(k=>{
-      const card = document.createElement('div');
-      card.style.padding='12px'; card.style.borderRadius='10px'; card.style.background='linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02))';
-      card.innerHTML = `
-        <img src="${k.cover}" style="width:100%; height:140px; object-fit:cover; border-radius:8px;">
-        <div style="font-weight:800; margin-top:8px;">${k.name}</div>
-        <div style="color:var(--muted);">${k.description.fr}</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-          <a class="btn-primary" href="${k.file}" download>Télécharger</a>
-          <div style="color:var(--muted)">${k.price ? k.price+'€' : 'FREE'}</div>
-        </div>
-      `;
-      kitsGrid.appendChild(card);
-    });
+      // populate beats grid
+      const beatsGrid = document.getElementById('beatsGrid');
+      let shown = 0;
+      const perPage = 9;
 
-    // sidebar lists
-    for(let i=1;i<=6;i++){
-      const el = document.createElement('div'); el.style.display='flex'; el.style.gap='10px'; el.style.alignItems='center';
-      el.innerHTML = `<img src="/mnt/data/Capture d'écran 2025-11-21 105144.png" style="width:52px;height:52px;border-radius:8px;object-fit:cover"><div><strong>Top Beat ${i}</strong><div style="color:var(--muted);font-size:.9rem">BPM ${110+i}</div></div>`;
-      topStreams.appendChild(el);
-    }
-    kits.slice(0,3).forEach(k=>{
-      const el = document.createElement('div'); el.style.display='flex'; el.style.gap='10px'; el.style.alignItems='center';
-      el.innerHTML = `<img src="${k.cover}" style="width:52px;height:52px;border-radius:8px;object-fit:cover"><div><strong>${k.name}</strong><div style="color:var(--muted);font-size:.9rem">${k.price?k.price+'€':'FREE'}</div></div>`;
-      topKits.appendChild(el);
-    });
+      function currency(p){ return (p && p>0) ? p.toFixed(2)+'€' : 'FREE'; }
 
-    // search & chips
-    const searchInput = document.getElementById('globalSearch');
-    const chips = document.querySelectorAll('.chip');
-    let activeFilter = 'all';
+      function createBeatCard(b){
+        const el = document.createElement('div');
+        el.className = 'beat';
+        el.innerHTML = `
+          <img class="thumb" src="${b.cover}" alt="${b.title}">
+          <div class="meta">
+            <div class="title">${b.title}</div>
+            <div class="by"><strong>${b.artist}</strong></div>
+            <div class="info"><span>BPM: ${b.bpm}</span><span>${b.key}</span><span>${b.duration}</span></div>
+          </div>
+          <div class="actions">
+            <button class="buy" data-play="${b.file}" data-title="${b.title}" data-artist="${b.artist}" data-cover="${b.cover}">PREVIEW</button>
+            <a class="download" href="${b.file}" download>${currency(b.price)}</a>
+          </div>
+        `;
+        // bind preview click
+        el.querySelector('button[data-play]').addEventListener('click', function(e){
+          const f = this.dataset.play;
+          const t = this.dataset.title;
+          const a = this.dataset.artist;
+          const c = this.dataset.cover;
+          startPreview({file:f, title:t, artist:a, cover:c});
+        });
+        return el;
+      }
 
-    function filterBeats(q, style) {
-      beatsContainer.innerHTML = '';
-      const results = beats.filter(b => {
-        const matchesQ = !q || b.name.toLowerCase().includes(q.toLowerCase()) || (b.description.fr && b.description.fr.toLowerCase().includes(q.toLowerCase()));
-        const matchesStyle = !style || style === 'all' || b.style === style;
-        return matchesQ && matchesStyle;
+      function loadMore(){
+        const to = Math.min(sampleBeats.length, shown + perPage);
+        for(let i=shown;i<to;i++){
+          beatsGrid.appendChild(createBeatCard(sampleBeats[i]));
+        }
+        shown = to;
+        if(shown >= sampleBeats.length) document.getElementById('loadMoreBtn').style.display='none';
+      }
+
+      loadMore();
+      document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
+
+      // producers list
+      const producersList = document.getElementById('producersList');
+      for(let i=1;i<=8;i++){
+        const div = document.createElement('div');
+        div.className = 'producer';
+        div.innerHTML = `<img src="/mnt/data/Capture d'écran 2025-11-21 105250.png" alt="prod">
+          <div style="min-width:0;">
+            <strong>Producer ${i}</strong>
+            <div class="muted" style="font-size:.9rem">Beats: ${10 + (i%12)}</div>
+          </div>`;
+        producersList.appendChild(div);
+      }
+
+      // category chips
+      document.querySelectorAll('.cat').forEach(c=>{
+        c.addEventListener('click', function(){
+          document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));
+          this.classList.add('active');
+          const cat = this.dataset.cat;
+          if(cat==='all'){
+            // reset grid to paginated initial
+            beatsGrid.innerHTML = ''; shown = 0; document.getElementById('loadMoreBtn').style.display='inline-block'; loadMore();
+          } else {
+            // filter on style
+            const filtered = sampleBeats.filter(b => b.title.toLowerCase().includes(cat));
+            beatsGrid.innerHTML = '';
+            filtered.slice(0,60).forEach(b => beatsGrid.appendChild(createBeatCard(b)));
+            document.getElementById('loadMoreBtn').style.display='none';
+          }
+        });
       });
-      if(results.length === 0){
-        beatsContainer.innerHTML = `<div style="color:var(--muted); padding:18px; text-align:center;">${lang==='fr' ? 'Aucun beat trouvé 😢' : 'No beats found 😢'}</div>`;
-        return;
-      }
-      results.slice(0,120).forEach(b => beatsContainer.appendChild(createBeatCard(b)));
-      document.getElementById('loadMore').style.display = 'none';
-    }
 
-    chips.forEach(c => {
-      c.addEventListener('click', ()=>{
-        chips.forEach(x=>x.classList.remove('active'));
-        c.classList.add('active');
-        activeFilter = c.dataset.filter;
-        filterBeats(searchInput.value, activeFilter);
+      // search input
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', function(){
+        const q = this.value.trim().toLowerCase();
+        if(!q){ beatsGrid.innerHTML=''; shown=0; document.getElementById('loadMoreBtn').style.display='inline-block'; loadMore(); return; }
+        const filtered = sampleBeats.filter(b => b.title.toLowerCase().includes(q) || b.artist.toLowerCase().includes(q));
+        beatsGrid.innerHTML = '';
+        filtered.slice(0,120).forEach(b => beatsGrid.appendChild(createBeatCard(b)));
+        document.getElementById('loadMoreBtn').style.display='none';
       });
-    });
 
-    searchInput.addEventListener('input', (e)=>{
-      const v = e.target.value;
-      if(!v){
-        beatsContainer.innerHTML = ''; shown = 0; document.getElementById('loadMore').style.display='inline-block'; loadMore(); return;
+      // filter select
+      document.getElementById('filterSelect').addEventListener('change', function(){
+        const v = this.value;
+        if(v==='all'){ beatsGrid.innerHTML=''; shown=0; document.getElementById('loadMoreBtn').style.display='inline-block'; loadMore(); return; }
+        const filtered = sampleBeats.filter(b => b.title.toLowerCase().includes(v));
+        beatsGrid.innerHTML=''; filtered.slice(0,120).forEach(b=>beatsGrid.appendChild(createBeatCard(b))); document.getElementById('loadMoreBtn').style.display='none';
+      });
+
+      // UPLOAD / CTA handlers (demo)
+      document.getElementById('cta-upload').addEventListener('click', function(){
+        alert('Cette démo ne permet pas de téléverser. Intégration possible via backend.');
+      });
+
+      // simple sticky player
+      const player = document.getElementById('player');
+      const playerThumb = document.getElementById('playerThumb');
+      const trackTitle = document.getElementById('trackTitle');
+      const trackArtist = document.getElementById('trackArtist');
+      const playBtn = document.getElementById('playBtn');
+      let audio = new Audio(); let isPlaying=false;
+
+      function startPreview(o){
+        if(!o || !o.file) return;
+        player.style.display = 'flex';
+        playerThumb.src = o.cover;
+        trackTitle.textContent = o.title;
+        trackArtist.textContent = o.artist;
+        try {
+          audio.src = o.file;
+          audio.play().catch(()=>{ /* may fail if file doesn't exist */ });
+          isPlaying = true; playBtn.textContent = '⏸';
+        } catch(e){ console.warn(e); }
       }
-      filterBeats(v, activeFilter);
-    });
 
-    // sticky player logic
-    const playerSticky = document.getElementById('playerSticky');
-    const playerThumb = document.getElementById('playerThumb');
-    const playerTitle = document.getElementById('playerTitle');
-    const playerArtist = document.getElementById('playerArtist');
-    const playerPlay = document.getElementById('playerPlay');
-    const playerPrev = document.getElementById('playerPrev');
-    const playerNext = document.getElementById('playerNext');
-    const playerSeek = document.getElementById('playerSeek');
+      playBtn.addEventListener('click', function(){
+        if(!audio.src) return;
+        if(audio.paused){ audio.play(); playBtn.textContent='⏸'; } else { audio.pause(); playBtn.textContent='▶️'; }
+      });
 
-    let audio = new Audio();
-    let playlist = [];
-    let currentIndex = 0;
+      // keyboard shortcut to focus search
+      document.addEventListener('keydown', function(e){
+        if(e.key.toLowerCase()==='f' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+          e.preventDefault(); searchInput.focus();
+        }
+      });
 
-    function startPlayer(obj){
-      if(!obj || !obj.file) return;
-      playerSticky.style.display = 'flex';
-      playerThumb.src = obj.cover || '/mnt/data/Capture d\'écran 2025-11-21 105144.png';
-      playerTitle.textContent = obj.title || 'Titre';
-      playerArtist.textContent = 'DKMV Beats';
-      audio.src = obj.file;
-      audio.play().catch(()=>{ /* ignore autoplay fail */ });
-      playerPlay.textContent = '⏸';
-      playlist.unshift(obj);
-      currentIndex = 0;
-    }
-
-    playerPlay.addEventListener('click', ()=>{
-      if(audio.paused){ audio.play(); playerPlay.textContent='⏸'; }
-      else { audio.pause(); playerPlay.textContent='▶️'; }
-    });
-
-    playerPrev.addEventListener('click', ()=>{
-      if(playlist.length <= 1) return;
-      currentIndex = Math.max(0, currentIndex - 1);
-      const o = playlist[currentIndex]; audio.src = o.file; audio.play(); playerTitle.textContent = o.title; playerThumb.src = o.cover; playerPlay.textContent='⏸';
-    });
-
-    playerNext.addEventListener('click', ()=>{
-      if(currentIndex + 1 >= playlist.length) return;
-      currentIndex++;
-      const o = playlist[currentIndex]; audio.src = o.file; audio.play(); playerTitle.textContent = o.title; playerThumb.src = o.cover; playerPlay.textContent='⏸';
-    });
-
-    audio.addEventListener('timeupdate', ()=> {
-      if(!audio.duration || isNaN(audio.duration)) return;
-      playerSeek.value = Math.floor((audio.currentTime / audio.duration) * 100);
-    });
-    playerSeek.addEventListener('input', (e)=>{
-      if(!audio.duration || isNaN(audio.duration)) return;
-      audio.currentTime = (e.target.value / 100) * audio.duration;
-    });
-
-    // contact form
-    const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
-    contactForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      const formData = new FormData(this);
-      formStatus.textContent = lang==='fr' ? 'Envoi en cours...' : 'Sending...';
-      fetch(this.action, { method:this.method, body:formData, headers:{'Accept':'application/json'} })
-        .then(res => {
-          if(res.ok){ formStatus.textContent = lang==='fr' ? 'Merci ! Votre message a bien été envoyé.' : 'Thanks! Your message was sent.'; this.reset(); }
-          else formStatus.textContent = lang==='fr' ? "Erreur lors de l'envoi." : 'Error sending message.';
-        })
-        .catch(()=> formStatus.textContent = lang==='fr' ? "Erreur réseau." : 'Network error.');
-    });
-
-    // small utilities
-    document.getElementById('btnBrowse').addEventListener('click', ()=>{
-      showPage('instrumentales');
-      // focus search input
-      setTimeout(()=> document.getElementById('globalSearch').focus(), 500);
-    });
-
-    // keyboard shortcut: 'f' to focus search
-    document.addEventListener('keydown', (e)=> {
-      if(e.key.toLowerCase() === 'f' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
-        e.preventDefault(); document.getElementById('globalSearch').focus();
-      }
-    });
-
-    // end ready
-  });
+      // End ready
+    }); // ready end
+  })();
   </script>
 </body>
 </html>
