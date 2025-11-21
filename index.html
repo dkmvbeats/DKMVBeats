@@ -588,6 +588,39 @@
 }
 </style>
 
+<style>
+/* --- Mise en grille uniquement pour les instrumentales --- */
+#beats .categories {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); 
+  gap: 15px;
+  margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+  #beats .categories {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* --- Style général des cartes (partagé, inchangé) --- */
+.category-card {
+  background: #111;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #333;
+}
+
+.category-card:hover {
+  background: #222;
+  transform: scale(1.05);
+}
+</style>
+
 
     <!-- Kits -->
     <div class="section fade-in" id="kits">
