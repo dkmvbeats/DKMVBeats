@@ -152,7 +152,7 @@
       <div class="brand">
         <div class="logo" aria-hidden="true">
           <!-- image uploaded by user -->
-          <img src="/mnt/data/Capture d'écran 2025-11-21 105250.png" alt="Logo" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+          <img src="/images/Capture8.jpeg" alt="Logo" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
         </div>
         <div>
           <div class="title">BeatMarket</div>
@@ -225,7 +225,7 @@
       </div>
 
       <aside class="hero-right">
-        <img class="cover" src="/mnt/data/Capture d'écran 2025-11-21 105144.png" alt="Featured" onerror="this.style.display='none'">
+        <img class="cover" src="/images/Capture8.jpeg" alt="Featured" onerror="this.style.display='none'">
         <div style="display:flex; gap:10px; justify-content:center; margin-top:12px;">
           <button class="btn" id="btn-listen-demo">Ecouter la démo</button>
           <button class="ghost" id="btn-follow">S'abonner</button>
@@ -253,7 +253,7 @@
 
   <!-- STICKY PLAYER (waveform) -->
   <div class="player" id="player" style="display:none;" aria-hidden="true">
-    <img id="playerThumb" src="/mnt/data/Capture d'écran 2025-11-21 105144.png" alt="cover">
+    <img id="playerThumb" src="/images/Capture8.jpeg" alt="cover">
     <div class="track">
       <div class="title" id="trackTitle">Titre</div>
       <div class="muted" id="trackArtist">Artiste</div>
@@ -307,7 +307,7 @@
           bpm: 70 + (i%80),
           key: ['A minor','C minor','D minor','E minor','G minor','F major'][i%6],
           duration: `${2 + (i%4)}:${(10 + (i%50)).toString().padStart(2,'0')}`,
-          cover: (i%2===0) ? "/mnt/data/Capture d'écran 2025-11-21 105144.png" : "/mnt/data/Capture d'écran 2025-11-21 105250.png",
+          cover: (i%2===0) ? "/images/Capture8.jpeg" : "/images/Capture8.jpeg",
           file: `assets/audio/beat_${i}.mp3`,
           price: (i%7===0) ? 0 : (7.99 + (i%5)),
           style: s
@@ -525,7 +525,7 @@
         // t: {file,title,artist,cover}
         if(!t) return;
         playerEl.style.display = 'flex';
-        playerThumb.src = t.cover || '/mnt/data/Capture d\'écran 2025-11-21 105144.png';
+        playerThumb.src = t.cover || '/images/Capture8.jpeg';
         trackTitle.textContent = t.title || 'Titre';
         trackArtist.textContent = t.artist || 'Artiste';
         // load into wavesurfer
