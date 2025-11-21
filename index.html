@@ -3,32 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>DKMV Beats</title>
+  <title>DKMV Beats — Rouge & Noir</title>
   <meta name="description" content="DKMV Beats - Instrumentales, kits & loopkits."/>
   <link rel="icon" href="images/favicon.ico" />
 
-  <!-- Google Font -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
   /* ======================
-     DKMV Beats - GLOBAL CSS
-     Single-file edition for quick start
+     THEME : Rouge & Noir (mix design)
      ====================== */
 
   :root{
-    --bg-1: #0f1720;
-    --bg-2: #111420;
-    --card: rgba(24,28,36,0.9);
-    --accent: #00d4ff;
-    --accent-2: #007BFF;
-    --glass: rgba(255,255,255,0.04);
-    --white: #ffffff;
+    --black-1: #0b0b0b;    /* noir profond */
+    --black-2: #151515;
+    --card: rgba(22,22,22,0.95);
+    --red: #e60000;       /* rouge vif */
+    --red-dark: #990000;  /* rouge foncé */
     --muted: #9aa4b2;
-    --success: #34d399;
-    --danger: #ff6666;
-    --radius: 14px;
+    --glass: rgba(255,255,255,0.03);
+    --white: #ffffff;
+    --radius: 18px;
     --nav-height: 74px;
+    --accent-shadow: 0 10px 40px rgba(230,0,0,0.12);
   }
 
   *{box-sizing:border-box}
@@ -36,112 +34,128 @@
   body{
     margin:0;
     font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(135deg,var(--bg-1) 0%, #232526 100%);
+    background: linear-gradient(135deg, var(--black-1) 0%, #111 100%);
     color:var(--white);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
   }
+
+  a { color: inherit; text-decoration: none; }
 
   /* PRELOADER */
   #preloader {
     position: fixed; inset:0; display:flex; justify-content:center; align-items:center; z-index:99999;
-    background: linear-gradient(180deg, rgba(2,6,23,0.9), rgba(12,16,22,0.6));
+    background: linear-gradient(180deg, rgba(11,11,11,0.98), rgba(20,20,20,0.95));
     transition: opacity .35s ease;
   }
-  #preloader.hidden{ opacity:0; pointer-events:none; }
+  #preloader.hidden{ opacity:0; pointer-events:none; transform:scale(.995); }
 
-  .loader {
-    display:flex; flex-direction:column; gap:12px; align-items:center;
-  }
+  .loader { display:flex; flex-direction:column; gap:12px; align-items:center; }
   .loader .circle{
-    width:80px; height:80px; border-radius:50%;
-    background: conic-gradient(var(--accent), transparent 60%);
-    filter: drop-shadow(0 8px 30px #00d4ff22);
+    width:92px; height:92px; border-radius:50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.06), rgba(0,0,0,0.2)),
+      conic-gradient(var(--red), rgba(255,255,255,0.03) 40%, transparent 60%);
+    filter: drop-shadow(0 10px 40px rgba(230,0,0,0.12));
     animation: spin 1.6s linear infinite;
   }
   @keyframes spin { to{ transform: rotate(360deg) } }
+  .loader .label { color:var(--muted); font-weight:700; letter-spacing:1px; }
 
-  /* TOP NAV */
+  /* NAV */
   .top-nav-fixed{
     position:fixed; left:12px; right:12px; top:12px;
     height:var(--nav-height);
-    background: linear-gradient(90deg, rgba(4,10,16,0.85), rgba(12,18,24,0.65));
+    background: linear-gradient(90deg, rgba(10,10,10,0.85), rgba(18,18,18,0.75));
     border-radius: 18px;
     display:flex; align-items:center; justify-content:space-between;
     padding:10px 18px; gap:18px; z-index:1200;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.03);
   }
 
   .brand-left { display:flex; gap:14px; align-items:center; }
-  .brand-left img.logo { width:56px; height:56px; border-radius:12px; object-fit:cover; box-shadow:0 6px 20px #00d4ff22; }
-  .brand-left .brand-title { font-weight:800; letter-spacing:1px; font-size:1.05rem; }
-  .nav-actions { display:flex; gap:8px; align-items:center; }
+  .brand-left img.logo { width:56px; height:56px; border-radius:12px; object-fit:cover; box-shadow: 0 8px 30px rgba(230,0,0,0.12); }
+  .brand-title { display:none; } /* on oublie le texte, rendu par image ou absent */
 
   .nav-links { display:flex; gap:8px; align-items:center; }
   .nav-links button.tab-btn {
-    background:none; border:none; color:var(--white); padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer;
-    transition: background .18s, transform .12s;
+    background:none; border:none; color:var(--white); padding:8px 14px; border-radius:10px; font-weight:700; cursor:pointer;
+    transition: background .18s, transform .12s, color .12s;
+    letter-spacing: 0.6px;
   }
+  .tab-btn:hover { transform: translateY(-2px); color:var(--red); }
   .tab-btn.active {
-    background: linear-gradient(90deg, rgba(0,212,255,0.12), rgba(0,123,255,0.08));
-    color:var(--accent);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(0,212,255,0.06);
+    background: linear-gradient(90deg, rgba(230,0,0,0.12), rgba(153,0,0,0.06));
+    color:var(--red);
+    transform: translateY(-3px);
+    box-shadow: var(--accent-shadow);
   }
 
   .controls { display:flex; gap:8px; align-items:center; }
   #toggleTheme, #toggleLang {
-    background: linear-gradient(135deg,#232526,#2c5364); border:1px solid rgba(255,255,255,0.05); color:var(--accent); width:44px; height:44px; border-radius:50%;
+    background: linear-gradient(135deg,#1a1a1a,#2b2b2b); border:1px solid rgba(255,255,255,0.03); color:var(--red); width:44px; height:44px; border-radius:50%;
     display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:18px;
   }
-  #toggleLang { width:auto; padding:8px 12px; border-radius:10px; color:#fff; background:var(--accent); border:none; font-weight:800; }
+  #toggleLang { width:auto; padding:6px 12px; border-radius:10px; color:#fff; background:var(--red); border:none; font-weight:800; box-shadow: 0 6px 20px rgba(230,0,0,0.12); }
 
-  /* MAIN LAYOUT */
-  main{ padding: calc(var(--nav-height) + 28px) 24px 120px; min-height:100vh; max-width:1400px; margin:0 auto; }
+  /* MAIN */
+  main{ padding: calc(var(--nav-height) + 28px) 20px 140px; min-height:100vh; max-width:1300px; margin:0 auto; }
 
   .hero {
-    display:grid; grid-template-columns: 1fr 420px; gap:28px; align-items:center;
-    margin-bottom:30px;
+    display:grid; grid-template-columns: 1fr 420px; gap:28px; align-items:start;
+    margin-bottom:20px;
   }
-  .hero-card {
+  .hero-left {
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
-    border-radius: var(--radius);
-    padding:28px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
-    border:1px solid rgba(255,255,255,0.03);
+    border-radius: var(--radius); padding:28px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.025);
   }
-  .hero h1{ margin:0; font-size:2.4rem; letter-spacing:1px; }
-  .hero p.lead { color:var(--muted); font-size:1.02rem; margin-top:12px; margin-bottom:18px; }
+  .hero-left h1{ margin:0; font-size:2.6rem; letter-spacing:1px; color:var(--red); text-shadow: 0 6px 20px rgba(230,0,0,0.08); }
+  .hero-left p.lead { color:var(--muted); font-size:1.02rem; margin-top:12px; margin-bottom:18px; }
 
-  .hero-right { display:flex; flex-direction:column; gap:12px; align-items:center; }
-  .hero-right img.cover { width:360px; height:200px; object-fit:cover; border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+  .hero-cta { display:flex; gap:12px; margin-top:16px; align-items:center; flex-wrap:wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg,var(--red),var(--red-dark)); color:#fff; border:none; padding:12px 18px; border-radius:12px; cursor:pointer; font-weight:800;
+    box-shadow: 0 12px 40px rgba(230,0,0,0.12);
+  }
+  .btn-ghost {
+    background:transparent; border:1.5px solid rgba(255,255,255,0.06); color:var(--white); padding:10px 14px; border-radius:12px; cursor:pointer;
+  }
 
-  /* Search bar & filters row */
-  .filters-row { display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+  .hero-right { display:flex; flex-direction:column; gap:12px; align-items:center; justify-content:flex-start; }
+  .hero-right .cover {
+    width:100%; max-width:420px; height:240px; object-fit:cover; border-radius:14px; box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    border: 2px solid rgba(230,0,0,0.06);
+  }
+  .maintenance { margin-top:10px; color:var(--red); font-weight:800; }
+
+  /* filters row */
+  .filters-row { display:flex; gap:12px; align-items:center; margin-top:18px; flex-wrap:wrap; }
   .searchbar {
-    flex:1;
-    display:flex; gap:8px; align-items:center;
-    background:var(--glass); padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,0.03);
+    flex:1; display:flex; gap:8px; align-items:center;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+    padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,0.03);
   }
   .searchbar input {
     background:transparent; border:none; outline:none; color:var(--white); font-size:1rem; width:100%;
   }
   .chip {
-    padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.03); font-weight:700; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
+    padding:10px 14px; border-radius:999px; background:rgba(255,255,255,0.02); font-weight:700; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
   }
-  .chip.active { background: linear-gradient(90deg,var(--accent-2),var(--accent)); color:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.5); transform:translateY(-2px); }
+  .chip.active { background: linear-gradient(90deg,var(--red-dark),var(--red)); color:#fff; box-shadow: var(--accent-shadow); transform:translateY(-3px); }
 
-  /* GRID: trending / catalogue */
+  /* layout: catalogue & sidebar */
   .catalogue {
-    display:grid; grid-template-columns: 1fr 380px; gap:22px; align-items:start;
+    display:grid; grid-template-columns: 1fr 360px; gap:22px; align-items:start; margin-top:18px;
   }
 
   .catalogue-list {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
-    border-radius: var(--radius);
-    padding:18px; border:1px solid rgba(255,255,255,0.03);
-    box-shadow:0 8px 32px rgba(0,0,0,0.5);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+    border-radius: 14px;
+    padding:18px; border:1px solid rgba(255,255,255,0.02);
   }
 
   .beats-grid {
@@ -152,81 +166,66 @@
 
   .beat-card {
     display:flex; gap:12px; align-items:center; padding:12px; border-radius:12px;
-    background: linear-gradient(90deg, rgba(0,0,0,0.12), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
+    border:1px solid rgba(255,255,255,0.02); transition: transform .16s, box-shadow .16s;
   }
-  .beat-thumb { width:84px; height:84px; border-radius:10px; object-fit:cover; }
+  .beat-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(230,0,0,0.06); }
+  .beat-thumb { width:88px; height:88px; border-radius:10px; object-fit:cover; border:1px solid rgba(255,255,255,0.02); }
   .beat-meta { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
-  .beat-title { font-weight:800; font-size:1rem; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .beat-desc { font-size:0.9rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .beat-title { font-weight:900; font-size:1rem; color:var(--red); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .beat-desc { font-size:0.92rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .beat-info { display:flex; gap:10px; font-size:0.85rem; color:var(--muted); }
 
   .beat-actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
-  .btn-primary {
-    background: linear-gradient(135deg,var(--accent-2),var(--accent)); color:#fff; border:none; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:800;
-    box-shadow:0 8px 28px rgba(0,212,255,0.08);
-  }
-  .btn-ghost {
-    background:transparent; border:1.5px solid rgba(255,255,255,0.06); color:var(--white); padding:6px 10px; border-radius:10px; cursor:pointer;
-  }
 
-  /* SIDEBAR */
+  /* right panel */
   aside.right-panel{
-    position:relative;
-    border-radius:var(--radius); padding:18px; height:fit-content;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    border:1px solid rgba(255,255,255,0.03);
+    position:relative; border-radius:16px; padding:16px; height:fit-content;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02));
+    border:1px solid rgba(255,255,255,0.02);
   }
   .widget { margin-bottom:16px; }
-  .widget h3 { margin:0 0 10px 0; font-size:1.05rem; color:var(--accent); }
-  .small-list { display:flex; flex-direction:column; gap:8px; }
+  .widget h3 { margin:0 0 10px 0; font-size:1.05rem; color:var(--red); }
 
-  /* AUDIO PLAYER STICKY */
+  /* sticky player */
   .player-sticky {
-    position:fixed; left:12px; right:12px; bottom:12px; height:78px; display:flex; align-items:center; gap:18px; padding:10px 18px;
-    background: linear-gradient(90deg, rgba(2,6,23,0.95), rgba(12,18,24,0.95));
-    border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.6); z-index:1200; border:1px solid rgba(255,255,255,0.03);
+    position:fixed; left:12px; right:12px; bottom:12px; height:82px; display:flex; align-items:center; gap:18px; padding:12px 18px;
+    background: linear-gradient(90deg, rgba(10,10,10,0.98), rgba(18,18,18,0.98));
+    border-radius:18px; box-shadow:0 28px 80px rgba(0,0,0,0.7); z-index:1200; border:1px solid rgba(255,255,255,0.02);
   }
-  .player-thumb { width:56px; height:56px; border-radius:10px; object-fit:cover; }
+  .player-thumb { width:64px; height:64px; border-radius:10px; object-fit:cover; }
   .player-meta { flex:1; display:flex; flex-direction:column; gap:6px; min-width:0;}
   .player-controls { display:flex; gap:10px; align-items:center; }
 
-  /* ABOUT / KITS / CONTACT SECTIONS (full width blocks below) */
-  .full-section { margin-top:28px; padding:22px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03)); border:1px solid rgba(255,255,255,0.03); }
+  /* full sections */
+  .full-section { margin-top:22px; padding:22px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02)); border:1px solid rgba(255,255,255,0.02); }
   .about-grid { display:grid; grid-template-columns: 420px 1fr; gap:18px; align-items:start; }
 
-  /* CONTACT FORM */
-  .contact-card { max-width:640px; margin:0 auto; padding:20px; border-radius:12px; background:rgba(0,0,0,0.06); border:1px solid rgba(255,255,255,0.02); }
+  /* contact */
+  .contact-card { max-width:720px; margin:0 auto; padding:20px; border-radius:12px; background:rgba(0,0,0,0.06); border:1px solid rgba(255,255,255,0.02); }
   .form-row { display:flex; gap:10px; }
-  .form-row input, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:var(--white); outline:none; }
+  .form-row input, textarea { width:100%; padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:var(--white); outline:none; }
   .form-row textarea { min-height:140px; resize:vertical; }
 
-  /* FOOTER */
-  footer { margin-top:40px; padding:18px; text-align:center; color:var(--muted); font-size:0.95rem; }
+  footer { margin-top:36px; padding:18px; text-align:center; color:var(--muted); font-size:0.95rem; }
 
-  /* RESPONSIVE */
+  /* responsive */
   @media (max-width: 980px){
     .hero { grid-template-columns: 1fr; }
     .catalogue { grid-template-columns: 1fr; }
-    .beats-grid { grid-template-columns: repeat(1, 1fr); }
-    .player-sticky { left:12px; right:12px; bottom:12px; }
+    .beats-grid { grid-template-columns: 1fr; }
+    .hero-right .cover { max-width:100%; height:180px; }
   }
-  @media (max-width:520px){
-    .top-nav-fixed{ padding:8px; left:8px; right:8px; top:8px; }
-    .brand-left .brand-title { display:none; }
+  @media (max-width:600px){
+    .top-nav-fixed{ left:8px; right:8px; top:8px; padding:8px; border-radius:12px; }
+    .brand-left img.logo{ width:48px; height:48px; }
     #toggleLang{ display:none; }
-    .hero-right img.cover{ width:100%; height:160px; }
+    body{ padding-bottom:110px; }
   }
 
-  /* light mode */
-  body.light-mode{
-    --bg-1: #f2f7ff;
-    --bg-2: #e6eefc;
-    color:#111827;
-  }
-  body.light-mode .top-nav-fixed { background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(240,246,255,0.9)); box-shadow:0 8px 36px rgba(2,6,23,0.06); }
-  body.light-mode .tab-btn { color:#0b1220; }
-  body.light-mode .tab-btn.active { background: linear-gradient(90deg,#e3efff,#f3fbff); color:var(--accent-2); }
+  /* show/hide sections (SPA) */
+  .page { display:none; opacity:0; transform: translateY(6px); transition: all .28s ease; }
+  .page.active { display:block; opacity:1; transform: translateY(0); }
 
   </style>
 </head>
@@ -235,26 +234,22 @@
   <div id="preloader" role="status">
     <div class="loader">
       <div class="circle" aria-hidden="true"></div>
-      <div style="color:var(--muted); font-weight:700; letter-spacing:1px;">Chargement — DKMV Beats</div>
+      <div class="label">Chargement — DKMV Beats</div>
     </div>
   </div>
 
   <!-- NAV -->
   <nav class="top-nav-fixed" aria-label="navigation">
     <div class="brand-left">
-      <!-- Use your uploaded screenshot as logo if you want -->
-      <img class="logo" src="images/favicon.ico" alt="DKMV Logo" onerror="this.style.display='none'">
-      <div>
-        <div class="brand-title">DKMV Beats</div>
-        <div style="font-size:11px;color:var(--muted)">Instrumentales & Kits</div>
-      </div>
+      <!-- using one of your uploaded screenshots as a logo/visual -->
+      <img class="logo" src="/mnt/data/Capture d&#39;écran 2025-11-21 105250.png" alt="DKMV" onerror="this.style.display='none'">
     </div>
 
     <div class="nav-links" role="tablist" aria-label="Sections">
-      <button class="tab-btn active" data-tab="home">Accueil</button>
-      <button class="tab-btn" data-tab="beats">Instrumentales</button>
+      <button class="tab-btn active" data-tab="accueil">Accueil</button>
+      <button class="tab-btn" data-tab="instrumentales">Instrumentales</button>
       <button class="tab-btn" data-tab="kits">Kits</button>
-      <button class="tab-btn" data-tab="about">À propos</button>
+      <button class="tab-btn" data-tab="apropos">À propos</button>
       <button class="tab-btn" data-tab="contact">Contact</button>
     </div>
 
@@ -267,75 +262,92 @@
   </nav>
 
   <main>
-    <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="hero-card">
-        <h1>DKMV Beats</h1>
-        <p class="lead">Instrumentales professionnelles — Trap, Drill, Afro, Reggaeton et plus. Parcours le catalogue, écoute et télécharge.</p>
+    <!-- ACCUEIL (page par défaut visible) -->
+    <section id="accueil" class="page active">
+      <div class="hero">
+        <div class="hero-left">
+          <h1>DKMV Beats</h1>
+          <p class="lead">Instrumentales professionnelles — Trap, Drill, Afro, Reggaeton et plus. Parcours le catalogue, écoute et télécharge.</p>
 
-        <div class="filters-row">
-          <div class="searchbar" role="search">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
-            <input id="globalSearch" type="search" placeholder="🔍 Rechercher un beat, titre, bpm..." aria-label="Rechercher">
+          <div class="filters-row">
+            <div class="searchbar" role="search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2"/></svg>
+              <input id="globalSearch" type="search" placeholder="🔍 Rechercher un beat, titre, bpm..." aria-label="Rechercher">
+            </div>
+
+            <div class="chip active" data-filter="all">Tous</div>
+            <div class="chip" data-filter="trap">Trap</div>
+            <div class="chip" data-filter="drill">Drill</div>
+            <div class="chip" data-filter="afro">Afro</div>
+            <div class="chip" data-filter="reggaeton">Reggaeton</div>
           </div>
 
-          <div class="chip active" data-filter="all">Tous</div>
-          <div class="chip" data-filter="trap">Trap</div>
-          <div class="chip" data-filter="drill">Drill</div>
-          <div class="chip" data-filter="afro">Afro</div>
-          <div class="chip" data-filter="reggaeton">Reggaeton</div>
+          <div class="hero-cta">
+            <button class="btn-primary" id="btnBrowse">Parcourir le catalogue</button>
+            <button class="btn-ghost" id="btnPreview">Voir la démo</button>
+            <div style="margin-left:auto; color:var(--muted); font-weight:700; padding:6px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.03);">SITE EN MAINTENANCE</div>
+          </div>
+
+          <div style="margin-top:18px;">
+            <h3 style="margin:0 0 8px 0; color:var(--red);">Nouveautés</h3>
+            <div style="display:flex; gap:8px; overflow:auto; padding-bottom:6px;">
+              <!-- small covers - use your uploaded screenshot as fallback -->
+              <img src="/mnt/data/Capture d&#39;écran 2025-11-21 105144.png" style="width:120px; height:80px; object-fit:cover; border-radius:8px;" alt="v1" onerror="this.style.display='none'">
+              <img src="/mnt/data/Capture d&#39;écran 2025-11-21 105250.png" style="width:120px; height:80px; object-fit:cover; border-radius:8px;" alt="v2" onerror="this.style.display='none'">
+              <img src="assets/images/default_cover.jpg" style="width:120px; height:80px; object-fit:cover; border-radius:8px;" alt="v3">
+            </div>
+          </div>
         </div>
 
-        <div style="margin-top:18px; display:flex; gap:10px; align-items:center;">
-          <button class="btn-primary" id="btnBrowse">Parcourir le catalogue</button>
-          <button class="btn-ghost" id="btnUpload">Uploader un kit</button>
+        <div class="hero-right">
+          <img class="cover" src="/mnt/data/Capture d&#39;écran 2025-11-21 105144.png" alt="cover" onerror="this.src='/mnt/data/Capture d&#39;écran 2025-11-21 105250.png'">
+          <div class="maintenance">SITE EN MAINTENANCE 🛠️</div>
+          <div style="color:var(--muted); text-align:center; margin-top:8px;">Abonne-toi pour les mises à jour</div>
         </div>
       </div>
-
-    <!-- CATALOGUE -->
-    <section class="catalogue">
-      <div class="catalogue-list" id="catalogueList">
-        <h2 style="margin-top:0;">Catalogue Musical</h2>
-        <p style="margin:6px 0 18px 0; color:var(--muted)">Écoute, teste et télécharge les instrumentales. Filtre par style, sous-style, BPM ou tonalité.</p>
-
-        <div id="beatsContainer" class="beats-grid" aria-live="polite">
-          <!-- Javascript injecte les cartes -->
-        </div>
-
-        <div id="catalogueFooter" style="margin-top:12px; display:flex; justify-content:center">
-          <button class="btn-ghost" id="loadMore">Afficher plus</button>
-        </div>
-      </div>
-
-      <aside class="right-panel">
-        <div class="widget">
-          <h3>Top streams</h3>
-          <div class="small-list" id="topStreams">
-            <!-- JS -->
-          </div>
-        </div>
-
-        <div class="widget">
-          <h3>Kits populaires</h3>
-          <div class="small-list" id="topKits">
-            <!-- JS -->
-          </div>
-        </div>
-
-        <div class="widget">
-          <h3>Contact rapide</h3>
-          <div style="color:var(--muted); font-size:0.95rem;">Pour commandes personnalisées : <br><strong>dkmv.beats@example.com</strong></div>
-          <div style="margin-top:10px; display:flex; gap:8px;">
-            <a class="btn-ghost" href="https://youtube.com" target="_blank">YouTube</a>
-            <a class="btn-ghost" href="https://instagram.com" target="_blank">Instagram</a>
-          </div>
-        </div>
-
-      </aside>
     </section>
 
-    <!-- KITS SECTION -->
-    <section id="kits" class="full-section" aria-labelledby="kits">
+    <!-- INSTRUMENTALES (initialement masqué) -->
+    <section id="instrumentales" class="page" aria-labelledby="instrumentales">
+      <div class="catalogue">
+        <div class="catalogue-list">
+          <h2 style="margin-top:0;">Catalogue Musical</h2>
+          <p style="margin:6px 0 18px 0; color:var(--muted)">Écoute, teste et télécharge les instrumentales. Filtre par style, sous-style, BPM ou tonalité.</p>
+
+          <div id="beatsContainer" class="beats-grid" aria-live="polite">
+            <!-- JS injecte les cartes -->
+          </div>
+
+          <div id="catalogueFooter" style="margin-top:12px; display:flex; justify-content:center">
+            <button class="btn-ghost" id="loadMore">Afficher plus</button>
+          </div>
+        </div>
+
+        <aside class="right-panel">
+          <div class="widget">
+            <h3>Top streams</h3>
+            <div class="small-list" id="topStreams"></div>
+          </div>
+
+          <div class="widget">
+            <h3>Kits populaires</h3>
+            <div class="small-list" id="topKits"></div>
+          </div>
+
+          <div class="widget">
+            <h3>Réseaux</h3>
+            <div style="color:var(--muted); font-size:0.95rem;">Pour commandes personnalisées : <br><strong>dkmv.beats@example.com</strong></div>
+            <div style="margin-top:10px; display:flex; gap:8px;">
+              <a class="btn-ghost" href="https://youtube.com" target="_blank">YouTube</a>
+              <a class="btn-ghost" href="https://instagram.com" target="_blank">Instagram</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- KITS -->
+    <section id="kits" class="page full-section" aria-labelledby="kits">
       <h2>Kits & Loopkits</h2>
       <p style="color:var(--muted)">Téléchargez ou parcourez les packs (drums, loops, one-shots).</p>
 
@@ -344,12 +356,12 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="full-section">
+    <!-- A PROPOS -->
+    <section id="apropos" class="page full-section">
       <h2>À propos</h2>
       <div class="about-grid">
         <div>
-          <img src="assets/images/Capture d'écran 2025-11-21 105250.png" alt="DKMV" style="width:100%; border-radius:12px; object-fit:cover; max-height:320px;" onerror="this.style.display='none'">
+          <img src="/mnt/data/Capture d&#39;écran 2025-11-21 105250.png" alt="DKMV" style="width:100%; border-radius:12px; object-fit:cover; max-height:320px;" onerror="this.style.display='none'">
         </div>
         <div>
           <p><strong>DKMV Beats</strong> est un studio virtuel centré sur la production de beats et de kits pour artistes, labels et créateurs de contenu. Nous produisons des instrumentales professionnelles, prêtes à être utilisées.</p>
@@ -375,7 +387,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="full-section">
+    <section id="contact" class="page full-section">
       <h2>Contact</h2>
       <div class="contact-card">
         <form id="contactForm" action="https://formspree.io/f/xdkwweby" method="POST" novalidate>
@@ -401,7 +413,6 @@
     <footer>
       © <span id="year"></span> DKMV Beats — Tous droits réservés.
     </footer>
-
   </main>
 
   <!-- PLAYER STICKY -->
@@ -410,7 +421,7 @@
     <div class="player-meta">
       <div style="display:flex; justify-content:space-between; gap:12px; align-items:center;">
         <div style="min-width:0;">
-          <div id="playerTitle" style="font-weight:800; color:var(--accent); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Titre</div>
+          <div id="playerTitle" style="font-weight:900; color:var(--red); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Titre</div>
           <div id="playerArtist" style="font-size:0.9rem; color:var(--muted)">DKMV Beats</div>
         </div>
         <div class="player-controls">
@@ -425,38 +436,45 @@
 
   <script>
   // ===============================
-  // DKMV Beats - Single-file JS
+  // SPA + Catalogue + Player
   // ===============================
 
-  // Helper - wait for DOM
   function ready(fn){ if(document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
 
   ready(() => {
-    // Hide preloader quickly
-    setTimeout(()=> document.getElementById('preloader').classList.add('hidden'), 550);
+    // Hide preloader
+    setTimeout(()=> document.getElementById('preloader').classList.add('hidden'), 500);
 
-    // Year
+    // year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Tab navigation
+    // Tabs behavior: show only selected page, accueil active on load
     const tabs = document.querySelectorAll('.tab-btn');
-    tabs.forEach(btn=>{
+    const pages = document.querySelectorAll('.page');
+
+    function showPage(id) {
+      pages.forEach(p => {
+        if(p.id === id) { p.classList.add('active'); p.style.display = ''; }
+        else { p.classList.remove('active'); p.style.display = 'none'; }
+      });
+      tabs.forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+      // scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ensure accueil visible by default (already set in HTML). Also hide others initially
+    pages.forEach(p => {
+      if(!p.classList.contains('active')) p.style.display = 'none';
+    });
+
+    tabs.forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
         const id = btn.dataset.tab;
-        const sections = ['home','beats','kits','about','contact'];
-        sections.forEach(s=>{
-          const el = document.getElementById(s);
-          if(!el) return;
-          el.style.display = (s===id || (s==='home' && id==='home')) ? '' : 'none';
-        });
-        // Scroll to top of main
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showPage(id);
       });
     });
 
-    // Theme handling
+    // Theme toggle (light/dark) - preserve if needed
     const themeBtn = document.getElementById('toggleTheme');
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     if(savedTheme === 'light') document.body.classList.add('light-mode');
@@ -465,131 +483,99 @@
       localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
     });
 
-    // Language toggle
+    // Language toggle (basic)
     const toggleLang = document.getElementById('toggleLang');
     let lang = localStorage.getItem('lang') || 'fr';
-    function applyLang() {
-      toggleLang.textContent = lang === 'fr' ? 'FR' : 'EN';
-      // Minimal translations for labels (expandable)
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.dataset.i18n;
-        if(translations[key]) el.textContent = translations[key][lang] || translations[key].fr;
-      });
-    }
+    toggleLang.textContent = lang === 'fr' ? 'FR' : 'EN';
     toggleLang.addEventListener('click', ()=> {
-      lang = lang === 'fr' ? 'en' : 'fr';
+      lang = (lang === 'fr') ? 'en' : 'fr';
       localStorage.setItem('lang', lang);
-      applyLang();
+      toggleLang.textContent = lang === 'fr' ? 'FR' : 'EN';
+      // you can expand translations here as needed
     });
 
-    const translations = {
-      "catalogTitle": { fr: "Catalogue Musical", en: "Beat Catalog" },
-      "kitsTitle": { fr: "Kits & Loopkits", en: "Kits & Loopkits" }
-    };
-
-    applyLang();
-
-    // Data: kits & beats (demo)
-    const kits = [
-      { name: "LoopKit — L'OVNI", file: "assets/kits/LOVNI.zip", cover: "assets/images/default_cover.jpg", price: 0, description: {fr:"Loopkit gratuit", en:"Free loopkit"} },
-      { name: "DrumKit — STREET", file: "assets/kits/STREET.zip", cover: "assets/images/default_cover.jpg", price: 12.99, description:{fr:"Kit de drums complet", en:"Full drumkit"} }
-    ];
-
-    // Beats: we create a programmatic sample catalogue (dozens of items)
+    // Data: generate many sample beats (large catalogue) to simulate full site
     const beats = [];
-    const sampleStyles = ['trap','drill','afro','reggaeton','club','pop','rnb','boombap'];
-    const sampleKeys = ['A minor','C minor','D minor','E minor','G minor','F major','Bb major','D# minor'];
-    // Generate 120 sample beats programmatically to simulate a large catalogue
-    for(let i=1;i<=120;i++){
-      const style = sampleStyles[i % sampleStyles.length];
+    const styles = ['trap','drill','afro','reggaeton','club','pop','rnb','boombap'];
+    const keys = ['A minor','C minor','D minor','E minor','G minor','F major','Bb major','D# minor'];
+    for(let i=1;i<=200;i++){
+      const s = styles[i % styles.length];
       beats.push({
-        id: 'beat-' + String(i).padStart(3,'0'),
-        name: `${style.toUpperCase()} BEAT ${i}`,
-        file: `assets/audio/${style}_beat_${i}.mp3`,
-        download: `assets/audio/${style}_beat_${i}.mp3`,
-        bpm: 80 + (i % 80),
-        key: sampleKeys[i % sampleKeys.length],
+        id: 'b' + i,
+        name: `${s.toUpperCase()} BEAT ${i}`,
+        file: `assets/audio/${s}_beat_${i}.mp3`,
+        download: `assets/audio/${s}_beat_${i}.mp3`,
+        bpm: 70 + (i % 100),
+        key: keys[i % keys.length],
         duration: `${2 + (i%4)}:${(10 + i%50).toString().padStart(2,'0')}`,
-        cover: 'assets/images/default_cover.jpg',
-        style: style,
-        description: { fr: `Instrumentale ${style} numéro ${i}`, en: `${style} instrumental nr ${i}` },
-        price: (i%7)==0 ? 0 : (9.99 + (i%5))
+        cover: '/mnt/data/Capture d\'écran 2025-11-21 105144.png',
+        style: s,
+        description: { fr: `Instrumentale ${s} numéro ${i}`, en: `${s} instrumental nr ${i}` },
+        price: (i%5===0) ? 0 : (7.99 + (i%6))
       });
     }
 
-    // Render functions
+    // kits
+    const kits = [
+      { name: "LoopKit — L'OVNI", file: "assets/kits/LOVNI.zip", cover: "/mnt/data/Capture d'écran 2025-11-21 105250.png", price:0, description:{fr:"Loopkit gratuit", en:"Free loopkit"} },
+      { name: "DrumKit — STREET", file: "assets/kits/STREET.zip", cover: "/mnt/data/Capture d'écran 2025-11-21 105144.png", price:12.99, description:{fr:"Kit de drums complet", en:"Full drumkit"} }
+    ];
+
+    // render functions
     const beatsContainer = document.getElementById('beatsContainer');
     const kitsGrid = document.getElementById('kitsGrid');
     const topStreams = document.getElementById('topStreams');
     const topKits = document.getElementById('topKits');
 
-    let displayed = 0;
-    const perPage = 12;
-
-    function formatPrice(p){
-      if(!p || p <= 0) return 'FREE';
-      // show euro
-      return p.toFixed(2) + '€';
-    }
-
-    function createBeatCard(b){
+    // create beat card
+    function createBeatCard(b) {
       const div = document.createElement('div');
       div.className = 'beat-card';
       div.innerHTML = `
-        <img class="beat-thumb" src="${b.cover}" alt="${b.name}" onerror="this.src='assets/images/default_cover.jpg'">
+        <img class="beat-thumb" src="${b.cover}" alt="${b.name}" onerror="this.src='/mnt/data/Capture d\\'écran 2025-11-21 105144.png'">
         <div class="beat-meta">
-          <div class="beat-title" title="${b.name}">${b.name}</div>
+          <div class="beat-title">${b.name}</div>
           <div class="beat-desc">${b.description.fr}</div>
-          <div class="beat-info">
-            <span>BPM: ${b.bpm}</span>
-            <span>Tonalité: ${b.key}</span>
-            <span>${b.duration}</span>
-          </div>
+          <div class="beat-info"><span>BPM: ${b.bpm}</span><span>Tonalité: ${b.key}</span><span>${b.duration}</span></div>
         </div>
         <div class="beat-actions">
-          <button class="btn-primary" data-action="play" data-file="${b.file}" data-name="${b.name}" data-cover="${b.cover}">${lang==='fr' ? 'Écouter' : 'Listen'}</button>
-          <a class="btn-ghost" href="${b.download}" download>${formatPrice(b.price)}</a>
+          <button class="btn-primary" data-play="${b.file}" data-title="${b.name}" data-cover="${b.cover}">${lang==='fr' ? 'Écouter' : 'Listen'}</button>
+          <a class="btn-ghost" href="${b.download}" download>${b.price && b.price > 0 ? b.price.toFixed(2)+'€' : 'FREE'}</a>
         </div>
       `;
-      // event binding for play
-      div.querySelector('[data-action="play"]').addEventListener('click', (e)=>{
-        const f = e.currentTarget.dataset.file;
-        const name = e.currentTarget.dataset.name;
-        const cover = e.currentTarget.dataset.cover;
-        startPlayer({file:f, title:name, cover});
+      // play binding
+      div.querySelector('button[data-play]').addEventListener('click', (e)=>{
+        const f = e.currentTarget.dataset.play;
+        const t = e.currentTarget.dataset.title;
+        const c = e.currentTarget.dataset.cover;
+        startPlayer({file:f, title:t, cover:c});
       });
       return div;
     }
 
-    function loadMoreBeats(){
-      const to = Math.min(beats.length, displayed + perPage);
-      for(let i=displayed;i<to;i++){
-        const card = createBeatCard(beats[i]);
-        beatsContainer.appendChild(card);
+    // pagination style load
+    let shown = 0;
+    const perPage = 16;
+    function loadMore() {
+      const to = Math.min(beats.length, shown + perPage);
+      for(let i=shown;i<to;i++){
+        beatsContainer.appendChild(createBeatCard(beats[i]));
       }
-      displayed = to;
-      if(displayed >= beats.length) document.getElementById('loadMore').style.display='none';
+      shown = to;
+      if(shown >= beats.length) document.getElementById('loadMore').style.display='none';
     }
+    loadMore();
+    document.getElementById('loadMore').addEventListener('click', loadMore);
 
-    // initial
-    loadMoreBeats();
-
-    document.getElementById('loadMore').addEventListener('click', loadMoreBeats);
-
-    // Kits render
+    // kits rendering
     kits.forEach(k=>{
       const card = document.createElement('div');
-      card.style.background = 'linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02))';
-      card.style.padding='12px';
-      card.style.borderRadius='10px';
-      card.style.display='flex';
-      card.style.flexDirection='column';
-      card.style.gap='8px';
+      card.style.padding='12px'; card.style.borderRadius='10px'; card.style.background='linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02))';
       card.innerHTML = `
         <img src="${k.cover}" style="width:100%; height:140px; object-fit:cover; border-radius:8px;">
-        <div style="font-weight:800;">${k.name}</div>
-        <div style="color:var(--muted); font-size:.95rem;">${k.description.fr}</div>
-        <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="font-weight:800; margin-top:8px;">${k.name}</div>
+        <div style="color:var(--muted);">${k.description.fr}</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
           <a class="btn-primary" href="${k.file}" download>Télécharger</a>
           <div style="color:var(--muted)">${k.price ? k.price+'€' : 'FREE'}</div>
         </div>
@@ -597,46 +583,39 @@
       kitsGrid.appendChild(card);
     });
 
-    // Sidebar top streams / kits (sample)
+    // sidebar lists
     for(let i=1;i<=6;i++){
-      const el = document.createElement('div');
-      el.style.display='flex'; el.style.gap='10px'; el.style.alignItems='center';
-      el.innerHTML = `<img src="assets/images/default_cover.jpg" style="width:52px;height:52px;border-radius:8px;object-fit:cover">
-        <div style="font-weight:700;">Top Beat ${i}<div style="color:var(--muted);font-size:.9rem">BPM ${100+i}</div></div>`;
+      const el = document.createElement('div'); el.style.display='flex'; el.style.gap='10px'; el.style.alignItems='center';
+      el.innerHTML = `<img src="/mnt/data/Capture d'écran 2025-11-21 105144.png" style="width:52px;height:52px;border-radius:8px;object-fit:cover"><div><strong>Top Beat ${i}</strong><div style="color:var(--muted);font-size:.9rem">BPM ${110+i}</div></div>`;
       topStreams.appendChild(el);
     }
-
     kits.slice(0,3).forEach(k=>{
-      const el = document.createElement('div');
-      el.style.display='flex'; el.style.gap='10px'; el.style.alignItems='center';
-      el.innerHTML = `<img src="${k.cover}" style="width:52px;height:52px;border-radius:8px;object-fit:cover">
-        <div style="font-weight:700;">${k.name}<div style="color:var(--muted);font-size:.9rem">${k.price?k.price+'€':'FREE'}</div></div>`;
+      const el = document.createElement('div'); el.style.display='flex'; el.style.gap='10px'; el.style.alignItems='center';
+      el.innerHTML = `<img src="${k.cover}" style="width:52px;height:52px;border-radius:8px;object-fit:cover"><div><strong>${k.name}</strong><div style="color:var(--muted);font-size:.9rem">${k.price?k.price+'€':'FREE'}</div></div>`;
       topKits.appendChild(el);
     });
 
-    // Global search and chip filters
+    // search & chips
     const searchInput = document.getElementById('globalSearch');
     const chips = document.querySelectorAll('.chip');
+    let activeFilter = 'all';
 
-    function filterBeats(q, filterStyle){
+    function filterBeats(q, style) {
       beatsContainer.innerHTML = '';
-      const results = beats.filter(b=>{
+      const results = beats.filter(b => {
         const matchesQ = !q || b.name.toLowerCase().includes(q.toLowerCase()) || (b.description.fr && b.description.fr.toLowerCase().includes(q.toLowerCase()));
-        const matchesStyle = !filterStyle || filterStyle === 'all' || b.style === filterStyle;
+        const matchesStyle = !style || style === 'all' || b.style === style;
         return matchesQ && matchesStyle;
       });
       if(results.length === 0){
-        beatsContainer.innerHTML = `<div style="color:var(--muted); width:100%; text-align:center; padding:18px;">${lang==='fr' ? 'Aucun beat trouvé 😢' : 'No beats found 😢'}</div>`;
+        beatsContainer.innerHTML = `<div style="color:var(--muted); padding:18px; text-align:center;">${lang==='fr' ? 'Aucun beat trouvé 😢' : 'No beats found 😢'}</div>`;
         return;
       }
-      results.slice(0,60).forEach(b=>{
-        beatsContainer.appendChild(createBeatCard(b));
-      });
+      results.slice(0,120).forEach(b => beatsContainer.appendChild(createBeatCard(b)));
       document.getElementById('loadMore').style.display = 'none';
     }
 
-    let activeFilter = 'all';
-    chips.forEach(c=>{
+    chips.forEach(c => {
       c.addEventListener('click', ()=>{
         chips.forEach(x=>x.classList.remove('active'));
         c.classList.add('active');
@@ -647,18 +626,13 @@
 
     searchInput.addEventListener('input', (e)=>{
       const v = e.target.value;
-      if(!v) {
-        // restore original (paginated) list
-        beatsContainer.innerHTML = '';
-        displayed = 0;
-        document.getElementById('loadMore').style.display='inline-block';
-        loadMoreBeats();
-        return;
+      if(!v){
+        beatsContainer.innerHTML = ''; shown = 0; document.getElementById('loadMore').style.display='inline-block'; loadMore(); return;
       }
       filterBeats(v, activeFilter);
     });
 
-    // Player logic
+    // sticky player logic
     const playerSticky = document.getElementById('playerSticky');
     const playerThumb = document.getElementById('playerThumb');
     const playerTitle = document.getElementById('playerTitle');
@@ -669,116 +643,78 @@
     const playerSeek = document.getElementById('playerSeek');
 
     let audio = new Audio();
-    let playlist = []; // will hold files
+    let playlist = [];
     let currentIndex = 0;
 
     function startPlayer(obj){
-      // obj: {file, title, cover}
+      if(!obj || !obj.file) return;
       playerSticky.style.display = 'flex';
-      playerThumb.src = obj.cover || 'assets/images/default_cover.jpg';
+      playerThumb.src = obj.cover || '/mnt/data/Capture d\'écran 2025-11-21 105144.png';
       playerTitle.textContent = obj.title || 'Titre';
       playerArtist.textContent = 'DKMV Beats';
       audio.src = obj.file;
-      audio.play().catch(()=>{ /* fail quietly if file not available locally */ });
+      audio.play().catch(()=>{ /* ignore autoplay fail */ });
       playerPlay.textContent = '⏸';
-      // add to playlist top
       playlist.unshift(obj);
       currentIndex = 0;
     }
 
     playerPlay.addEventListener('click', ()=>{
-      if(audio.paused){
-        audio.play();
-        playerPlay.textContent = '⏸';
-      } else {
-        audio.pause();
-        playerPlay.textContent = '▶️';
-      }
+      if(audio.paused){ audio.play(); playerPlay.textContent='⏸'; }
+      else { audio.pause(); playerPlay.textContent='▶️'; }
     });
 
     playerPrev.addEventListener('click', ()=>{
       if(playlist.length <= 1) return;
       currentIndex = Math.max(0, currentIndex - 1);
-      const obj = playlist[currentIndex];
-      audio.src = obj.file; audio.play(); playerTitle.textContent = obj.title; playerThumb.src = obj.cover; playerPlay.textContent='⏸';
+      const o = playlist[currentIndex]; audio.src = o.file; audio.play(); playerTitle.textContent = o.title; playerThumb.src = o.cover; playerPlay.textContent='⏸';
     });
 
     playerNext.addEventListener('click', ()=>{
       if(currentIndex + 1 >= playlist.length) return;
       currentIndex++;
-      const obj = playlist[currentIndex];
-      audio.src = obj.file; audio.play(); playerTitle.textContent = obj.title; playerThumb.src = obj.cover; playerPlay.textContent='⏸';
+      const o = playlist[currentIndex]; audio.src = o.file; audio.play(); playerTitle.textContent = o.title; playerThumb.src = o.cover; playerPlay.textContent='⏸';
     });
 
-    audio.addEventListener('timeupdate', ()=>{
+    audio.addEventListener('timeupdate', ()=> {
       if(!audio.duration || isNaN(audio.duration)) return;
-      const pct = Math.floor((audio.currentTime / audio.duration) * 100);
-      playerSeek.value = pct;
+      playerSeek.value = Math.floor((audio.currentTime / audio.duration) * 100);
     });
     playerSeek.addEventListener('input', (e)=>{
       if(!audio.duration || isNaN(audio.duration)) return;
-      const pct = e.target.value;
-      audio.currentTime = (pct/100) * audio.duration;
+      audio.currentTime = (e.target.value / 100) * audio.duration;
     });
 
-    // Contact form submit
+    // contact form
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
-
     contactForm.addEventListener('submit', function(e){
       e.preventDefault();
       const formData = new FormData(this);
       formStatus.textContent = lang==='fr' ? 'Envoi en cours...' : 'Sending...';
-      fetch(this.action, { method: this.method, body: formData, headers: { 'Accept': 'application/json' }})
-        .then(res=>{
-          if(res.ok){
-            formStatus.textContent = lang==='fr' ? 'Merci ! Votre message a bien été envoyé.' : 'Thanks! Your message was sent.';
-            this.reset();
-          } else {
-            formStatus.textContent = lang==='fr' ? "Erreur lors de l'envoi." : 'Error sending message.';
-          }
+      fetch(this.action, { method:this.method, body:formData, headers:{'Accept':'application/json'} })
+        .then(res => {
+          if(res.ok){ formStatus.textContent = lang==='fr' ? 'Merci ! Votre message a bien été envoyé.' : 'Thanks! Your message was sent.'; this.reset(); }
+          else formStatus.textContent = lang==='fr' ? "Erreur lors de l'envoi." : 'Error sending message.';
         })
-        .catch(()=>{
-          formStatus.textContent = lang==='fr' ? "Erreur réseau." : 'Network error.';
-        });
+        .catch(()=> formStatus.textContent = lang==='fr' ? "Erreur réseau." : 'Network error.');
     });
 
-    // Upload button - opens file dialog (client-side simulation)
-    const btnUpload = document.getElementById('btnUpload');
-    btnUpload.addEventListener('click', ()=>{
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.zip,audio/*';
-      input.addEventListener('change', e=>{
-        const f = e.target.files[0];
-        if(f) alert(`Fichier sélectionné: ${f.name} (upload simulé dans cette démo).`);
-      });
-      input.click();
+    // small utilities
+    document.getElementById('btnBrowse').addEventListener('click', ()=>{
+      showPage('instrumentales');
+      // focus search input
+      setTimeout(()=> document.getElementById('globalSearch').focus(), 500);
     });
 
-    // small UX: scroll to beats when Browse clicked
-    document.getElementById('btnBrowse').addEventListener('click', ()=> {
-      // show beats tab
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      document.querySelector('.tab-btn[data-tab="beats"]').classList.add('active');
-      // scroll
-      document.getElementById('beatsContainer').scrollIntoView({behavior:'smooth', block:'start'});
-    });
-
-    // small: keyboard shortcut "f" focuses search
-    document.addEventListener('keydown', (e)=>{
+    // keyboard shortcut: 'f' to focus search
+    document.addEventListener('keydown', (e)=> {
       if(e.key.toLowerCase() === 'f' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
-        e.preventDefault();
-        searchInput.focus();
+        e.preventDefault(); document.getElementById('globalSearch').focus();
       }
     });
 
-    // Accessibility improvements: focus outlines for keyboard users
-    document.body.addEventListener('keyup', (e)=> {
-      if(e.key === 'Tab') document.body.classList.add('show-focus');
-    });
-
-    // End of ready
+    // end ready
   });
   </script>
 </body>
