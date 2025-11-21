@@ -533,25 +533,6 @@
       </div>
     </div>
 
-    <!-- Instrumentales -->
-    <div class="section fade-in" id="beats">
-      <h1>Catalogue Musicale</h1>
-      <div class="categories">
-        <div class="category-card" onclick="loadCategory('trap')">Trap</div>
-        <div class="category-card" onclick="loadCategory('drill')">Drill</div>
-        <div class="category-card" onclick="loadCategory('club')">Club</div>
-        <div class="category-card" onclick="loadCategory('reggaeton')">Reggaeton</div>
-        <div class="category-card" onclick="loadCategory('afro')">Afro</div>
-        <div class="category-card" onclick="loadCategory('shatta')">Shatta</div>
-        <div class="category-card" onclick="loadCategory('boombap')">BoomBap</div>
-        <div class="category-card" onclick="loadCategory('rnb')">R'n'b</div>
-        <div class="category-card" onclick="loadCategory('pop')">Pop</div>
-        <div class="category-card" onclick="loadCategory('oldschool')">OldSchool</div>
-      </div>
-      <div id="subcategoriesContainer" class="hidden"></div>
-      <div id="beatsList" class="hidden"></div>
-    </div>
-
 <!-- Instrumentales -->
 <div class="section fade-in" id="beats">
   <h1>Catalogue Musicale</h1>
@@ -592,14 +573,30 @@
 
 /* Style des cartes */
 .category-card {
-  background: hwb(184 0% 0%);
+  background: #111;
   padding: 15px;
   text-align: center;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  border: 1px solid #333; /* optionnel mais stylé */
 }
+
+.category-card:hover {
+  background: #222;
+  transform: scale(1.05);
+}
+    .top-nav-fixed button { background:none; border:none; color:white; font-weight:bold; cursor:pointer; font-size:1em; transition:color 0.3s, transform 0.2s; letter-spacing: 1px;}
+    .top-nav-fixed button:hover { transform:scale(1.1); color:#00d4ff; }
+    .top-nav-fixed button.active {
+      text-decoration:underline;
+      color:#00d4ff;
+      background: linear-gradient(90deg, #00d4ff44 0%, #007BFF22 100%);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #00d4ff22;
+    }
 </style>
+
 
 
     <!-- Kits -->
