@@ -552,6 +552,62 @@
       <div id="beatsList" class="hidden"></div>
     </div>
 
+<!-- Instrumentales -->
+<div class="section fade-in" id="beats">
+  <h1>Catalogue Musicale</h1>
+
+  <div class="categories">
+    <div class="category-card" onclick="loadCategory('trap')">Trap</div>
+    <div class="category-card" onclick="loadCategory('drill')">Drill</div>
+    <div class="category-card" onclick="loadCategory('club')">Club</div>
+    <div class="category-card" onclick="loadCategory('reggaeton')">Reggaeton</div>
+    <div class="category-card" onclick="loadCategory('afro')">Afro</div>
+    <div class="category-card" onclick="loadCategory('shatta')">Shatta</div>
+    <div class="category-card" onclick="loadCategory('boombap')">BoomBap</div>
+    <div class="category-card" onclick="loadCategory('rnb')">R'n'b</div>
+    <div class="category-card" onclick="loadCategory('pop')">Pop</div>
+    <div class="category-card" onclick="loadCategory('oldschool')">OldSchool</div>
+  </div>
+
+  <div id="subcategoriesContainer" class="hidden"></div>
+  <div id="beatsList" class="hidden"></div>
+</div>
+
+<style>
+/* Mise en grille des catégories */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 colonnes → 10 catégories = 2 lignes */
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Responsive (mobile) */
+@media (max-width: 700px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur petits écrans */
+    gap: 10px;
+  }
+}
+
+/* Style des cartes */
+.category-card {
+  background: #111;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #333; /* optionnel mais stylé */
+}
+
+.category-card:hover {
+  background: #222;
+  transform: scale(1.05);
+}
+</style>
+
+
     <!-- Kits -->
     <div class="section fade-in" id="kits">
       <h1>Kits</h1>
