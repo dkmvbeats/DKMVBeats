@@ -732,14 +732,6 @@
       document.querySelector('.tab-btn[data-tab="contact"]').textContent = lang === 'fr' ? 'Contact' : 'Send Me';
       document.querySelector('.tab-btn[data-tab="apropos"]').textContent = lang === 'fr' ? 'À propos' : 'About';
       document.querySelector('#beats h1').textContent = lang === 'fr'
-      
-      // Maintenance
-  const maintenanceFR = document.querySelector('#accueil p.maintenance-fr');
-  const maintenanceEN = document.querySelector('#accueil p.maintenance-en');
-  if (maintenanceFR && maintenanceEN) {
-    maintenanceFR.style.display = lang === 'fr' ? '' : 'none';
-    maintenanceEN.style.display = lang === 'en' ? '' : 'none';
-  }
         ? 'Catalogue Musicale'
         : 'Beat Catalog';
       document.querySelectorAll('.category-card')[0].textContent = lang === 'fr' ? 'Trap' : 'Trap';
