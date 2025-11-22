@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-
+je veux créer un site comme ça ! reprends le code : <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -504,7 +503,6 @@
     .centered-wrapper { display:flex; justify-content:center; align-items:center; flex-direction:column; width:100%; }
     .hidden { display:none !important; }
   </style>
-
 </head>
 <body>
   <!-- NAVIGATION -->
@@ -534,19 +532,16 @@
   <p class="maintenance-en">WEBSITE UNDER MAINTENANCE 🛠️</p>
 </div>
 
-```
-  </div>
-  <div class="socials">
-    <a href="https://www.youtube.com/@dkmv_off" target="_blank"><img src="images/Youtube.png" alt="YouTube"/></a>
-    <a href="https://www.instagram.com/dkmv_fans" target="_blank"><img src="images/Instagram.png" alt="Instagram"/></a>
-    <a href="https://www.tiktok.com/@dkmv_fans" target="_blank"><img src="images/Tiktok.png" alt="TikTok"/></a>
-    <a href="https://www.twitch.tv/@dkmv_beats_offlive1" target="_blank"><img src="images/Twitch.png" alt="Twitch"/></a>
-  </div>
-</div>
-```
+      </div>
+      <div class="socials">
+        <a href="https://www.youtube.com/@dkmv_off" target="_blank"><img src="images/Youtube.png" alt="YouTube"/></a>
+        <a href="https://www.instagram.com/dkmv_fans" target="_blank"><img src="images/Instagram.png" alt="Instagram"/></a>
+        <a href="https://www.tiktok.com/@dkmv_fans" target="_blank"><img src="images/Tiktok.png" alt="TikTok"/></a>
+        <a href="https://www.twitch.tv/@dkmv_beats_offlive1" target="_blank"><img src="images/Twitch.png" alt="Twitch"/></a>
+      </div>
+    </div>
 
 <!-- Instrumentales -->
-
 <div class="section fade-in" id="beats">
   <h1>Catalogue Musicale</h1>
 
@@ -625,70 +620,67 @@
 }
 </style>
 
-```
-<!-- Kits -->
-<div class="section fade-in" id="kits">
-  <h1>Kits</h1>
-  <div class="categories" id="kitCategories">
-    <div class="category-card" onclick="loadKitCategory('loopkits')">Loopkits</div>
-    <div class="category-card" onclick="loadKitCategory('drumkits')">Drumkits</div>
-  </div>
-  <div id="kitSubcategoriesContainer" class="hidden"></div>
-  <div id="kitsList" class="hidden"></div>
-</div>
+    <!-- Kits -->
+    <div class="section fade-in" id="kits">
+      <h1>Kits</h1>
+      <div class="categories" id="kitCategories">
+        <div class="category-card" onclick="loadKitCategory('loopkits')">Loopkits</div>
+        <div class="category-card" onclick="loadKitCategory('drumkits')">Drumkits</div>
+      </div>
+      <div id="kitSubcategoriesContainer" class="hidden"></div>
+      <div id="kitsList" class="hidden"></div>
+    </div>
 
-<!-- Contact -->
-<div class="section fade-in" id="contact">
-  <h1>Contact</h1>
-  <div class="contact-card">
-    <form id="contactForm" action="https://formspree.io/f/xdkwweby" method="POST">
-      <label for="name" id="labelName">Votre nom</label>
-      <input type="text" id="name" name="name" placeholder="Entrez votre nom" required/>
-      <label for="email" id="labelEmail">Votre email</label>
-      <input type="email" id="email" name="_replyto" placeholder="Entrez votre email" required/>
-      <label for="message" id="labelMessage">Votre message</label>
-      <textarea id="message" name="message" placeholder="Écrivez votre message ici..." rows="10" required></textarea>
-      <button type="submit" id="sendButton">Envoyer</button>
-    </form>
-    <p id="confirmationMessage">Merci pour votre message !</p>
-  </div>
-</div>
+    <!-- Contact -->
+    <div class="section fade-in" id="contact">
+      <h1>Contact</h1>
+      <div class="contact-card">
+        <form id="contactForm" action="https://formspree.io/f/xdkwweby" method="POST">
+          <label for="name" id="labelName">Votre nom</label>
+          <input type="text" id="name" name="name" placeholder="Entrez votre nom" required/>
+          <label for="email" id="labelEmail">Votre email</label>
+          <input type="email" id="email" name="_replyto" placeholder="Entrez votre email" required/>
+          <label for="message" id="labelMessage">Votre message</label>
+          <textarea id="message" name="message" placeholder="Écrivez votre message ici..." rows="10" required></textarea>
+          <button type="submit" id="sendButton">Envoyer</button>
+        </form>
+        <p id="confirmationMessage">Merci pour votre message !</p>
+      </div>
+    </div>
 
-<!-- À propos -->
-<div class="section fade-in" id="apropos">
-  <h1>À propos</h1>
-  <img src="images/Capture8.jpeg" alt="DKMV" class="logo" />
-  <div class="about-container" id="aboutTextFR">
-    <p><strong>DKMV Beats</strong> — Passionné par la production musicale, je compose des instrumentales sur mesure destinées aux artistes, créateurs de contenu, et marques en quête de sonorités uniques.</p>
-    <h2>Styles de production</h2>
-    <ul>
-      <li>Trap / Drill / Jersey Drill</li>
-      <li>Afrobeat / Afrotrap / Afrodrill / AfroArab</li>
-      <li>Reggaeton / Oriental / Raï</li>
-      <li>Pop / Chill / Lo-Fi / R’n’B / Shatta</li>
-      <li>Ambiance / Old School / Boom Bap</li>
-    </ul>
-    <p>Chaque production est travaillée avec soin pour garantir une qualité professionnelle, adaptée aux standards de l’industrie musicale.</p>
-    <h2>Collaborations & projets</h2>
-    <p>Tu veux un beat exclusif ou une prod sur mesure ? Contacte-moi par mail ou via la rubrique "Contact" (elle est là pour ça😉)</p>
-  </div>
-  <div class="about-container" id="aboutTextEN" style="display:none;">
-    <p><strong>DKMV Beats</strong> — Passionate about music production, I create custom-made instrumentals for artists, content creators, and brands seeking unique sounds.</p>
-    <h2>Production Styles</h2>
-    <ul>
-      <li>Trap / Drill / Jersey Drill</li>
-      <li>Afrobeat / Afrotrap / Afrodrill / AfroArab</li>
-      <li>Reggaeton / Oriental / Raï</li>
-      <li>Pop / Chill / Lo-Fi / R’n’B / Shatta</li>
-      <li>Vibe / Old School / Boom Bap</li>
-    </ul>
-    <p>Each beat is carefully crafted to ensure professional quality that meets the standards of today’s music industry.</p>
-    <h2>Collaborations & Projects</h2>
-    <p>Want an exclusive beat or a custom production? Reach out via email or the “Send Me” section (that's what she's here for😉)</p>
-  </div>
-</div>
-```
-
+    <!-- À propos -->
+    <div class="section fade-in" id="apropos">
+      <h1>À propos</h1>
+      <img src="images/Capture8.jpeg" alt="DKMV" class="logo" />
+      <div class="about-container" id="aboutTextFR">
+        <p><strong>DKMV Beats</strong> — Passionné par la production musicale, je compose des instrumentales sur mesure destinées aux artistes, créateurs de contenu, et marques en quête de sonorités uniques.</p>
+        <h2>Styles de production</h2>
+        <ul>
+          <li>Trap / Drill / Jersey Drill</li>
+          <li>Afrobeat / Afrotrap / Afrodrill / AfroArab</li>
+          <li>Reggaeton / Oriental / Raï</li>
+          <li>Pop / Chill / Lo-Fi / R’n’B / Shatta</li>
+          <li>Ambiance / Old School / Boom Bap</li>
+        </ul>
+        <p>Chaque production est travaillée avec soin pour garantir une qualité professionnelle, adaptée aux standards de l’industrie musicale.</p>
+        <h2>Collaborations & projets</h2>
+        <p>Tu veux un beat exclusif ou une prod sur mesure ? Contacte-moi par mail ou via la rubrique "Contact" (elle est là pour ça😉)</p>
+      </div>
+      <div class="about-container" id="aboutTextEN" style="display:none;">
+        <p><strong>DKMV Beats</strong> — Passionate about music production, I create custom-made instrumentals for artists, content creators, and brands seeking unique sounds.</p>
+        <h2>Production Styles</h2>
+        <ul>
+          <li>Trap / Drill / Jersey Drill</li>
+          <li>Afrobeat / Afrotrap / Afrodrill / AfroArab</li>
+          <li>Reggaeton / Oriental / Raï</li>
+          <li>Pop / Chill / Lo-Fi / R’n’B / Shatta</li>
+          <li>Vibe / Old School / Boom Bap</li>
+        </ul>
+        <p>Each beat is carefully crafted to ensure professional quality that meets the standards of today’s music industry.</p>
+        <h2>Collaborations & Projects</h2>
+        <p>Want an exclusive beat or a custom production? Reach out via email or the “Send Me” section (that's what she's here for😉)</p>
+      </div>
+    </div>
   </main>
   <footer>
     © 2025 DKMV Beats. Tous droits réservés.
@@ -1052,6 +1044,5 @@
       }
     });
   </script>
-
 </body>
 </html>
