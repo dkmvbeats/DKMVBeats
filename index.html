@@ -208,16 +208,6 @@
         </div>
       </div>
 
-      <aside class="hero-right" aria-labelledby="featured-title">
-        <img class="cover" id="heroCover" src="" alt="Featured">
-        <div style="display:flex; gap:10px; justify-content:center; margin-top:12px;">
-          <button class="btn" id="btn-listen-demo">Ecouter la démo</button>
-          <button class="ghost" id="btn-follow">S'abonner</button>
-        </div>
-        <div style="margin-top:8px; color:var(--muted); font-weight:700; text-align:center;">Featured: DKMV Beats — New Drops</div>
-      </aside>
-    </section>
-
     <!-- TRENDS GRID -->
     <section id="trending" class="section trending" aria-labelledby="trending-title" style="display:block;">
       <h2 id="trending-title">Tendances</h2>
@@ -376,7 +366,6 @@
     // Generate brand logo / hero cover placeholders
     const brandLogo = makePlaceholderSVG('DKMV', 200, 200, '#111', '#fff');
     document.getElementById('brandLogo').src = brandLogo;
-    document.getElementById('heroCover').src = makePlaceholderSVG('Featured', 800, 600, '#1b1b1b', '#ff2b2b');
 
     // create a single silent audio URL and reuse for all beats
     const silentAudioURL = makeSilentWavURL(2); // 2s silent wav
