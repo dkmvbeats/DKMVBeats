@@ -7,11 +7,7 @@
   <title>DKMV Beats</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-
   <style>
-    /* ===========================
-       DKMV Beats - Styles (intégrés)
-       =========================== */
     html, body {
       margin:0; padding:0; height:100%;
       font-family:'Montserrat',sans-serif;
@@ -515,7 +511,6 @@
     <button id="toggleTheme" aria-label="Changer le thème" title="Changer le thème">🌓</button>
     <button id="toggleLang" aria-label="Switch language" title="Traduire en anglais">EN</button>
   </nav>
-
   <main>
   <!-- Accueil -->
   <div class="section fade-in active" id="accueil">
@@ -524,7 +519,7 @@
       <p>Bienvenue sur mon univers musical</p>
         <div class="video-preview">
         <iframe 
-            src="https://www.youtube.com/embed/PZlS0lcTpyw"
+            src="https://www.youtube.com/embed/PZlS0lcTpyw&t=2s"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -532,11 +527,9 @@
         </iframe>
     </div>
 </div>
-
 <!-- Instrumentales -->
 <div class="section fade-in" id="beats">
   <h1>Catalogue Musicale</h1>
-
   <div class="categories">
     <div class="category-card" onclick="loadCategory('trap')">Trap</div>
     <div class="category-card" onclick="loadCategory('drill')">Drill</div>
@@ -549,11 +542,9 @@
     <div class="category-card" onclick="loadCategory('pop')">Pop</div>
     <div class="category-card" onclick="loadCategory('oldschool')">OldSchool</div>
   </div>
-
   <div id="subcategoriesContainer" class="hidden"></div>
   <div id="beatsList" class="hidden"></div>
 </div>
-
 <style>
 /* --- Grille uniquement pour la partie Instrumentales --- */
 #beats .categories {
@@ -562,14 +553,12 @@
   gap: 15px;
   margin-top: 20px;
 }
-
 @media (max-width: 700px) {
   #beats .categories {
     grid-template-columns: repeat(2, 1fr); /* Sur mobile : 2 colonnes */
     gap: 10px;
   }
 }
-
 /* --- Style commun des cartes --- */
 .category-card {
   background:linear-gradient(135deg, #00d4ff, #007BFF);
@@ -580,12 +569,10 @@
   transition: 0.3s;
   border: 1px solid #333;
 }
-
 .category-card:hover {
-  background: #222;
+  background: #00d4ff;
   transform: scale(1.05);
 }
-
 /* --- Top navigation (inchangé) --- */
 .top-nav-fixed button { 
   background:none; 
@@ -597,12 +584,10 @@
   transition:color 0.3s, transform 0.2s; 
   letter-spacing: 1px;
 }
-
 .top-nav-fixed button:hover { 
   transform:scale(1.1); 
   color:#00d4ff; 
 }
-
 .top-nav-fixed button.active {
   text-decoration:underline;
   color:#00d4ff;
@@ -611,7 +596,6 @@
   box-shadow: 0 2px 8px #00d4ff22;
 }
 </style>
-
     <!-- Kits -->
     <div class="section fade-in" id="kits">
       <h1>Kits</h1>
@@ -622,7 +606,6 @@
       <div id="kitSubcategoriesContainer" class="hidden"></div>
       <div id="kitsList" class="hidden"></div>
     </div>
-
     <!-- Contact -->
     <div class="section fade-in" id="contact">
       <h1>Contact</h1>
@@ -639,7 +622,6 @@
         <p id="confirmationMessage">Merci pour votre message !</p>
       </div>
     </div>
-
     <!-- À propos -->
     <div class="section fade-in" id="apropos">
       <h1>À propos</h1>
@@ -674,7 +656,6 @@
       </div>
     </div>
   </main>
-
       </div>
       <div class="socials">
         <a href="https://www.youtube.com/@dkmv_off" target="_blank"><img src="images/Youtube.png" alt="YouTube"/></a>
@@ -683,11 +664,9 @@
         <a href="https://www.twitch.tv/@dkmv_beats_offlive1" target="_blank"><img src="images/Twitch.png" alt="Twitch"/></a>
       </div>
     </div>
-
   <footer>
     © 2025 DKMV Beats. Tous droits réservés.
   </footer>
-
   <script>
     // Navigation
     const tabs = document.querySelectorAll('.tab-btn');
@@ -701,7 +680,6 @@
         // NE CHARGE PLUS AUTOMATIQUEMENT LES CATEGORIES
       });
     });
-
     // Mode clair/sombre
     const toggleTheme = document.getElementById('toggleTheme');
     if (
@@ -716,11 +694,9 @@
       localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
       toggleTheme.textContent = document.body.classList.contains('light-mode') ? '🌗' : '🌓';
     });
-
     // Traduction FR/EN
     const toggleLang = document.getElementById('toggleLang');
     let lang = localStorage.getItem('lang') || 'fr';
-
     function setLang(l) {
       lang = l;
       localStorage.setItem('lang', lang);
@@ -763,13 +739,10 @@
       toggleLang.textContent = lang === 'fr' ? 'FR' : 'EN';
       toggleLang.title = lang === 'fr' ? 'Traduire en anglais' : 'Switch to French';
     }
-
     setLang(lang);
-
     toggleLang.addEventListener('click', () => {
       setLang(lang === 'fr' ? 'en' : 'fr');
     });
-
     // Data Kits & Beats - inchangé
     const kits = {
       loopkits: [
@@ -788,7 +761,6 @@
         // ... inchangé ...
       ],
     };
-
     const beats = {
       trap: [
         {
@@ -856,14 +828,12 @@
         },
       ],
     };
-
     const afroSubcategories = [
       { key: "AfroClub", labelFR: "AfroClub", labelEN: "AfroClub" },
       { key: "AfroTrap", labelFR: "AfroTrap", labelEN: "AfroTrap" },
       { key: "AfroDrill", labelFR: "AfroDrill", labelEN: "AfroDrill" },
       { key: "AfroArab", labelFR: "AfroArab", labelEN: "AfroArab" }
     ];
-
     // FUNCTION: loadCategory (Beats)
     function loadCategory(category, subcategory = null) {
       document.getElementById('beatsList').classList.remove('hidden');
@@ -927,9 +897,7 @@
       renderList();
       searchInput.addEventListener('input', e => renderList(e.target.value));
     }
-
     window.loadCategory = loadCategory;
-
     window.playBeat = function(file, btn){
       let player = document.getElementById('audioPlayer');
       const audioPlayerContainer = document.getElementById('audioPlayerContainer');
@@ -947,7 +915,6 @@
         player.scrollIntoView({behavior:'smooth', block:'center'});
       }
     }
-
     // FUNCTION: loadKitCategory
     function loadKitCategory(category) {
       document.getElementById('kitsList').classList.remove('hidden');
@@ -966,7 +933,7 @@
       function renderKitList(filter="") {
         container.innerHTML = '';
         if(!kits[category]) {
-          container.innerHTML = `<div class="no-beat">${lang === 'fr' ? 'Aucun kit trouvé 😢' : 'No kit found 😢'}</div>`;
+          container.innerHTML = `<div class="no-kit">${lang === 'fr' ? 'Aucun kit trouvé 😢' : 'No kit found 😢'}</div>`;
           return;
         }
         const filtered = kits[category].filter(kit => kit.name.toLowerCase().includes(filter.toLowerCase()));
@@ -991,10 +958,8 @@
           container.innerHTML = `<div class="no-beat">${lang === 'fr' ? 'Aucun kit trouvé 😢' : 'No kit found 😢'}</div>`;
         }
       }
-
       renderKitList();
       searchInput.addEventListener('input', e => renderKitList(e.target.value));
-
       const kitCards = document.querySelectorAll('#kitCategories .category-card');
       kitCards.forEach(card => {
         card.classList.remove('active');
@@ -1006,19 +971,15 @@
       const currentCard = Array.from(kitCards).find(c => c.textContent.trim().toLowerCase().includes(category.replace('kits','')));
       if(currentCard) currentCard.classList.add('active');
     }
-
     window.loadKitCategory = loadKitCategory;
-
     window.playKit = function(file, btn){
       // Fonction laissée vide car la pré-écoute n'est pas activée pour les kits.
       console.warn('playKit appelé mais la pré-écoute n\'est pas activée pour les kits.');
     }
-
     // NE CHARGE RIEN AU DEMARRAGE
     document.addEventListener('DOMContentLoaded', function(){
       // Menus beats/kits restent vides au début
     });
-
     // Formulaire Contact (inchangé)
     const form = document.getElementById("contactForm");
     form.addEventListener("submit", function(e){
@@ -1031,7 +992,6 @@
       } else alert(lang === 'fr' ? "Une erreur est survenue. Réessayez !" : "An error occurred. Try again!");})
       .catch(()=> alert(lang === 'fr' ? "Erreur réseau !" : "Network error!"));
     });
-
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') {
         // fermer les menus éventuels - placeholder si besoin
