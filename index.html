@@ -525,7 +525,7 @@
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen>
-          </iframe>
+  </iframe>
 
 
     </div>
@@ -534,16 +534,16 @@
 <div class="section fade-in" id="beats">
   <h1>Catalogue Musicale</h1>
   <div class="categories">
-    <div class="category-card" onclick="loadCategory('trap')">Trap</div>
-    <div class="category-card" onclick="loadCategory('drill')">Drill</div>
-    <div class="category-card" onclick="loadCategory('club')">Club</div>
-    <div class="category-card" onclick="loadCategory('reggaeton')">Reggaeton</div>
-    <div class="category-card" onclick="loadCategory('afro')">Afro</div>
-    <div class="category-card" onclick="loadCategory('shatta')">Shatta</div>
-    <div class="category-card" onclick="loadCategory('boombap')">BoomBap</div>
-    <div class="category-card" onclick="loadCategory('rnb')">R'n'b</div>
-    <div class="category-card" onclick="loadCategory('pop')">Pop</div>
-    <div class="category-card" onclick="loadCategory('oldschool')">OldSchool</div>
+    <div class="subcategory-card" onclick="loadCategory('trap')">Trap</div>
+    <div class="subcategory-card" onclick="loadCategory('drill')">Drill</div>
+    <div class="subcategory-card" onclick="loadCategory('club')">Club</div>
+    <div class="subcategory-card" onclick="loadCategory('reggaeton')">Reggaeton</div>
+    <div class="subcategory-card" onclick="loadCategory('afro')">Afro</div>
+    <div class="subcategory-card" onclick="loadCategory('shatta')">Shatta</div>
+    <div class="subcategory-card" onclick="loadCategory('boombap')">BoomBap</div>
+    <div class="subcategory-card" onclick="loadCategory('rnb')">R'n'b</div>
+    <div class="subcategory-card" onclick="loadCategory('pop')">Pop</div>
+    <div class="subcategory-card" onclick="loadCategory('oldschool')">OldSchool</div>
   </div>
   <div id="subcategoriesContainer" class="hidden"></div>
   <div id="beatsList" class="hidden"></div>
@@ -671,6 +671,38 @@
     © 2025 DKMV Beats. Tous droits réservés.
   </footer>
   <script>
+
+    // Fonction pour charger une catégorie
+function loadCategory(category) {
+  const beatsList = document.getElementById("beatsList");
+  beatsList.innerHTML = ""; // reset
+  beatsList.classList.remove("hidden");
+
+  if (!beatsData[category] || beatsData[category].length === 0) {
+    beatsList.innerHTML = `<p class="no-beat">Aucun beat disponible pour ${category}</p>`;
+    return;
+  }
+
+  beatsData[category].forEach(beat => {
+    const item = document.createElement("div");
+    item.className = "beat-item";
+    item.innerHTML = `
+      <div class="beat-meta">
+        <div class="beat-title">${beat.title}</div>
+        <div class="beat-description">${beat.description}</div>
+        <audio controls src="${beat.audio}" class="audio-player"></audio>
+      </div>
+    `;
+    beatsList.appendChild(item);
+  });
+}
+
+    const afroSubcategories = [
+      { key: "AfroClub", labelFR: "AfroClub", labelEN: "AfroClub" },
+      { key: "AfroTrap", labelFR: "AfroTrap", labelEN: "AfroTrap" },
+      { key: "AfroDrill", labelFR: "AfroDrill", labelEN: "AfroDrill" },
+      { key: "AfroArab", labelFR: "AfroArab", labelEN: "AfroArab" }
+    ];
     // Navigation
     const tabs = document.querySelectorAll('.tab-btn');
     const sections = document.querySelectorAll('.section');
@@ -747,7 +779,7 @@
       setLang(lang === 'fr' ? 'en' : 'fr');
     });
     // Data Kits & Beats - inchangé
-    const kits = {
+    const kitsData = {
       loopkits: [
         {
           name: "L'OVNI",
@@ -764,80 +796,60 @@
         // ... inchangé ...
       ],
     };
-    const beats = {
-      trap: [
-        {
-          name: "JVLIVS",
-          file: "audio/TRAP/JVLIVS.mp3",
-          download: "audio/TRAP/JVLIVS.mp3",
-          bpm: 120,
-          key: "D minor",
-          duration: "3:44",
-          cover: "images/Capture8.jpeg",
-        },
-      ],
-      drill: [
-        {
-          name: "FATALE",
-          file: "audio/DRILL/FATALE.mp3",
-          download: "audio/DRILL/FATALE.mp3",
-          bpm: 142,
-          key: "A# major",
-          duration: "3:12",
-          cover: "images/Capture8.jpeg",
-        },
-      ],
-      club: [
-        {
-          name: "ZONE",
-          file: "audio/CLUB/ZONE.mp3",
-          download: "audio/CLUB/ZONE.mp3",
-          bpm: 128,
-          key: "C minor",
-          duration: "2:19",
-          cover: "images/Capture8.jpeg",
-        },
-      ],
-      reggaeton: [        
-        {
-          name: "SEYA",
-          file: "audio/REGGAETON/SEYA.mp3",
-          download: "audio/REGGAETON/SEYA.mp3",
-          bpm: 88,
-          key: "E minor",
-          duration: "4:07",
-          cover: "images/Capture8.jpeg",
-        },],
-      afro: [
-        {
-          name: "TIKI TAKA",
-          subcategory: "AfroClub",
-          file: "audio/AFRO/AFRO CLUB/TIKI TAKA.mp3",
-          download: "audio/AFRO/AFRO CLUB/TIKI TAKA.mp3",
-          bpm: 100,
-          key: "D# minor",
-          duration: "2:58",
-          cover: "images/Capture8.jpeg",
-        },
-        {
-          name: "VIDA",
-          subcategory: "AfroArab",
-          file: "audio/AFRO/AFRO ARAB/VIDA.mp3",
-          download: "audio/AFRO/AFRO ARAB/VIDA.mp3",
-          bpm: 105,
-          key: "C minor",
-          duration: "3:17",
-          cover: "images/Capture8.jpeg",
-        },
-      ],
-    };
-    const afroSubcategories = [
-      { key: "AfroClub", labelFR: "AfroClub", labelEN: "AfroClub" },
-      { key: "AfroTrap", labelFR: "AfroTrap", labelEN: "AfroTrap" },
-      { key: "AfroDrill", labelFR: "AfroDrill", labelEN: "AfroDrill" },
-      { key: "AfroArab", labelFR: "AfroArab", labelEN: "AfroArab" }
-    ];
-    // FUNCTION: loadCategory (Beats)
+
+// Exemple de base de données des beats
+const beatsData = {
+  trap: [
+    { title: "JVLIVS", audio: "audio/TRAP/JVLIVS.mp3" }
+  ],
+  club: [
+    { title: "ZONE", audio: "audio/CLUB/ZONE.mp3" }
+  ],
+  drill: [
+    { title: "FATALE", audio: "audio/DRILL/FATALE.mp3" }
+  ],
+  reggaeton: [
+    { title: "SEYA", audio: "audio/REGGAETON/SEYA.mp3" }
+  ],
+  afro: {
+    afroarab: [
+      { title: "VIDA", audio: "audio/AFRO/AFRO_ARAB/VIDA.mp3" }
+    ],
+    afrotrap: [
+      { title: "AfroTrap Beat 1", audio: "audio/AFRO/AFRO_TRAP/TRAP1.mp3" }
+    ],
+    afroclub: [
+      { title: "AfroClub Beat 1", audio: "audio/AFRO/AFRO_CLUB/CLUB1.mp3" }
+    ]
+  }
+};
+    // FUNCTION: loadSubcategory (Beats)
+    function loadCategory(category) {
+  const beatsList = document.getElementById("beatsList");
+  beatsList.innerHTML = "";
+  beatsList.classList.remove("hidden");
+
+  const beats = beatsData[category];
+  if (!beats || beats.length === 0) {
+    beatsList.innerHTML = `<p class="no-beat">Aucun beat disponible pour ${category}</p>`;
+    return;
+  }
+
+  beats.forEach(beat => {
+    const item = document.createElement("div");
+    item.className = "beat-item";
+    item.innerHTML = `
+      <div class="beat-meta">
+        <div class="beat-title">${beat.title}</div>
+        <div class="beat-description">${beat.description}</div>
+        <audio controls src="${beat.audio}" class="audio-player"></audio>
+      </div>
+    `;
+    beatsList.appendChild(item);
+  });
+}
+
+
     function loadCategory(category, subcategory = null) {
       document.getElementById('beatsList').classList.remove('hidden');
       document.getElementById('subcategoriesContainer').classList.remove('hidden');
