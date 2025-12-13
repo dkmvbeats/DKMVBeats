@@ -27,7 +27,7 @@
 
 <main>
 
-<section id="accueil" class="section active hero">
+<section id="home" class="section active hero">
   <div class="hero-content">
     <h1>Bienvenue</h1>
     <p>Découvrez mon univers musical</p>
@@ -44,52 +44,54 @@
 </section>
 
 <section id="beats" class="section beats-section">
-  <h1>Catalogue Musical</h1>
-  <div class="categories">
-    <div class="category-card" onclick="loadBeats('trap')">Trap</div>
-    <div class="category-card" onclick="loadBeats('drill')">Drill</div>
-    <div class="category-card" onclick="loadBeats('club')">Club</div>
-    <div class="category-card" onclick="loadBeats('reggaeton')">Reggaeton</div>
-    <div class="category-card" onclick="loadBeats('afro')">Afro</div>
-    <div class="category-card" onclick="loadBeats('shatta')">Shatta</div>
-    <div class="category-card" onclick="loadBeats('boombap')">BoomBap</div>
-    <div class="category-card" onclick="loadBeats('rnb')">R'n'B</div>
-    <div class="category-card" onclick="loadBeats('pop')">Pop</div>
-    <div class="category-card" onclick="loadBeats('oldschool')">Old School</div>
-  </div>
+  <h1>Instrumentales</h1>
+  <p class="section-intro">Choisis une ambiance musicale</p>
+  <ul class="beats-list">
+    <li onclick="loadBeats('trap')">Trap</li>
+    <li onclick="loadBeats('drill')">Drill</li>
+    <li onclick="loadBeats('club')">Club</li>
+    <li onclick="loadBeats('reggaeton')">Reggaeton</li>
+    <li onclick="loadBeats('afro')">Afro</li>
+    <li onclick="loadBeats('shatta')">Shatta</li>
+    <li onclick="loadBeats('boombap')">BoomBap</li>
+    <li onclick="loadBeats('rnb')">R'n'B</li>
+    <li onclick="loadBeats('pop')">Pop</li>
+    <li onclick="loadBeats('oldschool')">Old School</li>
+  </ul>
   <div id="beatsList"></div>
 </section>
 
 <section id="kits" class="section kits-section">
   <h1>Kits</h1>
-  <div class="categories">
-    <div class="category-card" onclick="loadKits('loopkits')">Loopkits</div>
-    <div class="category-card" onclick="loadKits('drumkits')">Drumkits</div>
+  <div class="kits-grid">
+    <div class="kit-card" onclick="loadKits('loopkits')">
+      <h2>Loopkits</h2>
+      <p>Mélodies & ambiances</p>
+    </div>
+    <div class="kit-card" onclick="loadKits('drumkits')">
+      <h2>Drumkits</h2>
+      <p>Kicks, snares, percs</p>
+    </div>
   </div>
   <div id="kitsList"></div>
 </section>
 
 <section id="contact" class="section contact-section">
   <h1>Contact</h1>
-  <form class="contact-form">
-    <input type="text" placeholder="Votre nom" required>
-    <input type="email" placeholder="Votre email" required>
-    <textarea placeholder="Votre message" rows="6" required></textarea>
-    <button type="submit">Envoyer</button>
-  </form>
+  <div class="contact-box">
+    <p>Email : <a href="mailto:dkmvbeats@gmail.com">dkmvbeats@gmail.com</a></p>
+    <label>Message</label>
+    <textarea placeholder="Explique ton projet" rows="6"></textarea>
+    <button>Envoyer</button>
+  </div>
 </section>
 
 <section id="apropos" class="section apropos-section">
   <h1>À propos</h1>
-  <p><strong>DKMV Beats</strong> est un producteur passionné proposant des instrumentales sur mesure pour artistes et créateurs.</p>
-  <ul>
-    <li>Trap / Drill / Jersey</li>
-    <li>Afrobeat / Afrotrap / Afrodrill</li>
-    <li>Reggaeton / Oriental / Raï</li>
-    <li>Pop / Chill / R'n'B / Lo-Fi</li>
-    <li>Old School / Boom Bap</li>
-  </ul>
-  <p>Contacte-moi pour un beat exclusif ou une collaboration.</p>
+  <div class="apropos-text">
+    <p>DKMV Beats est un producteur indépendant spécialisé dans les instrumentales modernes et percutantes.</p>
+    <p>Chaque production est pensée pour s'adapter aux artistes, labels et créateurs de contenu.</p>
+  </div>
 </section>
 
 </main>
@@ -199,6 +201,48 @@ a{color:#00d4ff}
 .apropos-section{line-height:1.7;font-size:16px}
 .apropos-section ul{margin:20px 0;padding-left:20px}
 .apropos-section li{margin-bottom:8px}
+/* ===== SECTIONS DISTINCTES ===== */
+.distinct h1{margin-bottom:30px}
+
+/* INSTRUMENTALES : mur de catégories */
+.beats-section{background:linear-gradient(180deg,#111,#0a1a22)}
+.beats-section .categories{grid-template-columns:repeat(5,1fr)}
+
+/* KITS : cartes larges côte à côte */
+.kits-section{background:linear-gradient(180deg,#111,#22100a)}
+.kits-section .category-card{font-size:18px;padding:30px}
+
+/* CONTACT : formulaire plein écran */
+.contact-section{background:linear-gradient(180deg,#111,#0a2215)}
+.contact-section h1{text-align:center}
+.contact-form input,.contact-form textarea{background:#000;color:#fff}
+
+/* À PROPOS : texte éditorial */
+.apropos-section{background:linear-gradient(180deg,#111,#1a0a22)}
+.apropos-section p{max-width:700px}
+.apropos-section ul{columns:2}
+@media(max-width:700px){.apropos-section ul{columns:1}}
+/* ===== LAYOUTS DISTINCTS ===== */
+.section-intro{text-align:center;opacity:.8;margin-bottom:20px}
+
+/* INSTRUMENTALES = LISTE TEXTE */
+.beats-list{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;list-style:none;padding:0}
+.beats-list li{background:#000;padding:20px;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold}
+.beats-list li:hover{background:#00d4ff;color:#000}
+@media(max-width:900px){.beats-list{grid-template-columns:repeat(2,1fr)}}
+
+/* KITS = CARTES */
+.kits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:700px;margin:0 auto}
+.kit-card{background:#1e1e1e;padding:40px;border-radius:18px;text-align:center;cursor:pointer}
+.kit-card:hover{transform:scale(1.05)}
+
+/* CONTACT = BLOC SIMPLE */
+.contact-box{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:15px}
+.contact-box textarea{background:#000;color:#fff;border:none;padding:15px;border-radius:10px}
+.contact-box button{padding:12px;border:none;border-radius:10px;background:#00d4ff;font-weight:bold}
+
+/* A PROPOS = TEXTE */
+.apropos-text{max-width:700px;margin:0 auto;font-size:17px;line-height:1.8}
 </style>
 
 </body>
