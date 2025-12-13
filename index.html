@@ -17,6 +17,7 @@
 <body>
 
 <nav class="top-nav-fixed">
+  <div class="logo">DKMV Beats</div>
   <button class="tab-btn active" data-tab="accueil">Accueil</button>
   <button class="tab-btn" data-tab="beats">Instrumentales</button>
   <button class="tab-btn" data-tab="kits">Kits</button>
@@ -26,12 +27,23 @@
 
 <main>
 
-<section id="accueil" class="section active">
-  <h1>DKMV Beats</h1>
-  <p>Bienvenue sur mon univers musical</p>
+<section id="accueil" class="section active hero">
+  <div class="hero-content">
+    <h1>Bienvenue</h1>
+    <p>Découvrez mon univers musical</p>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/VIDEO_ID"
+        title="DKMV Beats Preview"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 </section>
 
-<section id="beats" class="section">
+<section id="beats" class="section beats-section">
   <h1>Catalogue Musical</h1>
   <div class="categories">
     <div class="category-card" onclick="loadBeats('trap')">Trap</div>
@@ -48,7 +60,7 @@
   <div id="beatsList"></div>
 </section>
 
-<section id="kits" class="section">
+<section id="kits" class="section kits-section">
   <h1>Kits</h1>
   <div class="categories">
     <div class="category-card" onclick="loadKits('loopkits')">Loopkits</div>
@@ -57,23 +69,17 @@
   <div id="kitsList"></div>
 </section>
 
-    <div class="section fade-in" id="contact">
-      <h1>Contact</h1>
-      <div class="contact-card">
-        <form id="contactForm" action="https://formspree.io/f/xdkwweby" method="POST">
-          <label for="name" id="labelName">Votre nom</label>
-          <input type="text" id="name" name="name" placeholder="Entrez votre nom" required/>
-          <label for="email" id="labelEmail">Votre email</label>
-          <input type="email" id="email" name="_replyto" placeholder="Entrez votre email" required/>
-          <label for="message" id="labelMessage">Votre message</label>
-          <textarea id="message" name="message" placeholder="Écrivez votre message ici..." rows="10" required></textarea>
-          <button type="submit" id="sendButton">Envoyer</button>
-        </form>
-        <p id="confirmationMessage">Merci pour votre message !</p>
-      </div>
-    </div>
+<section id="contact" class="section contact-section">
+  <h1>Contact</h1>
+  <form class="contact-form">
+    <input type="text" placeholder="Votre nom" required>
+    <input type="email" placeholder="Votre email" required>
+    <textarea placeholder="Votre message" rows="6" required></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+</section>
 
-<section id="apropos" class="section">
+<section id="apropos" class="section apropos-section">
   <h1>À propos</h1>
   <p><strong>DKMV Beats</strong> est un producteur passionné proposant des instrumentales sur mesure pour artistes et créateurs.</p>
   <ul>
@@ -166,7 +172,8 @@ function loadKits(category){
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;padding-top:70px}
-.top-nav-fixed{position:fixed;top:0;left:0;right:0;background:#000;display:flex;gap:25px;justify-content:center;padding:15px;z-index:1000}
+.top-nav-fixed{position:fixed;top:0;left:0;right:0;background:#000;display:flex;align-items:center;gap:25px;justify-content:center;padding:15px;z-index:1000}
+.logo{position:absolute;left:20px;font-weight:700;font-size:20px;color:#ffffff}
 .top-nav-fixed button{background:none;border:none;color:#fff;font-weight:bold;cursor:pointer}
 .top-nav-fixed button.active{color:#00d4ff}
 .section{display:none;max-width:900px;margin:auto;padding:40px}
@@ -176,6 +183,22 @@ body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;paddi
 .category-card:hover{transform:scale(1.05)}
 .beat-item,.kit-item{background:#1e1e1e;padding:20px;border-radius:14px;margin-bottom:15px;box-shadow:0 4px 12px #0005}
 a{color:#00d4ff}
+.hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-content h1{font-size:42px;margin-bottom:10px}
+.video-container{margin-top:30px;position:relative;width:100%;max-width:800px;aspect-ratio:16/9}
+.video-container iframe{width:100%;height:100%;border-radius:16px;box-shadow:0 10px 30px #000a}
+.beats-section .categories{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
+@media(max-width:900px){.beats-section .categories{grid-template-columns:repeat(2,1fr)}}
+
+.kits-section .categories{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:500px;margin:0 auto 30px}
+
+.contact-form{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:15px}
+.contact-form input,.contact-form textarea{padding:12px;border-radius:8px;border:none;font-family:inherit}
+.contact-form button{padding:12px;border:none;border-radius:8px;background:#00d4ff;font-weight:bold;cursor:pointer}
+
+.apropos-section{line-height:1.7;font-size:16px}
+.apropos-section ul{margin:20px 0;padding-left:20px}
+.apropos-section li{margin-bottom:8px}
 </style>
 
 </body>
