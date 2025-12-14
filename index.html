@@ -1,21 +1,70 @@
-<!-- VERSION CORRIGÉE COMPLÈTE -->
-<!-- AUCUNE FONCTION DUPLIQUÉE / STRUCTURE NETTE -->
-
 <!DOCTYPE html>
 <html lang="fr">
-
-<!-- ========================= -->
-<!-- ========= HTML ========== -->
-<!-- ========================= -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DKMV Beats</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-</head>
 
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;padding-top:80px}
+
+    /* ===== NAV ===== */
+    .top-nav-fixed{
+      position:fixed;top:0;left:0;right:0;
+      background:#000;display:flex;align-items:center;justify-content:center;gap:30px;
+      padding:15px;z-index:1000
+    }
+    .logo{position:absolute;left:20px;font-weight:700;font-size:20px}
+    .top-nav-fixed button{background:none;border:none;color:#fff;font-weight:bold;cursor:pointer;font-size:15px;padding:8px 14px;border-radius:10px;transition:all .25s ease}
+    .top-nav-fixed button[data-tab="accueil"].active{background:#00d4ff;color:#000}
+    .top-nav-fixed button[data-tab="beats"].active{background:#00ff88;color:#000}
+    .top-nav-fixed button[data-tab="kits"].active{background:#9b5cff;color:#fff}
+    .top-nav-fixed button[data-tab="contact"].active{background:#ff7a00;color:#000}
+    .top-nav-fixed button[data-tab="apropos"].active{background:#ff3cac;color:#fff}
+
+    /* ===== SECTIONS ===== */
+    .section{display:none;max-width:1000px;margin:auto;padding:40px}
+    .section.active{display:block}
+
+    /* ===== ACCUEIL ===== */
+    .hero{text-align:center}
+    .hero h1{font-size:42px;margin-bottom:10px}
+    .hero p{color:#00d4ff}
+    .video-container{margin:30px auto;max-width:800px;aspect-ratio:16/9}
+    .video-container iframe{width:100%;height:100%;border-radius:16px}
+
+    /* ===== INSTRUMENTALES ===== */
+    .beats-list{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;list-style:none;padding:0}
+    .beats-list li{background:#000;padding:18px;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold}
+    .beats-list li:hover{background:#00d4ff;color:#000}
+    @media(max-width:900px){.beats-list{grid-template-columns:repeat(2,1fr)}}
+
+    .beat-item{background:#1e1e1e;padding:20px;border-radius:14px;margin-top:15px}
+
+    /* ===== KITS ===== */
+    .kits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:600px;margin:auto}
+    .kit-card{background:#1e1e1e;padding:40px;border-radius:18px;text-align:center;cursor:pointer}
+    .kit-card:hover{transform:scale(1.05)}
+
+    /* ===== CONTACT ===== */
+    .contact-box{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px}
+    .contact-box textarea{background:#000;color:#fff;border:none;padding:15px;border-radius:10px}
+    .contact-box button{padding:12px;border:none;border-radius:10px;background:#00d4ff;font-weight:bold;cursor:pointer}
+
+    /* ===== A PROPOS ===== */
+    .apropos-text{max-width:700px;margin:auto;line-height:1.8}
+
+    /* ===== AUDIO PLAYER ===== */
+    .audio-player{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#000;padding:12px 20px;border-radius:30px;display:flex;align-items:center;gap:15px;z-index:2000}
+    .audio-player.hidden{display:none}
+    .audio-player button{background:#00d4ff;border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer}
+  </style>
+</head>
 <body>
 
+<!-- NAV -->
 <nav class="top-nav-fixed">
   <div class="logo">DKMV Beats</div>
   <button class="tab-btn active" data-tab="accueil">Accueil</button>
@@ -25,84 +74,77 @@
   <button class="tab-btn" data-tab="apropos">À propos</button>
 </nav>
 
+<!-- AUDIO PLAYER -->
+<div id="audio-player" class="audio-player hidden">
+  <button id="playPause">▶️</button>
+  <span id="trackTitle">Aucun beat</span>
+  <audio id="globalAudio"></audio>
+</div>
+
 <main>
 
+<!-- ACCUEIL -->
 <section id="accueil" class="section active hero">
-  <div class="hero-content">
-    <h1>Bienvenue</h1>
-    <p>Découvrez mon univers musical</p>
-    <div class="video-container">
-      <iframe
-        src="https://www.youtube.com/embed/VIDEO_ID"
-        title="DKMV Beats Preview"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>
+  <h1>Bienvenue</h1>
+  <p>Découvrez mon univers musical</p>
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/PZlS0lcTpyw" allowfullscreen></iframe>
   </div>
 </section>
 
-<section id="beats" class="section beats-section">
+<!-- INSTRUMENTALES -->
+<section id="beats" class="section">
   <h1>Instrumentales</h1>
-  <p class="section-intro">Choisis une ambiance musicale</p>
   <ul class="beats-list">
     <li onclick="loadBeats('trap')">Trap</li>
     <li onclick="loadBeats('drill')">Drill</li>
     <li onclick="loadBeats('club')">Club</li>
     <li onclick="loadBeats('reggaeton')">Reggaeton</li>
     <li onclick="loadBeats('afro')">Afro</li>
-    <li onclick="loadBeats('shatta')">Shatta</li>
-    <li onclick="loadBeats('boombap')">BoomBap</li>
-    <li onclick="loadBeats('rnb')">R'n'B</li>
-    <li onclick="loadBeats('pop')">Pop</li>
-    <li onclick="loadBeats('oldschool')">Old School</li>
   </ul>
   <div id="beatsList"></div>
 </section>
 
-<section id="kits" class="section kits-section">
+<!-- KITS -->
+<section id="kits" class="section">
   <h1>Kits</h1>
   <div class="kits-grid">
-    <div class="kit-card" onclick="loadKits('loopkits')">
-      <h2>Loopkits</h2>
-      <p>Mélodies & ambiances</p>
-    </div>
-    <div class="kit-card" onclick="loadKits('drumkits')">
-      <h2>Drumkits</h2>
-      <p>Kicks, snares, percs</p>
-    </div>
+    <div class="kit-card" onclick="loadKits('loopkits')">Loopkits</div>
+    <div class="kit-card" onclick="loadKits('drumkits')">Drumkits</div>
   </div>
   <div id="kitsList"></div>
 </section>
 
-<section id="contact" class="section contact-section">
+<!-- CONTACT -->
+<section id="contact" class="section">
   <h1>Contact</h1>
   <div class="contact-box">
     <p>Email : <a href="mailto:dkmvbeats@gmail.com">dkmvbeats@gmail.com</a></p>
-    <label>Message</label>
-    <textarea placeholder="Explique ton projet" rows="6"></textarea>
+    <textarea rows="6" placeholder="Votre message"></textarea>
     <button>Envoyer</button>
   </div>
 </section>
 
-<section id="apropos" class="section apropos-section">
+<!-- A PROPOS -->
+<section id="apropos" class="section">
   <h1>À propos</h1>
   <div class="apropos-text">
-    <p>DKMV Beats est un producteur indépendant spécialisé dans les instrumentales modernes et percutantes.</p>
-    <p>Chaque production est pensée pour s'adapter aux artistes, labels et créateurs de contenu.</p>
+    <p><strong>DKMV Beats</strong> est un producteur indépendant spécialisé dans les instrumentales modernes.</p>
+    <p>Trap, Drill, Afro, Club et bien plus.</p>
   </div>
 </section>
 
 </main>
 
-<!-- ========================= -->
-<!-- ========= JS ============ -->
-<!-- ========================= -->
 <script>
-// NAVIGATION
+/* ===== NAVIGATION ===== */
 const tabs = document.querySelectorAll('.tab-btn');
 const sections = document.querySelectorAll('.section');
+
+const audioPlayer = document.getElementById('audio-player');
+const globalAudio = document.getElementById('globalAudio');
+const playPauseBtn = document.getElementById('playPause');
+const trackTitle = document.getElementById('trackTitle');
 
 tabs.forEach(btn => {
   btn.addEventListener('click', () => {
@@ -110,149 +152,65 @@ tabs.forEach(btn => {
     sections.forEach(s => s.classList.remove('active'));
 
     btn.classList.add('active');
-    const targetSection = document.getElementById(btn.dataset.tab);
-    targetSection.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
 
-    // STOPPER la vidéo si on quitte l'accueil
     const iframe = document.querySelector('#accueil iframe');
-    if (btn.dataset.tab !== 'accueil' && iframe) {
-      iframe.src = iframe.src;
+    if(btn.dataset.tab !== 'accueil' && iframe){ iframe.src = iframe.src; }
+
+    if(btn.dataset.tab !== 'beats'){
+      globalAudio.pause();
+      playPauseBtn.textContent = '▶️';
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 });
 
-// DATA BEATS
-const beatsData = {
-  trap:[{name:'JVLIVS',audio:'audio/TRAP/JVLIVS.mp3',description:'Trap sombre',bpm:140}],
-  drill:[{name:'FATALE',audio:'audio/DRILL/FATALE.mp3',description:'Drill puissante',bpm:145}],
-  club:[{name:'ZONE',audio:'audio/CLUB/ZONE.mp3',description:'Beat club',bpm:128}],
-  reggaeton:[{name:'SEYA',audio:'audio/REGGAETON/SEYA.mp3',description:'Reggaeton latino',bpm:100}],
-  afro:[{name:'VIDA',audio:'audio/AFRO/VIDA.mp3',description:'Afro vibes',bpm:95}],
-  shatta:[{name:'SHATTA1',audio:'audio/SHATTA/SHATTA1.mp3',description:'Shatta énergique',bpm:102}],
-  boombap:[{name:'BOOMBAP1',audio:'audio/BOOMBAP/BB1.mp3',description:'Boom bap old school',bpm:90}],
-  rnb:[{name:'RNB1',audio:'audio/RNB/RNB1.mp3',description:'R\'n\'B chill',bpm:75}],
-  pop:[{name:'POP1',audio:'audio/POP/POP1.mp3',description:'Pop moderne',bpm:120}],
-  oldschool:[{name:'OLD1',audio:'audio/OLDSCHOOL/OLD1.mp3',description:'Old school',bpm:92}]
+/* ===== DATA ===== */
+const beatsData={
+  trap:[{name:'JVLIVS',audio:'audio/TRAP/JVLIVS.mp3'}],
+  drill:[{name:'FATALE',audio:'audio/DRILL/FATALE.mp3'}],
+  club:[{name:'ZONE',audio:'audio/CLUB/ZONE.mp3'}],
+  reggaeton:[{name:'SEYA',audio:'audio/REGGAETON/SEYA.mp3'}],
+  afro:[{name:'VIDA',audio:'audio/AFRO/VIDA.mp3'}]
 };
 
-// DATA KITS
-const kitsData = {
-  loopkits:[{name:"L'OVNI",download:'kits/lovni.zip',description:'Loopkit gratuit guitare & bells'}],
-  drumkits:[{name:'DRUM KIT 01',download:'kits/drumkit01.zip',description:'Drumkit trap & drill'}]
+const kitsData={
+  loopkits:[{name:"L'OVNI",download:'kits/lovni.zip'}],
+  drumkits:[{name:'DRUMKIT 01',download:'kits/drumkit01.zip'}]
 };
 
-// LOAD BEATS
-function loadBeats(category){
-  const list = document.getElementById('beatsList');
+/* ===== LOAD BEATS ===== */
+function loadBeats(cat){
+  const list=document.getElementById('beatsList');
   list.innerHTML='';
-  if(!beatsData[category]){ list.innerHTML='<p>Aucun beat</p>'; return; }
-
-  beatsData[category].forEach(beat=>{
-    list.innerHTML+=`
-      <div class="beat-item">
-        <strong>${beat.name}</strong><br>
-        <em>${beat.description}</em><br>
-        BPM: ${beat.bpm}<br>
-        <audio controls src="${beat.audio}"></audio>
-      </div>`;
+  beatsData[cat].forEach(b=>{
+    list.innerHTML+=`<div class="beat-item"><strong>${b.name}</strong><br><button onclick="playBeat('${b.audio}','${b.name}')">▶️ Écouter</button></div>`;
   });
 }
 
-// LOAD KITS
-function loadKits(category){
+function playBeat(src,title){
+  globalAudio.src=src;
+  globalAudio.play();
+  trackTitle.textContent=title;
+  playPauseBtn.textContent='⏸️';
+  audioPlayer.classList.remove('hidden');
+}
+
+playPauseBtn.onclick=()=>{
+  if(globalAudio.paused){globalAudio.play();playPauseBtn.textContent='⏸️'}
+  else{globalAudio.pause();playPauseBtn.textContent='▶️'}
+};
+
+/* ===== LOAD KITS ===== */
+function loadKits(cat){
   const list=document.getElementById('kitsList');
   list.innerHTML='';
-  if(!kitsData[category]){ list.innerHTML='<p>Aucun kit</p>'; return; }
-
-  kitsData[category].forEach(kit=>{
-    list.innerHTML+=`
-      <div class="kit-item">
-        <strong>${kit.name}</strong><br>
-        <em>${kit.description}</em><br>
-        <a href="${kit.download}" download>Télécharger</a>
-      </div>`;
+  kitsData[cat].forEach(k=>{
+    list.innerHTML+=`<div class="beat-item"><strong>${k.name}</strong><br><a href="${k.download}" download>Télécharger</a></div>`;
   });
 }
 </script>
-
-<!-- ========================= -->
-<!-- ========= CSS =========== -->
-<!-- ========================= -->
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;padding-top:70px}
-.top-nav-fixed{position:fixed;top:0;left:0;right:0;background:#000;display:flex;align-items:center;gap:25px;justify-content:center;padding:15px;z-index:1000}
-.logo{position:absolute;left:20px;font-weight:700;font-size:20px;color:#ffffff}
-.top-nav-fixed button{background:none;border:none;color:#fff;font-weight:bold;cursor:pointer}
-.top-nav-fixed button.active{color:#00d4ff}
-.section{display:none;max-width:900px;margin:auto;padding:40px}
-.section.active{display:block}
-.categories{display:flex;gap:15px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
-.category-card{padding:15px 30px;background:linear-gradient(135deg,#007BFF,#00d4ff);border-radius:12px;cursor:pointer;font-weight:bold}
-.category-card:hover{transform:scale(1.05)}
-.beat-item,.kit-item{background:#1e1e1e;padding:20px;border-radius:14px;margin-bottom:15px;box-shadow:0 4px 12px #0005}
-a{color:#00d4ff}
-.hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center}
-.hero-content h1{font-size:42px;margin-bottom:10px}
-.video-container{margin-top:30px;position:relative;width:100%;max-width:800px;aspect-ratio:16/9}
-.video-container iframe{width:100%;height:100%;border-radius:16px;box-shadow:0 10px 30px #000a}
-.beats-section .categories{display:grid;grid-template-columns:repeat(5,1fr);gap:15px}
-@media(max-width:900px){.beats-section .categories{grid-template-columns:repeat(2,1fr)}}
-
-.kits-section .categories{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:500px;margin:0 auto 30px}
-
-.contact-form{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:15px}
-.contact-form input,.contact-form textarea{padding:12px;border-radius:8px;border:none;font-family:inherit}
-.contact-form button{padding:12px;border:none;border-radius:8px;background:#00d4ff;font-weight:bold;cursor:pointer}
-
-.apropos-section{line-height:1.7;font-size:16px}
-.apropos-section ul{margin:20px 0;padding-left:20px}
-.apropos-section li{margin-bottom:8px}
-/* ===== SECTIONS DISTINCTES ===== */
-.distinct h1{margin-bottom:30px}
-
-/* INSTRUMENTALES : mur de catégories */
-.beats-section{background:linear-gradient(180deg,#111,#0a1a22)}
-.beats-section .categories{grid-template-columns:repeat(5,1fr)}
-
-/* KITS : cartes larges côte à côte */
-.kits-section{background:linear-gradient(180deg,#111,#22100a)}
-.kits-section .category-card{font-size:18px;padding:30px}
-
-/* CONTACT : formulaire plein écran */
-.contact-section{background:linear-gradient(180deg,#111,#0a2215)}
-.contact-section h1{text-align:center}
-.contact-form input,.contact-form textarea{background:#000;color:#fff}
-
-/* À PROPOS : texte éditorial */
-.apropos-section{background:linear-gradient(180deg,#111,#1a0a22)}
-.apropos-section p{max-width:700px}
-.apropos-section ul{columns:2}
-@media(max-width:700px){.apropos-section ul{columns:1}}
-/* ===== LAYOUTS DISTINCTS ===== */
-.section-intro{text-align:center;opacity:.8;margin-bottom:20px}
-
-/* INSTRUMENTALES = LISTE TEXTE */
-.beats-list{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;list-style:none;padding:0}
-.beats-list li{background:#000;padding:20px;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold}
-.beats-list li:hover{background:#00d4ff;color:#000}
-@media(max-width:900px){.beats-list{grid-template-columns:repeat(2,1fr)}}
-
-/* KITS = CARTES */
-.kits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:700px;margin:0 auto}
-.kit-card{background:#1e1e1e;padding:40px;border-radius:18px;text-align:center;cursor:pointer}
-.kit-card:hover{transform:scale(1.05)}
-
-/* CONTACT = BLOC SIMPLE */
-.contact-box{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:15px}
-.contact-box textarea{background:#000;color:#fff;border:none;padding:15px;border-radius:10px}
-.contact-box button{padding:12px;border:none;border-radius:10px;background:#00d4ff;font-weight:bold}
-
-/* A PROPOS = TEXTE */
-.apropos-text{max-width:700px;margin:0 auto;font-size:17px;line-height:1.8}
-</style>
 
 </body>
 </html>
