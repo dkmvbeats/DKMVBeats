@@ -27,6 +27,22 @@
 
 <main>
 
+<section id="accueil" class="section active hero">
+  <div class="hero-content">
+    <h1>Bienvenue</h1>
+    <p>Découvrez mon univers musical</p>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/VIDEO_ID"
+        title="DKMV Beats Preview"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
 <section id="beats" class="section beats-section">
   <h1>Instrumentales</h1>
   <p class="section-intro">Choisis une ambiance musicale</p>
@@ -92,8 +108,17 @@ tabs.forEach(btn => {
   btn.addEventListener('click', () => {
     tabs.forEach(b => b.classList.remove('active'));
     sections.forEach(s => s.classList.remove('active'));
+
     btn.classList.add('active');
-    document.getElementById(btn.dataset.tab).classList.add('active');
+    const targetSection = document.getElementById(btn.dataset.tab);
+    targetSection.classList.add('active');
+
+    // STOPPER la vidéo si on quitte l'accueil
+    const iframe = document.querySelector('#accueil iframe');
+    if (btn.dataset.tab !== 'accueil' && iframe) {
+      iframe.src = iframe.src;
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
