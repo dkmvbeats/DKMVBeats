@@ -152,6 +152,48 @@
         linear-gradient(180deg,#050505,#12020a 60%,#000);
     }
     #apropos p{font-size:18px;max-width:800px}
+
+    .beat-item {
+  background:#1e1e1e;
+  padding:15px;
+  border-radius:14px;
+  margin-top:15px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,.4);
+}
+
+.beat-cover {
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+.beat-info {
+  flex:1;
+}
+
+.beat-info strong {
+  font-size:16px;
+  display:block;
+  margin-bottom:5px;
+}
+
+.beat-meta {
+  font-size:13px;
+  color:#aaa;
+}
+
+.beat-actions button {
+  padding:8px 12px;
+  border:none;
+  border-radius:8px;
+  background:#00d4ff;
+  font-weight:bold;
+  cursor:pointer;
+}
   </style>
 </head>
 <body>
@@ -279,17 +321,47 @@ tabs.forEach(btn => {
 });
 
 /* ===== DATA ===== */
-const beatsData={
-  trap:[{name:'JVLIVS',audio:'audio/TRAP/JVLIVS.mp3'}],
-  drill:[{name:'FATALE',audio:'audio/DRILL/FATALE.mp3'}],
-  club:[{name:'ZONE',audio:'audio/CLUB/ZONE.mp3'}],
-  reggaeton:[{name:'SEYA',audio:'audio/REGGAETON/SEYA.mp3'}],
-
-  afrodrill:[{name:'AFRO DRILL 01',audio:'audio/AFRODRILL/AFRODRILL1.mp3'}],
-  afroarab:[{name:'AFRO ARAB 01',audio:'audio/AFROARAB/AFROARAB1.mp3'}],
-  afrobeat:[{name:'AFROBEAT 01',audio:'audio/AFROBEAT/AFROBEAT1.mp3'}],
-  afrotrap:[{name:'AFRO TRAP 01',audio:'audio/AFROTRAP/AFROTRAP1.mp3'}],
-  afroclub:[{name:'AFRO CLUB 01',audio:'audio/AFROCLUB/AFROCLUB1.mp3'}]
+const beatsData = {
+  trap: [
+    {
+      name: 'JVLIVS',
+      audio: 'audio/TRAP/JVLIVS.mp3',
+      cover: 'covers/trap_jvlivs.jpg',
+      duration: '3:25',
+      bpm: 140,
+      key: 'Am'
+    }
+  ],
+  drill: [
+    {
+      name: 'FATALE',
+      audio: 'audio/DRILL/FATALE.mp3',
+      cover: 'covers/drill_fatale.jpg',
+      duration: '2:58',
+      bpm: 145,
+      key: 'Fm'
+    }
+  ],
+  club: [
+    {
+      name: 'ZONE',
+      audio: 'audio/CLUB/ZONE.mp3',
+      cover: 'covers/club_zone.jpg',
+      duration: '3:10',
+      bpm: 128,
+      key: 'C#m'
+    }
+  ],
+  reggaeton: [
+    {
+      name: 'SEYA',
+      audio: 'audio/REGGAETON/SEYA.mp3',
+      cover: 'covers/reggaeton_seya.jpg',
+      duration: '3:45',
+      bpm: 100,
+      key: 'Gm'
+    }
+  ]
 };
 
 const kitsData={
@@ -299,14 +371,21 @@ const kitsData={
 
 /* ===== LOAD BEATS ===== */
 function loadBeats(cat){
-  // fermer les sous-catégories Afro dès qu'on clique ailleurs
-  const afro = document.getElementById('afro-subs');
-  if(afro) afro.classList.add('hidden');
-
   const list=document.getElementById('beatsList');
   list.innerHTML='';
   beatsData[cat].forEach(b=>{
-    list.innerHTML+=`<div class="beat-item"><strong>${b.name}</strong><br><button onclick="playBeat('${b.audio}','${b.name}')">▶️ Écouter</button></div>`;
+    list.innerHTML+=`
+      <div class="beat-item">
+        <img src="${b.cover}" alt="${b.name}" class="beat-cover">
+        <div class="beat-info">
+          <strong>${b.name}</strong>
+          <div class="beat-meta">Durée: ${b.duration} • BPM: ${b.bpm} • Clé: ${b.key}</div>
+        </div>
+        <div class="beat-actions">
+          <button onclick="playBeat('${b.audio}','${b.name}')">▶️ Écouter</button>
+        </div>
+      </div>
+    `;
   });
 }
 
