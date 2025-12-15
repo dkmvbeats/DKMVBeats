@@ -145,7 +145,14 @@
     <li onclick="loadBeats('drill')">Drill</li>
     <li onclick="loadBeats('club')">Club</li>
     <li onclick="loadBeats('reggaeton')">Reggaeton</li>
-    <li onclick="loadBeats('afro')">Afro</li>
+    <li onclick="toggleAfroSubs()">Afro ▾</li>
+    <ul id="afro-subs" class="afro-subs hidden">
+      <li onclick="loadBeats('afrodrill')">Afro Drill</li>
+      <li onclick="loadBeats('afroarab')">Afro Arab</li>
+      <li onclick="loadBeats('afrobeat')">Afrobeat</li>
+      <li onclick="loadBeats('afrotrap')">Afro Trap</li>
+      <li onclick="loadBeats('afroclub')">Afro Club</li>
+    </ul>
   </ul>
   <div id="beatsList"></div>
 </section>
@@ -182,6 +189,11 @@
 </main>
 
 <script>
+/* ===== AFRO SUB CATEGORIES ===== */
+function toggleAfroSubs(){
+  document.getElementById('afro-subs').classList.toggle('hidden');
+}
+
 /* ===== NAVIGATION ===== */
 const tabs = document.querySelectorAll('.tab-btn');
 const sections = document.querySelectorAll('.section');
@@ -217,7 +229,12 @@ const beatsData={
   drill:[{name:'FATALE',audio:'audio/DRILL/FATALE.mp3'}],
   club:[{name:'ZONE',audio:'audio/CLUB/ZONE.mp3'}],
   reggaeton:[{name:'SEYA',audio:'audio/REGGAETON/SEYA.mp3'}],
-  afro:[{name:'VIDA',audio:'audio/AFRO/VIDA.mp3'}]
+
+  afrodrill:[{name:'AFRO DRILL 01',audio:'audio/AFRODRILL/AFRODRILL1.mp3'}],
+  afroarab:[{name:'AFRO ARAB 01',audio:'audio/AFROARAB/AFROARAB1.mp3'}],
+  afrobeat:[{name:'AFROBEAT 01',audio:'audio/AFROBEAT/AFROBEAT1.mp3'}],
+  afrotrap:[{name:'AFRO TRAP 01',audio:'audio/AFROTRAP/AFROTRAP1.mp3'}],
+  afroclub:[{name:'AFRO CLUB 01',audio:'audio/AFROCLUB/AFROCLUB1.mp3'}]
 };
 
 const kitsData={
