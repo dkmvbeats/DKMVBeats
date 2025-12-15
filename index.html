@@ -8,7 +8,19 @@
 
   <style>
     *{box-sizing:border-box}
-    body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;padding-top:80px}
+    body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;padding-top:80px;transition:background .4s,color .4s}
+
+    body.light{
+      background:#f4f6fb;
+      color:#111;
+    }
+    body.light .top-nav-fixed{background:#fff;border-bottom:1px solid #ddd}
+    body.light .top-nav-fixed button{color:#111}
+    body.light .section{background:transparent}
+    body.light .beats-list li,
+    body.light .afro-subs li,
+    body.light .kit-card,
+    body.light .beat-item{background:#fff;color:#111;box-shadow:0 4px 15px rgba(0,0,0,.08)}
 
     /* ===== NAV ===== */
     .top-nav-fixed{
@@ -36,17 +48,52 @@
     .video-container iframe{width:100%;height:100%;border-radius:16px}
 
     /* ===== INSTRUMENTALES ===== */
-
-    /* Sous-catégories Afro (cachées par défaut) */
-    .afro-subs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:15px;list-style:none;padding:0}
-    .afro-subs.hidden{display:none}
-    .afro-subs li{background:#000;padding:14px;border-radius:12px;text-align:center;cursor:pointer;font-size:14px}
-    .afro-subs li:hover{background:#00ff88;color:#000}
-
-    .beats-list{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;list-style:none;padding:0}
-    .beats-list li{background:#000;padding:18px;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold}
+    .beats-list{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:15px;
+      list-style:none;
+      padding:0;
+    }
+    .beats-list li{
+      background:#000;
+      padding:18px;
+      border-radius:12px;
+      text-align:center;
+      cursor:pointer;
+      font-weight:bold;
+      min-height:80px; /* taille uniforme */
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
     .beats-list li:hover{background:#00d4ff;color:#000}
     @media(max-width:900px){.beats-list{grid-template-columns:repeat(2,1fr)}}
+
+    /* Sous-catégories Afro */
+    .afro-subs{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+      gap:16px;
+      margin:25px auto 0 auto;
+      list-style:none;
+      padding:0;
+      max-width:600px;
+      justify-items:center;
+    }
+    .afro-subs.hidden{display:none}
+    .afro-subs li{
+      width:100%;
+      background:#000;
+      padding:14px 10px;
+      border-radius:14px;
+      text-align:center;
+      cursor:pointer;
+      font-size:14px;
+      font-weight:bold;
+      box-shadow:0 8px 25px #000a;
+    }
+    .afro-subs li:hover{background:#00ff88;color:#000}
 
     .beat-item{background:#1e1e1e;padding:20px;border-radius:14px;margin-top:15px}
 
@@ -67,57 +114,51 @@
     .audio-player{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#000;padding:12px 20px;border-radius:30px;display:flex;align-items:center;gap:15px;z-index:2000}
     .audio-player.hidden{display:none}
     .audio-player button{background:#00d4ff;border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer}
-  
-/* ===== COULEURS PAR ONGLET ===== */
 
-/* ACCUEIL – BLEU */
-#accueil{
-  background:
-    radial-gradient(900px 350px at center bottom, rgba(0,212,255,0.45), transparent 60%),
-    radial-gradient(600px 250px at right top, rgba(0,150,255,0.25), transparent 65%),
-    linear-gradient(180deg,#050505,#020a12 60%,#000);
-}
-#accueil p{color:#7dd3fc}
+    /* ===== COULEURS PAR ONGLET ===== */
+    #accueil{
+      background:
+        radial-gradient(900px 350px at center bottom, rgba(0,212,255,0.45), transparent 60%),
+        radial-gradient(600px 250px at right top, rgba(0,150,255,0.25), transparent 65%),
+        linear-gradient(180deg,#050505,#020a12 60%,#000);
+    }
+    #accueil p{color:#7dd3fc}
 
-/* INSTRUMENTALES – VERT */
-#beats{
-  background:
-    radial-gradient(900px 300px at center bottom, rgba(0,255,136,0.45), transparent 60%),
-    radial-gradient(600px 250px at left bottom, rgba(0,200,120,0.25), transparent 65%),
-    linear-gradient(180deg,#050505,#02110a 60%,#000);
-}
+    #beats{
+      background:
+        radial-gradient(900px 300px at center bottom, rgba(0,255,136,0.45), transparent 60%),
+        radial-gradient(600px 250px at left bottom, rgba(0,200,120,0.25), transparent 65%),
+        linear-gradient(180deg,#050505,#02110a 60%,#000);
+    }
 
-/* KITS – VIOLET */
-#kits{
-  background:
-    radial-gradient(900px 300px at center bottom, rgba(155,92,255,0.45), transparent 60%),
-    radial-gradient(600px 250px at right bottom, rgba(190,140,255,0.25), transparent 65%),
-    linear-gradient(180deg,#050505,#0a0214 60%,#000);
-}
+    #kits{
+      background:
+        radial-gradient(900px 300px at center bottom, rgba(155,92,255,0.45), transparent 60%),
+        radial-gradient(600px 250px at right bottom, rgba(190,140,255,0.25), transparent 65%),
+        linear-gradient(180deg,#050505,#0a0214 60%,#000);
+    }
 
-/* CONTACT – ORANGE */
-#contact{
-  background:
-    radial-gradient(900px 300px at center bottom, rgba(255,122,0,0.45), transparent 60%),
-    radial-gradient(600px 250px at left bottom, rgba(255,180,80,0.25), transparent 65%),
-    linear-gradient(180deg,#050505,#140a02 60%,#000);
-}
+    #contact{
+      background:
+        radial-gradient(900px 300px at center bottom, rgba(255,122,0,0.45), transparent 60%),
+        radial-gradient(600px 250px at left bottom, rgba(255,180,80,0.25), transparent 65%),
+        linear-gradient(180deg,#050505,#140a02 60%,#000);
+    }
 
-/* A PROPOS – ROSE */
-#apropos{
-  background:
-    radial-gradient(900px 300px at left top, rgba(255,60,172,0.45), transparent 60%),
-    radial-gradient(600px 250px at right bottom, rgba(255,140,220,0.25), transparent 65%),
-    linear-gradient(180deg,#050505,#12020a 60%,#000);
-}
-#apropos p{font-size:18px;max-width:800px}
-
-</style>
+    #apropos{
+      background:
+        radial-gradient(900px 300px at left top, rgba(255,60,172,0.45), transparent 60%),
+        radial-gradient(600px 250px at right bottom, rgba(255,140,220,0.25), transparent 65%),
+        linear-gradient(180deg,#050505,#12020a 60%,#000);
+    }
+    #apropos p{font-size:18px;max-width:800px}
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="top-nav-fixed">
+  <button id="toggleLight" title="Mode éclairage">💡</button>
   <div class="logo">DKMV Beats</div>
   <button class="tab-btn active" data-tab="accueil">Accueil</button>
   <button class="tab-btn" data-tab="beats">Instrumentales</button>
@@ -152,15 +193,18 @@
     <li onclick="loadBeats('drill')">Drill</li>
     <li onclick="loadBeats('club')">Club</li>
     <li onclick="loadBeats('reggaeton')">Reggaeton</li>
-    <li onclick="event.stopPropagation(); toggleAfroSubs()">Afro ▾</li>
-    <ul id="afro-subs" class="afro-subs hidden">
-      <li onclick="loadBeats('afrodrill')">Afro Drill</li>
-      <li onclick="loadBeats('afroarab')">Afro Arab</li>
-      <li onclick="loadBeats('afrobeat')">Afrobeat</li>
-      <li onclick="loadBeats('afrotrap')">Afro Trap</li>
-      <li onclick="loadBeats('afroclub')">Afro Club</li>
-    </ul>
+    <li onclick="toggleAfroSubs()">Afro ▾</li>
   </ul>
+
+  <!-- Sous-catégories Afro (cachées par défaut) -->
+  <ul id="afro-subs" class="afro-subs hidden">
+    <li onclick="loadBeats('afrodrill')">Afro Drill</li>
+    <li onclick="loadBeats('afroarab')">Afro Arab</li>
+    <li onclick="loadBeats('afrobeat')">Afrobeat</li>
+    <li onclick="loadBeats('afrotrap')">Afro Trap</li>
+    <li onclick="loadBeats('afroclub')">Afro Club</li>
+  </ul>
+
   <div id="beatsList"></div>
 </section>
 
@@ -287,6 +331,13 @@ function loadKits(cat){
     list.innerHTML+=`<div class="beat-item"><strong>${k.name}</strong><br><a href="${k.download}" download>Télécharger</a></div>`;
   });
 }
+
+/* ===== MODE ECLAIRAGE ===== */
+const toggleLight=document.getElementById('toggleLight');
+toggleLight.addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+  toggleLight.textContent=document.body.classList.contains('light')?'🌙':'💡';
+});
 </script>
 
 </body>
