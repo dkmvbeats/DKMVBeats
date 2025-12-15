@@ -60,53 +60,52 @@
     .audio-player{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#000;padding:12px 20px;border-radius:30px;display:flex;align-items:center;gap:15px;z-index:2000}
     .audio-player.hidden{display:none}
     .audio-player button{background:#00d4ff;border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer}
-    /* ===== NAV COULEURS ===== */
-.top-nav-fixed{
-  position:fixed;
-  top:0; left:0; right:0;
-  background:rgba(0,0,0,.85);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:22px;
-  padding:15px;
-  z-index:1000;
+  
+/* ===== COULEURS PAR ONGLET ===== */
+
+/* ACCUEIL – BLEU */
+#accueil{
+  background:
+    radial-gradient(900px 350px at center bottom, rgba(0,212,255,0.45), transparent 60%),
+    radial-gradient(600px 250px at right top, rgba(0,150,255,0.25), transparent 65%),
+    linear-gradient(180deg,#050505,#020a12 60%,#000);
+}
+#accueil p{color:#7dd3fc}
+
+/* INSTRUMENTALES – VERT */
+#beats{
+  background:
+    radial-gradient(900px 300px at center bottom, rgba(0,255,136,0.45), transparent 60%),
+    radial-gradient(600px 250px at left bottom, rgba(0,200,120,0.25), transparent 65%),
+    linear-gradient(180deg,#050505,#02110a 60%,#000);
 }
 
-.logo{
-  position:absolute;
-  left:20px;
-  font-weight:700;
-  font-size:20px;
+/* KITS – VIOLET */
+#kits{
+  background:
+    radial-gradient(900px 300px at center bottom, rgba(155,92,255,0.45), transparent 60%),
+    radial-gradient(600px 250px at right bottom, rgba(190,140,255,0.25), transparent 65%),
+    linear-gradient(180deg,#050505,#0a0214 60%,#000);
 }
 
-/* Boutons */
-.top-nav-fixed button{
-  background:linear-gradient(135deg,#1f1f1f,#000);
-  border:none;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-  font-size:14px;
-  padding:10px 18px;
-  border-radius:14px;
-  transition:all .3s ease;
-  box-shadow:0 4px 12px #0006;
+/* CONTACT – ORANGE */
+#contact{
+  background:
+    radial-gradient(900px 300px at center bottom, rgba(255,122,0,0.45), transparent 60%),
+    radial-gradient(600px 250px at left bottom, rgba(255,180,80,0.25), transparent 65%),
+    linear-gradient(180deg,#050505,#140a02 60%,#000);
 }
 
-/* Hover */
-.top-nav-fixed button:hover{
-  transform:translateY(-2px) scale(1.05);
+/* A PROPOS – ROSE */
+#apropos{
+  background:
+    radial-gradient(900px 300px at left top, rgba(255,60,172,0.45), transparent 60%),
+    radial-gradient(600px 250px at right bottom, rgba(255,140,220,0.25), transparent 65%),
+    linear-gradient(180deg,#050505,#12020a 60%,#000);
 }
+#apropos p{font-size:18px;max-width:800px}
 
-/* Onglet actif = couleur */
-.top-nav-fixed button.active{
-  color:#fff;
-  background:linear-gradient(135deg,#22c55e,#8b5cf6);
-  box-shadow:0 0 18px #8b5cf6aa;
-}
-
-  </style>
+</style>
 </head>
 <body>
 
