@@ -10,10 +10,7 @@
     *{box-sizing:border-box}
     body{margin:0;font-family:Montserrat,sans-serif;background:#111;color:#fff;padding-top:80px;transition:background .4s,color .4s}
 
-    body.light{
-      background:#f4f6fb;
-      color:#111;
-    }
+    body.light{background:#f4f6fb;color:#111}
     body.light .top-nav-fixed{background:#fff;border-bottom:1px solid #ddd}
     body.light .top-nav-fixed button{color:#111}
     body.light .section{background:transparent}
@@ -30,6 +27,7 @@
     }
     .logo{position:absolute;left:20px;font-weight:700;font-size:20px}
     .top-nav-fixed button{background:none;border:none;color:#fff;font-weight:bold;cursor:pointer;font-size:15px;padding:8px 14px;border-radius:10px;transition:all .25s ease}
+    .top-nav-fixed button:hover{transform:scale(1.05);box-shadow:0 0 10px #00d4ff}
     .top-nav-fixed button[data-tab="accueil"].active{background:#00d4ff;color:#000}
     .top-nav-fixed button[data-tab="beats"].active{background:#00ff88;color:#000}
     .top-nav-fixed button[data-tab="kits"].active{background:#9b5cff;color:#fff}
@@ -37,70 +35,43 @@
     .top-nav-fixed button[data-tab="apropos"].active{background:#ff3cac;color:#fff}
 
     /* ===== SECTIONS ===== */
-    .section{display:none;max-width:1000px;margin:auto;padding:40px}
-    .section.active{display:block}
+    .section{display:none;max-width:1000px;margin:auto;padding:40px;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .section.active{display:block;opacity:1;transform:translateY(0)}
 
     /* ===== ACCUEIL ===== */
     .hero{text-align:center}
-    .hero h1{font-size:42px;margin-bottom:10px}
+    .hero h1{
+      font-size:42px;margin-bottom:10px;
+      background:linear-gradient(90deg,#00d4ff,#9b5cff,#ff7a00);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:gradientMove 5s infinite linear;
+      background-size:200% auto;
+    }
+    @keyframes gradientMove{0%{background-position:0%}100%{background-position:200%}}
     .hero p{color:#00d4ff}
     .video-container{margin:30px auto;max-width:800px;aspect-ratio:16/9}
     .video-container iframe{width:100%;height:100%;border-radius:16px}
 
     /* ===== INSTRUMENTALES ===== */
-    .beats-list{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:15px;
-      list-style:none;
-      padding:0;
-    }
-    .beats-list li{
-      background:#000;
-      padding:18px;
-      border-radius:12px;
-      text-align:center;
-      cursor:pointer;
-      font-weight:bold;
-      min-height:80px; /* taille uniforme */
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
+    .beats-list{display:grid;grid-template-columns:repeat(5,1fr);gap:15px;list-style:none;padding:0}
+    .beats-list li{background:#000;padding:18px;border-radius:12px;text-align:center;cursor:pointer;font-weight:bold;min-height:80px;display:flex;align-items:center;justify-content:center;transition:.3s}
     .beats-list li:hover{background:#00d4ff;color:#000}
     @media(max-width:900px){.beats-list{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.beats-list{display:flex;overflow-x:auto;gap:10px}.beats-list li{min-width:120px;flex-shrink:0}}
 
-    /* Sous-catégories Afro */
-    .afro-subs{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-      gap:16px;
-      margin:25px auto 0 auto;
-      list-style:none;
-      padding:0;
-      max-width:600px;
-      justify-items:center;
-    }
+    .afro-subs{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin:25px auto 0;list-style:none;padding:0;max-width:600px;justify-items:center}
     .afro-subs.hidden{display:none}
-    .afro-subs li{
-      width:100%;
-      background:#000;
-      padding:14px 10px;
-      border-radius:14px;
-      text-align:center;
-      cursor:pointer;
-      font-size:14px;
-      font-weight:bold;
-      box-shadow:0 8px 25px #000a;
-    }
+    .afro-subs li{width:100%;background:#000;padding:14px 10px;border-radius:14px;text-align:center;cursor:pointer;font-size:14px;font-weight:bold;box-shadow:0 8px 25px #000a;transition:.3s}
     .afro-subs li:hover{background:#00ff88;color:#000}
 
-    .beat-item{background:#1e1e1e;padding:20px;border-radius:14px;margin-top:15px}
-
-    /* ===== KITS ===== */
-    .kits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:600px;margin:auto}
-    .kit-card{background:#1e1e1e;padding:40px;border-radius:18px;text-align:center;cursor:pointer}
-    .kit-card:hover{transform:scale(1.05)}
+    .beat-item{background:#1e1e1e;padding:15px;border-radius:14px;margin-top:15px;display:flex;align-items:center;gap:15px;box-shadow:0 4px 12px rgba(0,0,0,.4);transition:.3s}
+    .beat-item:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.5)}
+    .beat-cover{width:70px;height:70px;border-radius:10px;object-fit:cover}
+    .beat-info{flex:1}
+    .beat-info strong{font-size:16px;display:block;margin-bottom:5px}
+    .beat-meta{font-size:13px;color:#aaa}
+    .beat-actions button{padding:8px 12px;border:none;border-radius:8px;background:#00d4ff;font-weight:bold;cursor:pointer}
 
     /* ===== CONTACT ===== */
     .contact-box{max-width:500px;margin:auto;display:flex;flex-direction:column;gap:15px}
@@ -109,91 +80,15 @@
 
     /* ===== A PROPOS ===== */
     .apropos-text{max-width:700px;margin:auto;line-height:1.8}
+    #apropos p{font-size:18px;max-width:800px}
 
     /* ===== AUDIO PLAYER ===== */
     .audio-player{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#000;padding:12px 20px;border-radius:30px;display:flex;align-items:center;gap:15px;z-index:2000}
     .audio-player.hidden{display:none}
     .audio-player button{background:#00d4ff;border:none;border-radius:50%;width:40px;height:40px;font-size:16px;cursor:pointer}
-
-    /* ===== COULEURS PAR ONGLET ===== */
-    #accueil{
-      background:
-        radial-gradient(900px 350px at center bottom, rgba(0,212,255,0.45), transparent 60%),
-        radial-gradient(600px 250px at right top, rgba(0,150,255,0.25), transparent 65%),
-        linear-gradient(180deg,#050505,#020a12 60%,#000);
-    }
-    #accueil p{color:#7dd3fc}
-
-    #beats{
-      background:
-        radial-gradient(900px 300px at center bottom, rgba(0,255,136,0.45), transparent 60%),
-        radial-gradient(600px 250px at left bottom, rgba(0,200,120,0.25), transparent 65%),
-        linear-gradient(180deg,#050505,#02110a 60%,#000);
-    }
-
-    #kits{
-      background:
-        radial-gradient(900px 300px at center bottom, rgba(155,92,255,0.45), transparent 60%),
-        radial-gradient(600px 250px at right bottom, rgba(190,140,255,0.25), transparent 65%),
-        linear-gradient(180deg,#050505,#0a0214 60%,#000);
-    }
-
-    #contact{
-      background:
-        radial-gradient(900px 300px at center bottom, rgba(255,122,0,0.45), transparent 60%),
-        radial-gradient(600px 250px at left bottom, rgba(255,180,80,0.25), transparent 65%),
-        linear-gradient(180deg,#050505,#140a02 60%,#000);
-    }
-
-    #apropos{
-      background:
-        radial-gradient(900px 300px at left top, rgba(255,60,172,0.45), transparent 60%),
-        radial-gradient(600px 250px at right bottom, rgba(255,140,220,0.25), transparent 65%),
-        linear-gradient(180deg,#050505,#12020a 60%,#000);
-    }
-    #apropos p{font-size:18px;max-width:800px}
-
-    .beat-item {
-  background:#1e1e1e;
-  padding:15px;
-  border-radius:14px;
-  margin-top:15px;
-  display:flex;
-  align-items:center;
-  gap:15px;
-  box-shadow:0 4px 12px rgba(0,0,0,.4);
-}
-
-.beat-cover {
-  width:70px;
-  height:70px;
-  border-radius:10px;
-  object-fit:cover;
-}
-
-.beat-info {
-  flex:1;
-}
-
-.beat-info strong {
-  font-size:16px;
-  display:block;
-  margin-bottom:5px;
-}
-
-.beat-meta {
-  font-size:13px;
-  color:#aaa;
-}
-
-.beat-actions button {
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  background:#00d4ff;
-  font-weight:bold;
-  cursor:pointer;
-}
+    #playPause.playing{box-shadow:0 0 15px #00d4ff;animation:pulse 1.5s infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+    #progressBar{flex:1}
   </style>
 </head>
 <body>
@@ -213,6 +108,14 @@
 <div id="audio-player" class="audio-player hidden">
   <button id="playPause">▶️</button>
   <span id="trackTitle">Aucun beat</span>
+  <input type="range" id="progressBar" value="0
+
+  <!-- AUDIO PLAYER -->
+<div id="audio-player" class="audio-player hidden">
+  <button id="playPause">▶️</button>
+  <span id="trackTitle">Aucun beat</span>
+  <input type="range" id="progressBar" value="0" max="100">
+  <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
   <audio id="globalAudio"></audio>
 </div>
 
@@ -238,7 +141,7 @@
     <li onclick="toggleAfroSubs()">Afro</li>
   </ul>
 
-  <!-- Sous-catégories Afro (cachées par défaut) -->
+  <!-- Sous-catégories Afro -->
   <ul id="afro-subs" class="afro-subs hidden">
     <li onclick="loadBeats('afrodrill')">Afro Drill</li>
     <li onclick="loadBeats('afroarab')">Afro Arab</li>
@@ -284,90 +187,42 @@
 <script>
 /* ===== AFRO SUB CATEGORIES ===== */
 function toggleAfroSubs(){
-  const afro=document.getElementById('afro-subs');
-  afro.classList.toggle('hidden');
+  document.getElementById('afro-subs').classList.toggle('hidden');
 }
 
 /* ===== NAVIGATION ===== */
 const tabs = document.querySelectorAll('.tab-btn');
 const sections = document.querySelectorAll('.section');
-
 const audioPlayer = document.getElementById('audio-player');
 const globalAudio = document.getElementById('globalAudio');
 const playPauseBtn = document.getElementById('playPause');
 const trackTitle = document.getElementById('trackTitle');
+const progressBar = document.getElementById('progressBar');
+const currentTime = document.getElementById('currentTime');
+const totalTime = document.getElementById('totalTime');
 
 tabs.forEach(btn => {
   btn.addEventListener('click', () => {
     tabs.forEach(b => b.classList.remove('active'));
     sections.forEach(s => s.classList.remove('active'));
-
     btn.classList.add('active');
     document.getElementById(btn.dataset.tab).classList.add('active');
-
-    // fermer sous-catégories Afro si on quitte Instrumentales
     document.getElementById('afro-subs').classList.add('hidden');
-
     const iframe = document.querySelector('#accueil iframe');
     if(btn.dataset.tab !== 'accueil' && iframe){ iframe.src = iframe.src; }
-
-    if(btn.dataset.tab !== 'beats'){
-      globalAudio.pause();
-      playPauseBtn.textContent = '▶️';
-    }
-
+    if(btn.dataset.tab !== 'beats'){ globalAudio.pause(); playPauseBtn.textContent = '▶️'; }
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
 
 /* ===== DATA ===== */
 const beatsData = {
-  trap: [
-    {
-      name: 'JVLIVS',
-      audio: 'audio/TRAP/JVLIVS.mp3',
-      cover: 'covers/trap_jvlivs.jpg',
-      duration: '3:25',
-      bpm: 140,
-      key: 'Am'
-    }
-  ],
-  drill: [
-    {
-      name: 'FATALE',
-      audio: 'audio/DRILL/FATALE.mp3',
-      cover: 'covers/drill_fatale.jpg',
-      duration: '2:58',
-      bpm: 145,
-      key: 'Fm'
-    }
-  ],
-  club: [
-    {
-      name: 'ZONE',
-      audio: 'audio/CLUB/ZONE.mp3',
-      cover: 'covers/club_zone.jpg',
-      duration: '3:10',
-      bpm: 128,
-      key: 'C#m'
-    }
-  ],
-  reggaeton: [
-    {
-      name: 'SEYA',
-      audio: 'audio/REGGAETON/SEYA.mp3',
-      cover: 'covers/reggaeton_seya.jpg',
-      duration: '3:45',
-      bpm: 100,
-      key: 'Gm'
-    }
-  ]
+  trap:[{name:'JVLIVS',audio:'audio/TRAP/JVLIVS.mp3',cover:'covers/trap_jvlivs.jpg',duration:'3:25',bpm:140,key:'Am'}],
+  drill:[{name:'FATALE',audio:'audio/DRILL/FATALE.mp3',cover:'covers/drill_fatale.jpg',duration:'2:58',bpm:145,key:'Fm'}],
+  club:[{name:'ZONE',audio:'audio/CLUB/ZONE.mp3',cover:'covers/club_zone.jpg',duration:'3:10',bpm:128,key:'C#m'}],
+  reggaeton:[{name:'SEYA',audio:'audio/REGGAETON/SEYA.mp3',cover:'covers/reggaeton_seya.jpg',duration:'3:45',bpm:100,key:'Gm'}]
 };
-
-const kitsData={
-  loopkits:[{name:"L'OVNI",download:'kits/lovni.zip'}],
-  drumkits:[{name:'DRUMKIT 01',download:'kits/drumkit01.zip'}]
-};
+const kitsData={loopkits:[{name:"L'OVNI",download:'kits/lovni.zip'}],drumkits:[{name:'DRUMKIT 01',download:'kits/drumkit01.zip'}]};
 
 /* ===== LOAD BEATS ===== */
 function loadBeats(cat){
@@ -384,8 +239,7 @@ function loadBeats(cat){
         <div class="beat-actions">
           <button onclick="playBeat('${b.audio}','${b.name}')">▶️ Écouter</button>
         </div>
-      </div>
-    `;
+      </div>`;
   });
 }
 
@@ -394,13 +248,31 @@ function playBeat(src,title){
   globalAudio.play();
   trackTitle.textContent=title;
   playPauseBtn.textContent='⏸️';
+  playPauseBtn.classList.add('playing');
   audioPlayer.classList.remove('hidden');
 }
 
 playPauseBtn.onclick=()=>{
-  if(globalAudio.paused){globalAudio.play();playPauseBtn.textContent='⏸️'}
-  else{globalAudio.pause();playPauseBtn.textContent='▶️'}
+  if(globalAudio.paused){globalAudio.play();playPauseBtn.textContent='⏸️';playPauseBtn.classList.add('playing')}
+  else{globalAudio.pause();playPauseBtn.textContent='▶️';playPauseBtn.classList.remove('playing')}
 };
+
+/* ===== PROGRESS BAR ===== */
+globalAudio.addEventListener('timeupdate',()=>{
+  const progress=(globalAudio.currentTime/globalAudio.duration)*100;
+  progressBar.value=progress||0;
+  currentTime.textContent=formatTime(globalAudio.currentTime);
+  totalTime.textContent=formatTime(globalAudio.duration);
+});
+progressBar.addEventListener('input',()=>{
+  globalAudio.currentTime=(progressBar.value/100)*globalAudio.duration;
+});
+function formatTime(sec){
+  if(isNaN(sec)) return "0:00";
+  const m=Math.floor(sec/60);
+  const s=Math.floor(sec%60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
 
 /* ===== LOAD KITS ===== */
 function loadKits(cat){
