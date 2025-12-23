@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DKMV Beats - Instrumentales</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="top-nav-fixed">
+  <div class="logo"><a href="home.html">DKMV Beats</a></div>
+  <a class="tab-btn" href="home.html">Accueil</a>
+  <a class="tab-btn active" href="beats.html">Instrumentales</a>
+  <a class="tab-btn" href="kits.html">Kits</a>
+  <a class="tab-btn" href="contact.html">Contact</a>
+  <a class="tab-btn" href="about.html">À propos</a>
+</nav>
+
+<main>
+<section class="section active">
+  <h1>Instrumentales</h1>
+
+  <ul class="beats-list">
+    <li onclick="closeAfro(); loadBeats('Trap')">Trap</li>
+    <li onclick="closeAfro(); loadBeats('Drill')">Drill</li>
+    <li onclick="closeAfro(); loadBeats('Club')">Club</li>
+    <li onclick="closeAfro(); loadBeats('Reggaeton')">Reggaeton</li>
+    <li onclick="toggleAfro()">Afro</li>
+  </ul>
+
+  <ul id="afroSubs" class="afro-subs hidden">
+    <li onclick="loadBeats('Afro Drill')">Afro Drill</li>
+    <li onclick="loadBeats('Afro Arab')">Afro Arab</li>
+    <li onclick="loadBeats('Afrobeat')">Afrobeat</li>
+    <li onclick="loadBeats('Afro Trap')">Afro Trap</li>
+    <li onclick="loadBeats('Afro Club')">Afro Club</li>
+  </ul>
+
+  <div id="audio-player" class="audio-player hidden">
+    <button id="playPause">▶️</button>
+    <span id="trackTitle">Aucun beat</span>
+    <audio id="globalAudio"></audio>
+  </div>
+
+  <div id="beatsList"></div>
+</section>
+
+<script src="script.js"></script>
+</main>
+
+</body>
+</html>
