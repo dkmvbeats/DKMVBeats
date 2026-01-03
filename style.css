@@ -262,3 +262,25 @@ body{
   background:#00d4ff;
   color:#000;
 }
+.social-icons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 32px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+/* Couleurs réseaux */
+.social-icons .fa-youtube { color: #ff0000; }
+.social-icons .fa-instagram { color: #e1306c; }
+.social-icons .fa-soundcloud { color: #ff7700; }
