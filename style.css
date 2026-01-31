@@ -1,286 +1,211 @@
-
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Montserrat,sans-serif;
-  background:#111;
-  color:#fff;
-  padding-top:80px
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ===== NAV ===== */
-.top-nav-fixed{
-  position:fixed;
-  top:0;left:0;right:0;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
-  padding:15px;
-  z-index:1000
-}
-.logo{
-  position:absolute;
-  left:20px;
-  font-weight:700;
-  font-size:20px
-}
-.top-nav-fixed button{
-  background:none;
-  border:none;
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-  padding:8px 14px;
-  border-radius:10px;
-  transition:.25s
-}
-.top-nav-fixed button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 10px #00d4ff
-}
-.top-nav-fixed button.active{
-  background:#00d4ff;
-  color:#000
-}
-
-/* ===== SECTIONS ===== */
-.section{
-  display:none;
-  max-width:1000px;
-  margin:auto;
-  padding:40px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:.5s
-}
-.section.active{
-  display:block;
-  opacity:1;
-  transform:translateY(0)
-}
-
-/* ===== TITRES ===== */
-.section h1{
-  text-align:center;
-  font-size:38px;
-  margin-bottom:25px;
-  background:linear-gradient(90deg,#00d4ff,#9b5cff,#ff7a00);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-size:200% auto;
-  animation:gradientMove 5s infinite linear;
-}
-@keyframes gradientMove{
-  0%{background-position:0%}
-  100%{background-position:200%}
-}
-
-/* ===== ACCUEIL ===== */
-.hero{text-align:center}
-.hero h1{font-size:42px}
-.hero p{color:#00d4ff}
-.video-container{
-  margin:30px auto;
-  max-width:800px;
-  aspect-ratio:16/9
-}
-.video-container iframe{
-  width:100%;
-  height:100%;
-  border-radius:16px
-}
-
-/* ===== BEATS ===== */
-.beats-list{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:15px;
-  list-style:none;
-  padding:0
-}
-.beats-list li{
-  background:#000;
-  padding:18px;
-  border-radius:12px;
-  text-align:center;
-  cursor:pointer;
-  font-weight:bold;
-  transition:.3s
-}
-.beats-list li:hover{
-  background:#00d4ff;
-  color:#000
-}
-@media(max-width:900px){
-  .beats-list{grid-template-columns:repeat(2,1fr)}
-}
-
-.afro-subs{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:16px;
-  list-style:none;
-  padding:0;
-  margin-top:20px
-}
-.afro-subs.hidden{display:none}
-.afro-subs li{
-  background:#000;
-  padding:14px;
-  border-radius:14px;
-  text-align:center;
-  cursor:pointer;
-  font-weight:bold;
-  transition:.3s
-}
-.afro-subs li:hover{
-  background:#00ff88;
-  color:#000
-}
-
-.beat-item{
-  background:#1e1e1e;
-  padding:15px;
-  border-radius:14px;
-  margin-top:15px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center
-}
-.beat-actions button{
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  background:#00d4ff;
-  font-weight:bold;
-  cursor:pointer
-}
-
-/* ===== KITS ===== */
-.kits-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  max-width:500px;
-  margin:auto
-}
-.kit-card{
-  background:#000;
-  padding:18px;
-  border-radius:12px;
-  text-align:center;
-  cursor:pointer;
-  font-weight:bold;
-  transition:.3s
-}
-.kit-card:hover{
-  background:#00d4ff;
-  color:#000
-}
-
-/* ===== CONTACT ===== */
-.contact-box{
-  max-width:500px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:15px
-}
-.contact-box textarea{
-  background:#000;
-  color:#fff;
-  border:none;
-  padding:15px;
-  border-radius:10px
-}
-.contact-box button{
-  padding:12px;
-  border:none;
-  border-radius:10px;
-  background:#00d4ff;
-  font-weight:bold;
-  cursor:pointer
-}
-
-/* ===== AUDIO ===== */
-.audio-player{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#000;
-  padding:12px 20px;
-  border-radius:30px;
-  display:flex;
-  gap:15px;
-  align-items:center;
-  z-index:2000
-}
-.audio-player.hidden{display:none}
-.audio-player button{
-  background:#00d4ff;
-  border:none;
-  border-radius:50%;
-  width:40px;
-  height:40px;
-  cursor:pointer
-}
-
-.logo a{
-  color:#fff;
-  text-decoration:none;
-}
-
-.logo a:visited{
-  color:#fff;
-}
-
-.logo a:hover{
-  text-decoration:none;
-  text-shadow:0 0 10px #00d4ff;
-}
-
-.top-nav-fixed .tab-btn {
-  background:none;
-  border:none;  /* fonctionne pour <a>, pas besoin de button */
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-  padding:8px 14px;
-  border-radius:10px;
-  transition:.25s;
-  position:relative;
-  text-decoration:none;  /* important pour enlever le soulignement */
-}
-.top-nav-fixed .tab-btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 10px #00d4ff;
-}
-.top-nav-fixed .tab-btn.active{
-  background:#00d4ff;
-  color:#000;
-}
-.social-icons {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-}
-
-.social-icons a {
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #121212;
   color: #fff;
+  line-height: 1.5;
+  padding-top: 80px;
+}
+
+/* Scrollbar Spotify */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1DB954;
+  border-radius: 4px;
+}
+.top-nav-fixed {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  justify-content: space-between;
+  z-index: 1000;
+  border-bottom: 1px solid #1DB95420;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: .25s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: #1DB95420;
+}
+
+.nav-links a.active {
+  background: #1DB954;
+  color: #000;
+}
+.section {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: .4s ease;
+  display: none;
+}
+
+.section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h1 {
   font-size: 32px;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fff;
+}
+.hero {
+  text-align: center;
+  padding: 40px 0;
 }
 
-.social-icons a:hover {
-  transform: scale(1.15);
-  opacity: 0.8;
+.hero h1 {
+  font-size: 40px;
+  font-weight: 800;
 }
 
-/* Couleurs réseaux */
-.social-icons .fa-youtube { color: #ff0000; }
-.social-icons .fa-instagram { color: #e1306c; }
-.social-icons .fa-soundcloud { color: #ff7700; }
+.hero p {
+  color: #1DB954;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.video-container {
+  margin: 40px auto;
+  max-width: 900px;
+  aspect-ratio: 16/9;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+.beats-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.beats-list li {
+  background: #181818;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: .25s;
+  color: #fff;
+}
+
+.beats-list li:hover {
+  background: #282828;
+  transform: translateY(-4px);
+}
+.kits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.kit-card {
+  background: #181818;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.kit-card:hover {
+  background: #282828;
+  transform: translateY(-4px);
+}
+.contact-box {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-box textarea,
+.contact-box input {
+  background: #181818;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.contact-box button {
+  background: #1DB954;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.contact-box button:hover {
+  background: #1ed760;
+}
+.audio-player {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  padding: 12px 20px;
+  border-radius: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  z-index: 2000;
+  border: 1px solid #1DB95420;
+}
+
+.audio-player button {
+  background: #1DB954;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.audio-player button:hover {
+  background: #1ed760;
+}
