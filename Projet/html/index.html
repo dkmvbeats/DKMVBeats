@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Projet Maths / Physique</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Projet Mathématiques & Sciences Physiques</h1>
+    <nav>
+      <button class="tab-btn" data-tab="maths">Maths</button>
+      <button class="tab-btn" data-tab="physique">Physique</button>
+      <button class="tab-btn" data-tab="affichage">Affichage</button>
+      <button class="tab-btn" data-tab="connexion">Connexion</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- CONNEXION -->
+    <section id="connexion" class="tab-content">
+      <h2>Connexion</h2>
+
+      <label>Nom d'utilisateur :
+        <input type="text" id="login-user">
+      </label>
+
+      <label>Mot de passe :
+        <input type="password" id="login-pass">
+      </label>
+
+      <label>Rôle :
+        <select id="login-role">
+          <option value="prof">Professeur</option>
+          <option value="admin">Administrateur</option>
+        </select>
+      </label>
+
+      <button id="btn-login">Se connecter</button>
+      <p id="login-status"></p>
+    </section>
+
+    <!-- MATHS -->
+    <section id="maths" class="tab-content">
+      <h2>Mathématiques</h2>
+
+      <!-- POLYNÔME (JS) -->
+      <h3>Polynôme (version JavaScript)</h3>
+
+      <label>a :
+        <input type="number" id="poly-a" value="1">
+      </label>
+
+      <label>b :
+        <input type="number" id="poly-b" value="0">
+      </label>
+
+      <label>c :
+        <input type="number" id="poly-c" value="0">
+      </label>
+
+      <button id="btn-poly">Tracer le polynôme</button>
+
+      <canvas id="poly-chart" style="margin-top:20px; max-width:100%;"></canvas>
+
+      <hr style="margin:40px 0;">
+
+      <!-- POLYNÔME (PYTHON) -->
+      <h3>Polynôme (version Python)</h3>
+
+      <label>a :
+        <input type="number" id="a">
+      </label>
+
+      <label>b :
+        <input type="number" id="b">
+      </label>
+
+      <label>c :
+        <input type="number" id="c">
+      </label>
+
+      <button id="btn-calc-poly">Calculer</button>
+      <p id="result-poly"></p>
+
+      <button id="btn-tracer-python">Tracer avec Python</button>
+      <img id="graph-python" class="graph-img" style="display:none;">
+
+      <hr style="margin:40px 0;">
+
+      <!-- EDO PYTHON -->
+      <h3>Équation différentielle : dy/dx = f(x, y)</h3>
+
+      <label>f(x, y) :
+        <input type="text" id="edo-f" placeholder="ex : y - x">
+      </label>
+
+      <label>x₀ :
+        <input type="number" id="edo-x0">
+      </label>
+
+      <label>y₀ :
+        <input type="number" id="edo-y0">
+      </label>
+
+      <label>x min :
+        <input type="number" id="edo-xmin">
+      </label>
+
+      <label>x max :
+        <input type="number" id="edo-xmax">
+      </label>
+
+      <button id="btn-tracer-edo">Tracer EDO (Python)</button>
+      <img id="graph-edo" class="graph-img" style="display:none;">
+
+      <hr style="margin:40px 0;">
+
+      <!-- MATRICES PYTHON -->
+      <h3>Calcul matriciel</h3>
+
+      <label>Opération :
+        <select id="mat-op">
+          <option value="add">Addition A + B</option>
+          <option value="mul">Multiplication A × B</option>
+          <option value="det">Déterminant det(A)</option>
+        </select>
+      </label>
+
+      <label>Matrice A (format : [[1,2],[3,4]]) :
+        <input type="text" id="mat-A">
+      </label>
+
+      <label>Matrice B (si nécessaire) :
+        <input type="text" id="mat-B">
+      </label>
+
+      <button id="btn-mat-calc">Calculer (Python)</button>
+      <pre id="mat-result"></pre>
+
+      <button class="admin-only">Ajouter un programme</button>
+      <button class="admin-only">Supprimer</button>
+    </section>
+
+    <!-- PHYSIQUE -->
+    <section id="physique" class="tab-content">
+      <h2>Physique</h2>
+
+      <!-- LOI D'OHM -->
+      <h3>Loi d'Ohm</h3>
+
+      <label>Tension U (volts) :
+        <input type="number" id="u">
+      </label>
+
+      <label>Résistance R (ohms) :
+        <input type="number" id="r">
+      </label>
+
+      <button id="btn-calc-ohm">Calculer</button>
+      <p id="result-ohm"></p>
+
+      <hr style="margin:40px 0;">
+
+      <!-- FILTRE -->
+      <h3>Filtre passe-bas / passe-haut</h3>
+
+      <label>Fréquence de coupure fc (Hz) :
+        <input type="number" id="fc" value="1">
+      </label>
+
+      <label>Type de filtre :
+        <select id="filtre-type">
+          <option value="lowpass">Passe-bas</option>
+          <option value="highpass">Passe-haut</option>
+        </select>
+      </label>
+
+      <button id="btn-filtre">Tracer le filtre</button>
+
+      <canvas id="filtre-chart" style="margin-top:20px; max-width:100%;"></canvas>
+
+      <hr style="margin:40px 0;">
+
+      <!-- ODE JS -->
+      <h3>Équation différentielle : dy/dt = -k·y</h3>
+
+      <label>Condition initiale y(0) :
+        <input type="number" id="ode-y0" value="1">
+      </label>
+
+      <label>Constante k :
+        <input type="number" id="ode-k" value="1">
+      </label>
+
+      <button id="btn-ode">Tracer la solution</button>
+
+      <canvas id="ode-chart" style="margin-top:20px; max-width:100%;"></canvas>
+
+      <hr style="margin:40px 0;">
+
+      <!-- SIGNAL -->
+      <h3>Signal sinusoïdal</h3>
+
+      <label>Amplitude A :
+        <input type="number" id="sig-A" value="1">
+      </label>
+
+      <label>Fréquence f (Hz) :
+        <input type="number" id="sig-f" value="1">
+      </label>
+
+      <label>Décalage vertical C :
+        <input type="number" id="sig-C" value="0">
+      </label>
+
+      <button id="btn-signal">Tracer le signal</button>
+
+      <canvas id="signal-chart" style="margin-top:20px; max-width:100%;"></canvas>
+
+      <button class="admin-only">Modifier ce module</button>
+    </section>
+
+    <!-- AFFICHAGE -->
+    <section id="affichage" class="tab-content">
+      <h2>Affichage des données</h2>
+
+      <label>Choisir une catégorie :
+        <select id="affichage-type">
+          <option value="maths">Maths</option>
+          <option value="physique">Physique</option>
+        </select>
+      </label>
+
+      <button id="btn-afficher">Afficher</button>
+      <ul id="affichage-result"></ul>
+
+      <button class="admin-only">Effacer l’historique</button>
+    </section>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+  <script src="../js/python.js"></script>
+  <script src="../js/main.js"></script>
+
+</body>
+</html>

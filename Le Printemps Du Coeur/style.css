@@ -1,0 +1,452 @@
+/* =====================
+   TYPOGRAPHIE GLOBALE
+===================== */
+
+/* Forcer Playfair Display sur tous les titres */
+h1, h2, h3, .section-title, nav h1 a {
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 500;
+    color: var(--primary);
+}
+
+/* Texte normal / sous-titres */
+p, .section-subtitle, nav a, .btn, .card p, .home-subtitle {
+    font-family: 'Inter', sans-serif !important;
+    color: var(--text-soft);
+}
+
+/* =====================
+   VARIABLES & RESET
+===================== */
+:root {
+    --primary: #5f7c6a;
+    --primary-soft: #e6efe9;
+    --background: #f9faf9;
+    --white: #ffffff;
+    --text-main: #1f2933;
+    --text-soft: #6b7280;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    background: var(--background);
+    color: var(--text-main);
+    line-height: 1.7;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+}
+
+/* =====================
+   TITRES GLOBAUX
+===================== */
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.section-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    color: var(--text-soft);
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* =====================
+   HEADER / NAV
+===================== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+nav {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav h1 {
+    margin: 0;
+}
+
+nav h1 a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;   /* taille normale */
+    font-weight: 500;
+    color: var(--primary);
+    text-decoration: none;
+    line-height: 1;
+}
+
+.home nav h1 a {
+    font-size: 1.35rem;  /* plus discret sur l'accueil */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    position: relative;
+}
+
+nav a:not(.btn)::after {
+    content:"";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+nav a:not(.btn):hover::after {
+    width: 100%;
+}
+
+/* =====================
+   OBJECTIF / DESCRIPTION
+===================== */
+.objectif {
+    background: linear-gradient(to bottom, var(--primary-soft), var(--background));
+    text-align: center;
+}
+
+.objectif {
+    background: linear-gradient(to bottom, var(--primary-soft), var(--background));
+    text-align: center;
+    padding: 120px 20px 80px; /* plus d'espace en haut pour descendre la section */
+}
+
+.objectif h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: var(--primary);
+}
+
+.objectif p {
+    max-width: 760px;
+    margin: 0 auto 25px;
+    color: var(--text-soft);
+}
+
+/* =====================
+   SERVICES
+===================== */
+.services {
+    background: linear-gradient(to bottom, var(--primary-soft), var(--background));
+    text-align: center;
+}
+
+.cards {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin-inline: auto;
+}
+
+.card {
+    background: rgba(255,255,255,0.9);
+    padding: 40px 30px;
+    border-radius: 28px;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+}
+
+.card h3, .card h4 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+}
+
+.services {
+    background: linear-gradient(to bottom, var(--primary-soft), var(--background));
+    text-align: center;
+    padding: 120px 20px 80px; /* plus d'espace en haut pour descendre la section */
+}
+
+.services h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.services .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-soft);
+    margin-bottom: 50px;
+}
+
+.services .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.services .card {
+    background: rgba(255,255,255,0.9);
+    padding: 40px 30px;
+    border-radius: 28px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px; /* toutes les cartes ont la même hauteur */
+}
+
+.services .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+}
+
+.services .card h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.services .card p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.services .card span {
+    font-weight: 500;
+    color: var(--primary);
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* =====================
+   CONTACT
+===================== */
+.contact {
+    background: var(--white);
+    text-align: center;
+}
+
+.contact form {
+    max-width: 520px;
+    margin: 60px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact input,
+.contact textarea {
+    padding: 16px 18px;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    font-size: 0.95rem;
+}
+
+/* =====================
+   FOOTER
+===================== */
+footer {
+    margin-top: auto;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    background: var(--white);
+}
+
+/* =====================
+   PAGE TRANSITION
+===================== */
+body.page-exit {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+    nav ul {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    section {
+        padding: 90px 20px;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
+
+/* =====================
+   TEMOIGNAGES
+===================== */
+.temoignages {
+    background: var(--background);
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.temoignages h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 50px;
+}
+
+.temoignages .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.temoignages .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* pousse le nom vers le bas */
+    background: rgba(255,255,255,0.9);
+    padding: 30px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    min-height: 200px; /* optionnel, force toutes les cartes à la même hauteur */
+}
+
+.temoignages .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.temoignages .card p {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.temoignages .card span {
+    font-weight: 500;
+    color: var(--primary);
+    font-size: 0.9rem;
+    text-align: right; /* optionnel : nom aligné à droite */
+}
+
+nav h1 a {
+    color: var(--primary);
+    text-decoration: none; /* enlève le soulignement */
+}
+
+nav h1 a:hover {
+    opacity: 0.8; /* léger effet au survol */
+}
+
+.reservation {
+    background: linear-gradient(to bottom, var(--primary-soft), var(--background));
+    text-align: center;
+}
+
+.reservation {
+    background: linear-gradient(to bottom, var(--primary-soft), var(--background));
+    text-align: center;
+    padding: 120px 20px 80px; /* plus d'espace en haut pour descendre la section */
+}
+
+.reservation h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 40px;
+}
+
+.reservation-form {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.reservation-form label {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.reservation-form input,
+.reservation-form select,
+.reservation-form textarea {
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.reservation-form textarea {
+    min-height: 100px;
+}
+
+.reservation-form button {
+    margin-top: 10px;
+    display: inline-block;
+    max-width: 200px;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 500;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.reservation-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(95,124,106,0.3);
+}

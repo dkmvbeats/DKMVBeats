@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produits – Admin TAMAZIR</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="admin">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>TAMAZIR Admin</h2>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin-produits.html" class="active">Produits</a>
+            <a href="admin-categories.html">Catégories</a>
+            <a href="admin-commandes.html">Commandes</a>
+            <a href="admin-revenus.html">Revenus</a>
+            <a href="login.html">Déconnexion</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+        <!-- HEADER -->
+        <header class="admin-header">
+            <h1>Gestion des produits</h1>
+            <div class="admin-user"><strong>Rabia Ait Ouali</strong></div>
+        </header>
+
+        <section class="admin-content">
+
+            <a href="ajouter-produits.html" class="btn-admin add-btn">+ Ajouter un produit</a>
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Catégorie</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><img src="../images/background.png" class="table-img"></td>
+                        <td>Collier berbère argent</td>
+                        <td>49€</td>
+                        <td>Colliers</td>
+                        <td>
+                            <a class="btn-admin small" href="modifier-produits.html">Modifier</a>
+                            <a class="btn-admin small danger" href="supprimer-produits.html">Supprimer</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><img src="../images/background.png" class="table-img"></td>
+                        <td>Bague gravée amazighe</td>
+                        <td>29€</td>
+                        <td>Bagues</td>
+                        <td>
+                            <a class="btn-admin small" href="modifier-produits.html">Modifier</a>
+                            <a class="btn-admin small danger" href="supprimer-produits.html">Supprimer</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

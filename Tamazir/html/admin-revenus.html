@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenus – Admin TAMAZIR</title>
+
+    <!-- CSS ADMIN -->
+    <link rel="stylesheet" href="../css/admin.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="admin">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>TAMAZIR Admin</h2>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin-produits.html">Produits</a>
+            <a href="admin-categories.html">Catégories</a>
+            <a href="admin-commandes.html">Commandes</a>
+            <a href="admin-revenus.html" class="active">Revenus</a>
+            <a href="login.html">Déconnexion</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+        <!-- HEADER -->
+        <header class="admin-header">
+            <h1>Revenus & Statistiques</h1>
+            <div class="admin-user"><strong>Rabia Ait Ouali</strong></div>
+        </header>
+
+        <section class="admin-content">
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <h3>Revenus du mois</h3>
+                    <p class="stat-number">1 245€</p>
+                    <span class="stat-info">+12% vs mois dernier</span>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Revenus annuels</h3>
+                    <p class="stat-number">14 900€</p>
+                    <span class="stat-info">+18% vs 2024</span>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Commandes totales</h3>
+                    <p class="stat-number">127</p>
+                    <span class="stat-info">Depuis janvier</span>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Panier moyen</h3>
+                    <p class="stat-number">42€</p>
+                    <span class="stat-info">Stable</span>
+                </div>
+
+            </div>
+
+            <!-- GRAPHIQUES -->
+            <div class="charts-grid">
+
+                <div class="chart-card">
+                    <h3>Revenus mensuels</h3>
+                    <canvas id="revenusMensuels"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Revenus annuels</h3>
+                    <canvas id="revenusAnnuels"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Répartition des commandes</h3>
+                    <canvas id="repartitionCommandes"></canvas>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Activité du panier</h3>
+                    <canvas id="panierChart"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- SCRIPTS GRAPHIQUES -->
+    <script>
+        const noir = "#1a1a1a";
+        const or = "#d4a017";
+        const vert = "#1a7f1a";
+        const rouge = "#b30000";
+
+        /* --- REVENUS MENSUELS --- */
+        new Chart(document.getElementById("revenusMensuels"), {
+            type: "line",
+            data: {
+                labels: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin"],
+                datasets: [{
+                    label: "Revenus (€)",
+                    data: [320, 450, 380, 610, 720, 890],
+                    borderColor: noir,
+                    backgroundColor: "rgba(0,0,0,0.1)",
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: noir
+                }]
+            },
+            options: { plugins: { legend: { display: false } } }
+        });
+
+        /* --- REVENUS ANNUELS --- */
+        new Chart(document.getElementById("revenusAnnuels"), {
+            type: "bar",
+            data: {
+                labels: ["2022", "2023", "2024", "2025"],
+                datasets: [{
+                    label: "Revenus annuels (€)",
+                    data: [8200, 10400, 12600, 14900],
+                    backgroundColor: [noir, "#444", "#777", or],
+                    borderRadius: 10
+                }]
+            },
+            options: { plugins: { legend: { display: false } } }
+        });
+
+        /* --- RÉPARTITION COMMANDES --- */
+        new Chart(document.getElementById("repartitionCommandes"), {
+            type: "doughnut",
+            data: {
+                labels: ["En cours", "Expédiées", "Annulées"],
+                datasets: [{
+                    data: [8, 6, 3],
+                    backgroundColor: [or, vert, rouge],
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: "bottom" }
+                }
+            }
+        });
+
+        /* --- ACTIVITÉ DU PANIER --- */
+        new Chart(document.getElementById("panierChart"), {
+            type: "line",
+            data: {
+                labels: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin"],
+                datasets: [{
+                    label: "Ajouts au panier",
+                    data: [120, 150, 180, 210, 260, 300],
+                    borderColor: or,
+                    backgroundColor: "rgba(212,160,23,0.2)",
+                    borderWidth: 3,
+                    tension: 0.4,
+                    pointRadius: 5,
+                    pointBackgroundColor: or
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    </script>
+
+</body>
+</html>

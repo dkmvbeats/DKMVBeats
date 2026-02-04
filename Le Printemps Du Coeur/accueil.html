@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Printemps Du Coeur – Accueil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <h1><a href="accueil.html">Le Printemps Du Coeur</a></h1>
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="rendez-vous.html">Prise de RDV</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- OBJECTIF / DESCRIPTION -->
+<section class="objectif">
+    <h3>L’objectif de cet accompagnement</h3>
+    <p>Ce site a pour vocation de vous offrir un espace de découverte et de connexion à vous-même. L’objectif est de vous accompagner vers plus d’équilibre, de sérénité et de conscience, en respectant votre rythme et votre singularité.</p>
+    <p>Chaque accompagnement est pensé comme un chemin personnel visant à harmoniser le corps, l’esprit et les émotions, pour un mieux-être durable.</p>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="temoignages">
+    <h2>Témoignages</h2>
+
+    <div class="cards">
+        <div class="card">
+            <p>"Grâce à cet accompagnement, j’ai retrouvé équilibre et sérénité. Chaque séance est un vrai moment de transformation.
+              (Je fais de la composition musicale aussi, je pose ça là au cas où 😬)"</p>
+            <span>- Khalil Alias DKMV Beats</span>
+        </div>
+
+        <div class="card">
+            <p>"Le coaching holistique m’a aidé à mieux comprendre mes émotions et à vivre plus pleinement."</p>
+            <span>- Anonyme</span>
+        </div>
+
+        <div class="card">
+            <p>"Le site est en maitenance les gars ! Passez par là : https://dkmvbeats.github.io/DKMVBeats.
+                C'est plus fiable et moins risqué (je sais ce que je dis t'inquiète 😉)"</p>
+            <span>- Dev Web Alias le meilleur des neveux</span>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Le Printemps Du Coeur • Tous droits réservés</p>
+</footer>
+
+<script>
+    document.querySelectorAll('.transition-link').forEach(link => {
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            const target = this.href;
+            document.body.classList.add('page-exit');
+            setTimeout(()=>{ window.location.href = target; }, 500);
+        });
+    });
+</script>
+
+</body>
+</html>

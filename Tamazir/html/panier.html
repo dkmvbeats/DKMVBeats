@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - TAMAZIR</title>
+    <link rel="stylesheet" href="../css/panier.css">
+</head>
+<body>
+<header>
+    <div class="header-bg"></div>
+
+<div class="logo">
+  <a href="../html/accueil.html">
+    <img src="../images/background.png" alt="Logo Tamazir">
+  </a>
+</div>
+
+    <nav>
+        <a href="../html/accueil.html">Accueil</a>
+        <a href="../html/boutique.html">Boutique</a>
+        <a href="../html/panier.html">Panier</a>
+    </nav>
+</header>
+
+<main class="panier-page">
+
+    <h2 class="titre-page">Votre panier</h2>
+
+    <div id="panier-container" class="panier-contenu">
+        <!-- Le panier sera injecté par JS -->
+    </div>
+
+    <div class="panier-total">
+        <p>Total : <span id="panier-total-prix">0.00 €</span></p>
+        <button class="btn-commander" onclick="validerCommande()">Valider la commande</button>
+    </div>
+
+</main>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

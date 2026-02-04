@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Printemps Du Coeur – Services</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <h1><a href="accueil.html">Le Printemps Du Coeur</a></h1>
+        <ul>
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="rendez-vous.html">Prise de RDV</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- SERVICES -->
+<section class="services">
+    <h2>Mes Services</h2>
+    <p class="subtitle">Découvrez les accompagnements que je propose pour votre bien-être</p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Coaching holistique</h3>
+            <p>Accompagnement global pour retrouver clarté et équilibre.</p>
+            <span>1h30</span>
+        </div>
+        <div class="card">
+            <h3>Séance bien-être</h3>
+            <p>Moment de recentrage pour apaiser le mental et relâcher les tensions.</p>
+            <span>45 min</span>
+        </div>
+        <div class="card">
+            <h3>Suivi personnalisé</h3>
+            <p>Un cheminement sur mesure selon vos besoins.</p>
+            <span>1h</span>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Le Printemps Du Coeur • Tous droits réservés</p>
+</footer>
+
+<script>
+document.querySelectorAll('.transition-link').forEach(link => {
+    link.addEventListener('click', function(e){
+        e.preventDefault();
+        const target = this.href;
+        document.body.classList.add('page-exit');
+        setTimeout(()=>{ window.location.href = target; }, 500);
+    });
+});
+</script>
+
+</body>
+</html>

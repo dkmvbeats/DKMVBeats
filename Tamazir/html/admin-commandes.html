@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes – Admin TAMAZIR</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body class="admin">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>TAMAZIR Admin</h2>
+
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin-produits.html">Produits</a>
+            <a href="admin-categories.html">Catégories</a>
+            <a href="admin-commandes.html" class="active">Commandes</a>
+            <a href="admin-revenus.html">Revenus</a>
+            <a href="login.html">Déconnexion</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+        <!-- HEADER -->
+        <header class="admin-header">
+            <h1>Gestion des commandes</h1>
+            <div class="admin-user"><strong>Rabia Ait Ouali</strong></div>
+        </header>
+
+        <section class="admin-content">
+
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client</th>
+                        <th>Produit</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>#1024</td>
+                        <td>Saïda</td>
+                        <td>Collier berbère argent</td>
+                        <td>49€</td>
+                        <td><span class="status en-cours">En cours</span></td>
+                        <td>
+                            <a class="btn-admin small" href="details.html">Détails</a>
+                            <a class="btn-admin small danger" href="annuler.html">Annuler</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#1023</td>
+                        <td>Dounia</td>
+                        <td>Bague gravée amazighe</td>
+                        <td>29€</td>
+                        <td><span class="status expediee">Expédiée</span></td>
+                        <td>
+                            <a class="btn-admin small" href="details.html">Détails</a>
+                            <a class="btn-admin small danger" href="annuler.html">Annuler</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>#1022</td>
+                        <td>Rabia</td>
+                        <td>Bracelet artisanal</td>
+                        <td>39€</td>
+                        <td><span class="status annulee">Annulée</span></td>
+                        <td>
+                            <a class="btn-admin small" href="details.html">Détails</a>
+                            <a class="btn-admin small danger" href="annuler.html">Annuler</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

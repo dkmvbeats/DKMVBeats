@@ -1,0 +1,307 @@
+/* -------------------------------------------------- */
+/* RESET                                               */
+/* -------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background: #eef1f5;
+    color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* -------------------------------------------------- */
+/* HEADER                                              */
+/* -------------------------------------------------- */
+header {
+    background: #0f172a;
+    color: white;
+    padding: 25px 40px 80px 40px;
+    position: relative;
+    text-align: center;
+    border-bottom: 3px solid #1e293b;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* -------------------------------------------------- */
+/* NAVIGATION                                          */
+/* -------------------------------------------------- */
+nav {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    position: relative;
+}
+
+/* Boutons d’onglets */
+nav .tab-btn {
+    background: #1e293b;
+    color: #cbd5e1;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.25s;
+}
+
+nav .tab-btn:hover {
+    background: #334155;
+    color: white;
+}
+
+nav .tab-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+
+/* Bouton Connexion à droite */
+nav .tab-btn[data-tab="connexion"] {
+    position: absolute;
+    right: 40px;
+    top: -70px;
+    background: #3b82f6;
+    color: white;
+}
+
+nav .tab-btn[data-tab="connexion"]:hover {
+    background: #2563eb;
+}
+
+/* -------------------------------------------------- */
+/* CONTENU PRINCIPAL                                   */
+/* -------------------------------------------------- */
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: -40px auto 40px auto;
+    padding: 20px;
+}
+
+/* Sections */
+.tab-content {
+    display: none;
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    animation: fade 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Animation */
+@keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------------------------------- */
+/* TITRES SECTIONS                                      */
+/* -------------------------------------------------- */
+section h2 {
+    font-size: 26px;
+    margin-bottom: 25px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+/* -------------------------------------------------- */
+/* FORMULAIRES                                         */
+/* -------------------------------------------------- */
+label {
+    display: block;
+    margin: 15px 0 6px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #f8fafc;
+    transition: 0.2s;
+    font-size: 15px;
+}
+
+input:focus, select:focus {
+    border-color: #3b82f6;
+    background: white;
+    outline: none;
+}
+
+/* -------------------------------------------------- */
+/* BOUTONS                                              */
+/* -------------------------------------------------- */
+button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+button:hover {
+    background: #2563eb;
+}
+
+/* -------------------------------------------------- */
+/* LISTES / AFFICHAGE                                   */
+/* -------------------------------------------------- */
+ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+ul li {
+    background: #f1f5f9;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    font-size: 15px;
+}
+
+/* -------------------------------------------------- */
+/* API / CONSOLE                                        */
+/* -------------------------------------------------- */
+pre {
+    background: #0f172a;
+    color: #10b981;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+/* -------------------------------------------------- */
+/* STYLE SPÉCIFIQUE : CONNEXION                       */
+/* -------------------------------------------------- */
+
+#connexion {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    text-align: left;
+    animation: fade 0.3s ease;
+}
+
+/* Titre */
+#connexion h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #0f172a;
+}
+
+/* Labels */
+#connexion label {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+/* Champs */
+#connexion input,
+#connexion select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    margin-bottom: 18px;
+    transition: 0.25s;
+    font-size: 15px;
+}
+
+#connexion input:focus,
+#connexion select:focus {
+    border-color: #3b82f6;
+    background: white;
+    outline: none;
+}
+
+/* Bouton */
+#connexion button {
+    width: 100%;
+    padding: 14px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-top: 10px;
+}
+
+#connexion button:hover {
+    background: #2563eb;
+}
+
+/* Message de statut */
+#login-status {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #0f172a;
+}
+/* Boutons réservés à l’admin */
+.admin-only {
+    display: none;
+}
+
+body.admin .admin-only {
+    display: inline-block;
+}
+
+/* Boutons réservés au prof */
+.prof-only {
+    display: none;
+}
+
+body.prof .prof-only {
+    display: inline-block;
+}
+/* Caché par défaut */
+.admin-only,
+.prof-only {
+    display: none;
+}
+
+/* Visible pour admin */
+body[data-role="admin"] .admin-only {
+    display: inline-block;
+}
+
+/* Visible pour prof */
+body[data-role="prof"] .prof-only {
+    display: inline-block;
+}
